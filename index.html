@@ -1,40 +1,46 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shreeyash Solunke — The Journey of an Engineer | VIT Pune '30</title>
-  <meta name="description" content="Interactive storytelling portfolio of Shreeyash Rahul Solunke — B.Tech IT at VIT Pune (Class of 2030), Team Leader of ByteForge at Code APEX 3.0. Inspired by MotionSites.">
+  <title>Shreeyash Solunke — Engineer, Builder & Student Journey | VIT Pune '30</title>
+  <meta name="description" content="Interactive WebGL & GSAP storytelling portfolio of Shreeyash Rahul Solunke — B.Tech IT at VIT Pune (Class of 2030), Team Leader of ByteForge at Code APEX 3.0.">
 
-  <!-- Google Fonts: Space Grotesk, Instrument Serif, Caveat Brush, JetBrains Mono, Plus Jakarta Sans -->
+  <!-- Fonts: Syne (Avant-garde Display), Instrument Serif, Space Grotesk, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CSS & Lucide Icons -->
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Three.js WebGL -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            display: ['"Space Grotesk"', 'sans-serif'],
+            syne: ['"Syne"', 'sans-serif'],
             serif: ['"Instrument Serif"', 'serif'],
-            hand: ['"Caveat Brush"', 'cursive'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
             mono: ['"JetBrains Mono"', 'monospace'],
+            hand: ['"Caveat Brush"', 'cursive'],
           },
           colors: {
-            moss: '#0f110d',
-            ink: '#0c0c10',
-            paper: '#f4efe6',
-            cobalt: '#3b82f6',
+            obsidian: '#060608',
+            surface: '#0e0e13',
+            bone: '#f3f0e8',
             mint: '#2dd4bf',
-            sage: '#7fa8a3',
-            copper: '#c5794b',
-            violet: '#7c3aed',
+            indigoGlow: '#6366f1',
+            amberGlow: '#f59e0b',
           }
         }
       }
@@ -42,23 +48,34 @@
   </script>
 
   <style>
-    /* Film Grain SVG Overlay (Dot Portrait Reference) */
-    .film-grain {
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+    html, body {
+      background-color: #060608;
+      color: #f3f0e8;
+      overflow-x: hidden;
+    }
+
+    /* Subtle Analog Film Grain */
+    .noise-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 90;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
     /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #0c0c10; }
-    ::-webkit-scrollbar-thumb { background: #272736; border-radius: 9999px; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #060608; }
+    ::-webkit-scrollbar-thumb { background: #272732; border-radius: 99px; }
     ::-webkit-scrollbar-thumb:hover { background: #2dd4bf; }
 
-    /* Custom Morphing Cursor (VHS Archive Reference) */
-    #cursor-ring {
+    /* Morphing Cursor */
+    #cursor-follower {
       position: fixed;
       top: 0; left: 0;
-      width: 34px; height: 34px;
-      border: 1.5px solid rgba(45, 212, 191, 0.55);
+      width: 28px; height: 28px;
+      border: 1px solid rgba(243, 240, 232, 0.45);
       border-radius: 9999px;
       pointer-events: none;
       z-index: 9999;
@@ -73,259 +90,224 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 9px;
       font-weight: 700;
-      color: #0c0c10;
+      color: #060608;
       letter-spacing: 0.08em;
     }
-    #cursor-ring.cursor-active {
-      width: 64px;
-      height: 64px;
+    #cursor-follower.is-active {
+      width: 68px;
+      height: 68px;
       background-color: #2dd4bf;
       border-color: #2dd4bf;
-      mix-blend-mode: normal;
     }
-    #cursor-dot {
+
+    /* Masked Text Line Reveal */
+    .reveal-mask {
+      overflow: hidden;
+      display: block;
+    }
+    .reveal-line {
+      display: block;
+      transform: translateY(110%);
+    }
+
+    /* 3D Lanyard Card */
+    .lanyard-pass {
+      transform-style: preserve-3d;
+      box-shadow: 0 35px 70px -15px rgba(0,0,0,0.85), 0 0 40px rgba(45, 212, 191, 0.12);
+    }
+
+    /* Floating Hover Preview Card for Works List */
+    #work-preview-float {
       position: fixed;
-      top: 0; left: 0;
-      width: 5px; height: 5px;
-      background: #2dd4bf;
-      border-radius: 9999px;
       pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-    }
-
-    /* Scroll-Opacity Character Reveal (3D Jack Reference) */
-    .scroll-char {
-      opacity: 0.16;
-      transition: opacity 0.12s linear;
-    }
-
-    /* 3D Lanyard Card (Laptop Portfolio + React Bits Reference) */
-    .lanyard-card {
-      transform-style: preserve-3d;
-      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8), 0 0 35px rgba(45, 212, 191, 0.15);
-    }
-
-    /* VHS / Shelf Spine Styles (Shelf Hero Reference) */
-    .shelf-spine {
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      transform-style: preserve-3d;
-    }
-    .shelf-spine.active {
-      flex: 2.6;
-      transform: translateY(-14px) scale(1.02);
-    }
-
-    /* Punched Paper Ticket Card (Laptop Portfolio Reference) */
-    .ticket-card {
-      background: #f4efe6;
-      color: #141418;
-      position: relative;
-      mask-image: radial-gradient(circle at 0 50%, transparent 10px, black 11px),
-                  radial-gradient(circle at 100% 50%, transparent 10px, black 11px);
-      mask-composite: intersect;
-      -webkit-mask-composite: source-in;
-    }
-
-    /* Sticky Stacking Project Cards (3D Jack Reference) */
-    .stack-card {
-      position: sticky;
-      top: var(--stack-top, 84px);
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* Preloader Overlay */
-    #preloader {
-      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
-    }
-    #preloader.done {
+      z-index: 60;
+      width: 320px;
       opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
+      transform: translate(-50%, -50%) scale(0.85);
+      transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #work-preview-float.visible {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* Editorial Work Row Hover */
+    .work-row {
+      transition: padding-left 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+    }
+    .work-row:hover {
+      padding-left: 1.25rem;
+      border-color: rgba(45, 212, 191, 0.5);
+    }
+
+    /* Manifesto Word Highlight */
+    .manifesto-word {
+      opacity: 0.15;
+      display: inline-block;
+      margin-right: 0.28em;
     }
   </style>
 </head>
+<body class="antialiased selection:bg-mint selection:text-obsidian">
 
-<body class="bg-ink text-slate-100 font-sans antialiased overflow-x-hidden film-grain selection:bg-mint selection:text-ink">
+  <!-- Film Grain Overlay -->
+  <div class="noise-overlay"></div>
+
+  <!-- Custom Morphing Cursor -->
+  <div id="cursor-follower" class="hidden md:flex"></div>
 
   <!-- ========================================================================= -->
-  <!-- 0. RING PRELOADER (Dot Portrait Reference: 0% -> 100% Assembly)           -->
+  <!-- CURTAIN PRELOADER (000 -> 100 Clip-Path Wipe)                             -->
   <!-- ========================================================================= -->
-  <div id="preloader" class="fixed inset-0 z-[100] bg-moss flex flex-col items-center justify-center gap-5">
-    <div class="relative w-24 h-24 flex items-center justify-center">
-      <svg class="w-full h-full -rotate-90" viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="44" stroke="rgba(255,255,255,0.08)" stroke-width="2" fill="none" />
-        <circle id="loader-circle" cx="50" cy="50" r="44" stroke="#2dd4bf" stroke-width="2.5" fill="none"
-                stroke-dasharray="276.46" stroke-dashoffset="276.46" stroke-linecap="round" />
-      </svg>
-      <span id="loader-pct" class="absolute font-mono text-sm font-bold text-paper">0%</span>
+  <div id="curtain-preloader" class="fixed inset-0 z-[100] bg-obsidian flex flex-col justify-between p-6 sm:p-12">
+    <div class="flex justify-between items-center font-mono text-xs text-slate-500 uppercase tracking-widest">
+      <span>Shreeyash Solunke</span>
+      <span>VIT Pune // Class of 2030</span>
     </div>
-    <div class="font-mono text-[11px] tracking-[0.25em] uppercase text-sage">
-      Assembling Student Archive...
+    <div class="my-auto flex flex-col items-start">
+      <div class="font-mono text-xs text-mint uppercase tracking-[0.25em] mb-2">Initializing Experience</div>
+      <div id="preloader-counter" class="font-syne font-extrabold text-7xl sm:text-9xl text-bone tabular-nums leading-none">
+        000
+      </div>
+    </div>
+    <div class="w-full h-[1px] bg-white/10 relative overflow-hidden">
+      <div id="preloader-bar" class="absolute inset-y-0 left-0 bg-mint w-0"></div>
     </div>
   </div>
 
-  <!-- Custom Morphing Cursor -->
-  <div id="cursor-ring" class="hidden md:flex"></div>
-  <div id="cursor-dot" class="hidden md:block"></div>
-
   <!-- ========================================================================= -->
-  <!-- TOP EDITORIAL NAVIGATION BAR (3D Jack 4-Link Spacing + Audio Toggle)      -->
+  <!-- MINIMALIST EDITORIAL HEADER                                               -->
   <!-- ========================================================================= -->
   <header class="fixed top-0 left-0 right-0 z-50 px-5 sm:px-10 py-5 flex items-center justify-between mix-blend-difference text-white pointer-events-none">
-    <a href="#hero" class="pointer-events-auto font-serif italic text-2xl tracking-tight hover:text-mint transition-colors" data-cursor="TOP">
+    <a href="#hero" class="pointer-events-auto font-serif italic text-2xl sm:text-3xl tracking-tight hover:text-mint transition-colors" data-cursor="HOME">
       Shreeyash<span class="text-mint">.</span>
     </a>
 
-    <nav class="pointer-events-auto hidden md:flex items-center gap-10 font-mono text-[11px] uppercase tracking-[0.2em]">
-      <a href="#story" class="hover:text-mint transition-colors">01. Story</a>
-      <a href="#archive" class="hover:text-mint transition-colors">02. Archive</a>
-      <a href="#toolkit" class="hover:text-mint transition-colors">03. Toolkit</a>
-      <a href="#works" class="hover:text-mint transition-colors">04. Works</a>
-      <a href="#dispatch" class="hover:text-mint transition-colors">05. Contact</a>
+    <nav class="pointer-events-auto hidden md:flex items-center gap-9 font-mono text-[11px] uppercase tracking-[0.2em]">
+      <a href="#journey" class="hover:text-mint transition-colors">01. Journey</a>
+      <a href="#manifesto" class="hover:text-mint transition-colors">02. Ethos</a>
+      <a href="#works" class="hover:text-mint transition-colors">03. Works</a>
+      <a href="#toolkit" class="hover:text-mint transition-colors">04. Stack</a>
+      <a href="#contact" class="hover:text-mint transition-colors">05. Contact</a>
     </nav>
 
     <div class="pointer-events-auto flex items-center gap-3">
-      <button id="soundToggle" class="p-2 rounded-full border border-white/20 hover:border-mint text-white/80 hover:text-mint transition-all" title="Toggle Tactile Audio">
-        <i data-lucide="volume-2" id="iconSoundOn" class="w-4 h-4"></i>
-        <i data-lucide="volume-x" id="iconSoundOff" class="w-4 h-4 hidden"></i>
+      <button id="audioBtn" class="p-2 rounded-full border border-white/20 hover:border-mint text-white/80 hover:text-mint transition-all" title="Toggle Tactile Sound">
+        <i data-lucide="volume-2" id="sndOn" class="w-4 h-4"></i>
+        <i data-lucide="volume-x" id="sndOff" class="w-4 h-4 hidden"></i>
       </button>
-      <a href="#dispatch" class="px-4 py-1.5 rounded-full border border-white/25 hover:bg-white hover:text-ink font-mono text-[11px] uppercase tracking-wider transition-all">
-        Let's Talk
+      <a href="#contact" class="px-4 py-1.5 rounded-full border border-white/25 hover:bg-white hover:text-obsidian font-mono text-[11px] uppercase tracking-wider transition-all" data-cursor="TALK">
+        Connect
       </a>
     </div>
   </header>
 
   <!-- ========================================================================= -->
-  <!-- ACT I: OPENING & IDENTITY ASSEMBLY (Dot Portrait + Laptop Portfolio)      -->
+  <!-- ACT I: 3D WEBGL HERO STAGE + INTERACTIVE LANYARD PASS                     -->
   <!-- ========================================================================= -->
-  <section id="hero" class="relative min-h-screen w-full bg-moss flex flex-col justify-between pt-28 pb-10 px-5 sm:px-12 overflow-hidden">
+  <section id="hero" class="relative min-h-screen w-full flex flex-col justify-between pt-28 pb-10 px-5 sm:px-12 overflow-hidden">
     
-    <!-- Interactive Particle Assembly Canvas -->
-    <canvas id="particleCanvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+    <!-- Three.js WebGL 3D Canvas -->
+    <canvas id="webgl-hero" class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-85"></canvas>
 
-    <!-- Subtle Ambient Moss/Mint Glow -->
-    <div class="absolute top-1/4 left-1/3 w-[500px] h-[500px] bg-mint/10 blur-[150px] rounded-full pointer-events-none z-0"></div>
-    <div class="absolute bottom-0 right-1/4 w-[450px] h-[450px] bg-violet/15 blur-[160px] rounded-full pointer-events-none z-0"></div>
-
-    <!-- Top Margin Handwritten Annotation (Laptop Portfolio Reference) -->
-    <div class="relative z-10 flex items-center justify-between">
-      <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-md">
+    <!-- Top Metadata Row -->
+    <div class="relative z-10 flex items-center justify-between font-mono text-[11px] text-slate-400 uppercase tracking-widest">
+      <div class="flex items-center gap-2.5">
         <span class="w-2 h-2 rounded-full bg-mint animate-ping"></span>
-        <span class="font-mono text-[11px] text-paper/80 tracking-wider uppercase">Chapter 01 // VIT Pune Class of 2030</span>
+        <span>Open for Software & AI Engineering</span>
       </div>
-      <div class="hidden sm:block font-hand text-2xl text-mint/80 -rotate-3 select-none">
-        "from curiosity to systems..."
+      <div class="hidden sm:block font-hand text-2xl text-mint/90 normal-case tracking-normal -rotate-2">
+        "code is my canvas"
       </div>
     </div>
 
-    <!-- Center Editorial Showcase: Giant Wordmark + Hanging 3D Lanyard -->
+    <!-- Main Hero Grid -->
     <div class="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 items-center my-auto py-8">
       
-      <!-- Left 7 Cols: Giant Editorial Typography -->
-      <div class="lg:col-span-7 space-y-5">
-        <div class="font-hand text-2xl sm:text-3xl text-copper rotate-[-2deg] inline-block">
-          Engineering Student & Builder
+      <!-- Left 8 Cols: Giant Masked Typography -->
+      <div class="lg:col-span-8 space-y-6">
+        <div class="font-mono text-xs text-mint uppercase tracking-[0.25em]">
+          VIT Pune • B.Tech IT '30 • ByteForge Lead
         </div>
 
-        <h1 class="font-display font-bold tracking-tighter leading-[0.9] text-transparent bg-clip-text bg-gradient-to-b from-white via-paper to-slate-500 text-6xl sm:text-8xl xl:text-[7.5rem] select-none">
-          SHREEYASH<br>
-          <span class="font-serif italic font-normal text-mint">Solunke.</span>
+        <h1 class="font-syne font-extrabold tracking-tighter leading-[0.88] text-5xl sm:text-7xl md:text-8xl xl:text-[7.25rem] text-bone uppercase">
+          <span class="reveal-mask"><span class="reveal-line">SHREEYASH</span></span>
+          <span class="reveal-mask"><span class="reveal-line font-serif italic font-normal lowercase text-mint tracking-normal">Solunke.</span></span>
         </h1>
 
         <p class="text-slate-300/90 text-base sm:text-lg max-w-xl leading-relaxed font-sans pt-2">
-          A first-year <strong class="text-white">Information Technology</strong> undergraduate at <strong class="text-mint">VIT Pune</strong>, leading <strong class="text-white">Team ByteForge</strong> at Code APEX 3.0 and engineering offline-first AI triage systems, transparent civic ledgers, and motion-driven interfaces.
+          First-year Information Technology student at <strong class="text-white">VIT Pune</strong>, leading <strong class="text-mint">Team ByteForge</strong> at Code APEX 3.0. I engineer offline-first AI triage tools, transparent civic ledgers, and kinetic web experiences.
         </p>
 
-        <!-- Quick Jump Pills -->
-        <div class="flex flex-wrap items-center gap-3 pt-3">
-          <a href="#story" class="px-6 py-3 rounded-full bg-gradient-to-r from-violet via-cobalt to-mint text-white font-mono text-xs font-semibold uppercase tracking-wider shadow-lg shadow-mint/20 hover:scale-105 transition-transform flex items-center gap-2">
-            <span>Begin the Journey</span>
+        <div class="flex flex-wrap items-center gap-4 pt-2">
+          <a href="#journey" class="px-7 py-3.5 rounded-full bg-bone text-obsidian hover:bg-mint font-mono text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-2 shadow-xl shadow-black/50" data-cursor="SCROLL">
+            <span>Explore the Journey</span>
             <i data-lucide="arrow-down" class="w-4 h-4"></i>
           </a>
-          <a href="https://github.com/ShreeyashSolunke08" target="_blank" class="px-5 py-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 font-mono text-xs text-paper flex items-center gap-2 transition-all">
+          <a href="https://github.com/ShreeyashSolunke08" target="_blank" class="px-6 py-3.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 font-mono text-xs text-bone flex items-center gap-2 transition-all">
             <i data-lucide="github" class="w-4 h-4"></i>
             <span>@ShreeyashSolunke08</span>
           </a>
         </div>
       </div>
 
-      <!-- Right 5 Cols: Hanging 3D Student Lanyard Badge (Laptop Portfolio + React Bits) -->
-      <div class="lg:col-span-5 flex flex-col items-center justify-center">
-        <!-- Lanyard Strap -->
-        <div class="w-5 h-10 bg-gradient-to-b from-cobalt to-ink rounded-t-sm border-x border-white/15 relative">
-          <div class="w-full h-full opacity-25 bg-[repeating-linear-gradient(45deg,#fff_0,#fff_2px,transparent_0,transparent_6px)]"></div>
-        </div>
+      <!-- Right 4 Cols: Interactive 3D Physics Lanyard Pass -->
+      <div class="lg:col-span-4 flex flex-col items-center justify-center">
+        <div class="w-5 h-10 bg-gradient-to-b from-indigoGlow to-obsidian rounded-t-sm border-x border-white/20"></div>
         <div class="w-9 h-2.5 bg-zinc-700 rounded-full border border-zinc-500 -mt-0.5 mb-1.5"></div>
 
-        <!-- Interactive 3D Card -->
-        <div id="lanyardCard" data-cursor="FLIP" class="lanyard-card w-full max-w-[330px] rounded-2xl p-6 bg-gradient-to-br from-[#171915]/95 to-[#0b0c09]/95 border border-white/15 backdrop-blur-xl cursor-pointer relative overflow-hidden">
-          <div class="absolute -top-12 -right-12 w-32 h-32 bg-mint/15 blur-2xl rounded-full pointer-events-none"></div>
+        <div id="lanyardPass" data-cursor="FLIP" class="lanyard-pass w-full max-w-[320px] rounded-2xl p-6 bg-surface/90 border border-white/15 backdrop-blur-2xl cursor-pointer relative overflow-hidden">
+          <div class="absolute -top-14 -right-14 w-32 h-32 bg-mint/15 blur-2xl rounded-full pointer-events-none"></div>
 
-          <!-- Front Face -->
-          <div id="badgeFront" class="space-y-4">
-            <div class="flex items-center justify-between border-b border-white/10 pb-3">
-              <span class="font-mono text-[10px] tracking-[0.2em] text-mint uppercase font-bold">VIT PUNE • PASS</span>
-              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/10 text-paper">CLASS '30</span>
+          <!-- Front -->
+          <div id="passFront" class="space-y-4">
+            <div class="flex items-center justify-between border-b border-white/10 pb-3 font-mono text-[10px]">
+              <span class="text-mint tracking-[0.2em] font-bold">VIT PUNE • STUDENT</span>
+              <span class="px-2 py-0.5 rounded bg-white/10 text-bone">2026–2030</span>
             </div>
-
-            <div class="flex items-center gap-4">
-              <div class="w-14 h-14 rounded-xl bg-gradient-to-tr from-mint to-cobalt p-[1.5px] shrink-0">
-                <div class="w-full h-full bg-moss rounded-[10px] flex items-center justify-center font-serif italic text-2xl text-white">
-                  SS
-                </div>
+            <div class="flex items-center gap-3.5">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-mint to-indigoGlow p-[1.5px] shrink-0">
+                <div class="w-full h-full bg-obsidian rounded-[10px] flex items-center justify-center font-serif italic text-xl text-white">SS</div>
               </div>
               <div>
-                <div class="font-display font-bold text-lg text-white leading-tight">Shreeyash Solunke</div>
+                <div class="font-syne font-bold text-base text-white">Shreeyash R. Solunke</div>
                 <div class="font-mono text-[11px] text-mint">FY-IT-E • Batch B2</div>
-                <div class="font-mono text-[10px] text-slate-400">B.Tech Information Tech</div>
               </div>
             </div>
-
             <div class="p-3 rounded-xl bg-white/[0.03] border border-white/5 font-mono text-[11px] space-y-1.5">
-              <div class="flex justify-between">
-                <span class="text-slate-500">Team Lead</span>
-                <span class="text-white font-semibold">ByteForge (APEX 3.0)</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-slate-500">Course Lead</span>
-                <span class="text-mint">EDI1 (ES26102)</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-slate-500">Focus</span>
-                <span class="text-slate-200">Full-Stack & Offline AI</span>
-              </div>
+              <div class="flex justify-between"><span class="text-slate-500">Hackathon</span><span class="text-white font-semibold">ByteForge Lead</span></div>
+              <div class="flex justify-between"><span class="text-slate-500">Innovation</span><span class="text-mint">EDI1 (ES26102)</span></div>
+              <div class="flex justify-between"><span class="text-slate-500">Focus</span><span class="text-slate-200">AI & Systems</span></div>
             </div>
-
-            <div class="pt-2 border-t border-white/10 flex items-center justify-between font-mono text-[10px] text-slate-500">
-              <span>ID: VIT-2030-BF08</span>
-              <span class="text-mint flex items-center gap-1"><i data-lucide="rotate-cw" class="w-3 h-3"></i> Click to flip</span>
+            <div class="pt-2 border-t border-white/10 flex justify-between items-center font-mono text-[10px] text-slate-500">
+              <span>VIT#2030-IT-08</span>
+              <span class="text-mint flex items-center gap-1"><i data-lucide="rotate-cw" class="w-3 h-3"></i> Flip</span>
             </div>
           </div>
 
-          <!-- Back Face -->
-          <div id="badgeBack" class="hidden space-y-4">
-            <div class="flex items-center justify-between border-b border-white/10 pb-3">
-              <span class="font-mono text-[10px] tracking-[0.2em] text-copper uppercase font-bold">CORE CREDENTIALS</span>
-              <span class="font-mono text-[10px] text-slate-400">VERIFIED</span>
+          <!-- Back -->
+          <div id="passBack" class="hidden space-y-4">
+            <div class="flex items-center justify-between border-b border-white/10 pb-3 font-mono text-[10px]">
+              <span class="text-amberGlow tracking-[0.2em] font-bold">CREDENTIALS</span>
+              <span class="text-slate-400">VERIFIED</span>
             </div>
             <div class="space-y-2 font-mono text-xs">
               <div class="p-2.5 rounded-lg bg-white/5">
-                <div class="text-[10px] text-slate-400">LANGUAGES</div>
-                <div class="text-white font-semibold">Python • C++ • TypeScript • JS</div>
+                <div class="text-[10px] text-slate-400">STACK</div>
+                <div class="text-white font-semibold">Python • C++ • React • TS</div>
               </div>
               <div class="p-2.5 rounded-lg bg-white/5">
-                <div class="text-[10px] text-slate-400">EXPERTISE</div>
-                <div class="text-white font-semibold">React • IndexedDB • DSA • WebGL</div>
+                <div class="text-[10px] text-slate-400">SPECIALTY</div>
+                <div class="text-white font-semibold">Offline IndexedDB • WebGL</div>
               </div>
               <div class="p-2.5 rounded-lg bg-white/5">
-                <div class="text-[10px] text-slate-400">DIRECT UPLINK</div>
+                <div class="text-[10px] text-slate-400">EMAIL</div>
                 <div class="text-mint text-[11px]">shreeyashsolunke@gmail.com</div>
               </div>
             </div>
-            <div class="pt-2 border-t border-white/10 flex items-center justify-between font-mono text-[10px] text-slate-500">
-              <span>PUNE, INDIA</span>
-              <span class="text-mint flex items-center gap-1"><i data-lucide="rotate-ccw" class="w-3 h-3"></i> Flip front</span>
+            <div class="pt-2 border-t border-white/10 flex justify-between items-center font-mono text-[10px] text-slate-500">
+              <span>PUNE, IN</span>
+              <span class="text-mint flex items-center gap-1"><i data-lucide="rotate-ccw" class="w-3 h-3"></i> Front</span>
             </div>
           </div>
         </div>
@@ -333,407 +315,256 @@
 
     </div>
 
-    <!-- Bottom Split Bar (3D Jack Hero Pattern) -->
-    <div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-white/10 pt-5 font-mono text-xs text-slate-400">
-      <div>PUNE, MAHARASHTRA • 18.5204° N, 73.8567° E</div>
-      <div class="flex items-center gap-2 text-mint">
-        <span class="animate-bounce">↓</span>
-        <span>SCROLL TO READ THE CHAPTERS</span>
-      </div>
+    <!-- Bottom Coordinates Bar -->
+    <div class="relative z-10 flex justify-between items-center border-t border-white/10 pt-5 font-mono text-[11px] text-slate-500">
+      <span>18.5204° N, 73.8567° E — PUNE</span>
+      <span class="text-mint animate-pulse">SCROLL ↓</span>
     </div>
   </section>
 
   <!-- ========================================================================= -->
-  <!-- ACT II: "THE STORY SO FAR" (3D Jack Character-by-Character + Dual Marquee)-->
+  <!-- ACT II: PINNED HORIZONTAL STUDENT JOURNEY (GSAP ScrollTrigger Pin)        -->
   <!-- ========================================================================= -->
-  <section id="story" class="relative py-28 sm:py-36 bg-ink border-t border-white/5 overflow-hidden">
+  <section id="journey" class="relative z-10 bg-surface border-t border-white/10 overflow-hidden">
     
-    <!-- Character-by-Character Scroll-Opacity Narrative -->
-    <div class="max-w-5xl mx-auto px-5 sm:px-10 mb-24">
-      <div class="flex items-center gap-3 font-mono text-xs text-mint uppercase tracking-[0.2em] mb-8">
-        <span>01 // The Student Journey</span>
-        <span class="h-[1px] w-12 bg-mint/40"></span>
-        <span class="font-hand text-xl text-copper normal-case tracking-normal">scroll to illuminate</span>
+    <!-- Pinned Header HUD -->
+    <div class="max-w-7xl mx-auto px-5 sm:px-12 pt-16 pb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+      <div>
+        <div class="font-mono text-xs text-mint uppercase tracking-[0.25em] mb-2">01 // The Student Journey</div>
+        <h2 class="font-syne font-bold text-3xl sm:text-5xl text-bone tracking-tight">Five Chapters in Motion</h2>
+      </div>
+      <div class="flex items-center gap-4 font-mono text-xs text-slate-400">
+        <span id="journey-step-label">CHAPTER 01 / 05</span>
+        <div class="w-32 h-1 bg-white/10 rounded-full overflow-hidden">
+          <div id="journey-progress" class="h-full bg-mint w-1/5"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Horizontal Track (Pinned on Desktop via GSAP, Clean Grid/Scroll on Mobile) -->
+    <div id="horizontal-track" class="flex flex-col md:flex-row md:w-[500vw] will-change-transform">
+      
+      <!-- Chapter 01 -->
+      <div class="journey-panel w-full md:w-screen min-h-[65vh] md:min-h-[72vh] flex items-center px-5 sm:px-12 py-10">
+        <div class="max-w-4xl mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center p-8 sm:p-12 rounded-3xl bg-obsidian/80 border border-white/10 backdrop-blur-xl">
+          <div class="md:col-span-4 font-syne font-extrabold text-7xl sm:text-8xl text-white/10 select-none">01</div>
+          <div class="md:col-span-8 space-y-4">
+            <span class="px-3 py-1 rounded-full bg-mint/10 border border-mint/30 text-mint font-mono text-[11px] uppercase">The First Spark</span>
+            <h3 class="font-serif italic text-4xl sm:text-5xl text-white">Breaking Things to Learn</h3>
+            <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+              Long before formal lectures, curiosity drove my first lines of Python. I started by automating small problems, exploring logic puzzles, and realizing that software is the closest thing we have to leverage from thin air.
+            </p>
+            <div class="font-mono text-xs text-slate-500 pt-2">KEYSTACK: PYTHON • LOGIC • CURIOSITY</div>
+          </div>
+        </div>
       </div>
 
-      <p id="scrollStoryText" class="font-display text-2xl sm:text-4xl md:text-5xl font-semibold leading-[1.25] tracking-tight text-white">
-        Every engineer starts with a single question: how does this actually work? From writing my first Python scripts to stepping into VIT Pune's Class of 2030, my journey has been about turning curiosity into real-world impact—leading Team ByteForge at Code APEX 3.0, architecting offline-first medical triage for zero-connectivity zones, and crafting interfaces that feel alive.
+      <!-- Chapter 02 -->
+      <div class="journey-panel w-full md:w-screen min-h-[65vh] md:min-h-[72vh] flex items-center px-5 sm:px-12 py-10">
+        <div class="max-w-4xl mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center p-8 sm:p-12 rounded-3xl bg-obsidian/80 border border-white/10 backdrop-blur-xl">
+          <div class="md:col-span-4 font-syne font-extrabold text-7xl sm:text-8xl text-white/10 select-none">02</div>
+          <div class="md:col-span-8 space-y-4">
+            <span class="px-3 py-1 rounded-full bg-indigoGlow/15 border border-indigoGlow/30 text-indigo-300 font-mono text-[11px] uppercase">VIT Pune Entry</span>
+            <h3 class="font-serif italic text-4xl sm:text-5xl text-white">B.Tech IT — Class of 2030</h3>
+            <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+              Entered Vishwakarma Institute of Technology, Pune (Division FY-IT-E, Batch B2). Immersed myself in C++, Data Structures, and collaborative peer engineering—turning theory into shipped prototypes.
+            </p>
+            <div class="font-mono text-xs text-slate-500 pt-2">COHORT: FY-IT-E • BATCH B2 • VIT PUNE</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chapter 03 -->
+      <div class="journey-panel w-full md:w-screen min-h-[65vh] md:min-h-[72vh] flex items-center px-5 sm:px-12 py-10">
+        <div class="max-w-4xl mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center p-8 sm:p-12 rounded-3xl bg-obsidian/80 border border-mint/30 backdrop-blur-xl shadow-2xl shadow-mint/5">
+          <div class="md:col-span-4 font-syne font-extrabold text-7xl sm:text-8xl text-mint/20 select-none">03</div>
+          <div class="md:col-span-8 space-y-4">
+            <span class="px-3 py-1 rounded-full bg-amberGlow/15 border border-amberGlow/30 text-amber-300 font-mono text-[11px] uppercase">VIT Code APEX 3.0</span>
+            <h3 class="font-serif italic text-4xl sm:text-5xl text-white">Leading Team ByteForge</h3>
+            <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+              Stepped up as Team Leader of ByteForge at VIT Code APEX 3.0. Coordinated rapid sprint cycles, resolved git merge conflicts under the clock, aligned system architecture, and delivered the live jury pitch.
+            </p>
+            <div class="font-mono text-xs text-mint pt-2">ROLE: TEAM CAPTAIN • ARCHITECTURE • PITCH</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chapter 04 -->
+      <div class="journey-panel w-full md:w-screen min-h-[65vh] md:min-h-[72vh] flex items-center px-5 sm:px-12 py-10">
+        <div class="max-w-4xl mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center p-8 sm:p-12 rounded-3xl bg-obsidian/80 border border-white/10 backdrop-blur-xl">
+          <div class="md:col-span-4 font-syne font-extrabold text-7xl sm:text-8xl text-white/10 select-none">04</div>
+          <div class="md:col-span-8 space-y-4">
+            <span class="px-3 py-1 rounded-full bg-purple-500/15 border border-purple-500/30 text-purple-300 font-mono text-[11px] uppercase">EDI1 & Research</span>
+            <h3 class="font-serif italic text-4xl sm:text-5xl text-white">Design & Story Leadership</h3>
+            <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+              Served as Group Lead for Engineering Design & Innovation (ES26102) and Lead Presenter for "Rajasthan in Focus"—translating complex geospatial, cultural, and water-system research into clear stage narratives.
+            </p>
+            <div class="font-mono text-xs text-slate-500 pt-2">PROJECTS: EDI1 (ES26102) • RAJASTHAN STUDY</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chapter 05 -->
+      <div class="journey-panel w-full md:w-screen min-h-[65vh] md:min-h-[72vh] flex items-center px-5 sm:px-12 py-10">
+        <div class="max-w-4xl mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center p-8 sm:p-12 rounded-3xl bg-obsidian/80 border border-white/10 backdrop-blur-xl">
+          <div class="md:col-span-4 font-syne font-extrabold text-7xl sm:text-8xl text-white/10 select-none">05</div>
+          <div class="md:col-span-8 space-y-4">
+            <span class="px-3 py-1 rounded-full bg-mint/15 border border-mint/30 text-mint font-mono text-[11px] uppercase">Horizon 2030</span>
+            <h3 class="font-serif italic text-4xl sm:text-5xl text-white">Offline AI & Motion Systems</h3>
+            <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+              Today I focus on resilient software that works where people actually need it—from zero-connectivity medical triage (MediMate AI) to transparent community ledgers (UTSAVFUND) and interactive WebGL UIs.
+            </p>
+            <div class="font-mono text-xs text-mint pt-2">NEXT: INTERNSHIPS • OPEN SOURCE • DEEP TECH</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- ACT III: SCROLL-SCRUBBED MANIFESTO (Word-by-Word GSAP Scrub)              -->
+  <!-- ========================================================================= -->
+  <section id="manifesto" class="relative z-10 py-32 sm:py-44 bg-obsidian px-5 sm:px-12 border-t border-white/5">
+    <div class="max-w-5xl mx-auto">
+      <div class="font-mono text-xs text-mint uppercase tracking-[0.25em] mb-8">02 // Engineering Ethos</div>
+      <p id="manifesto-text" class="font-syne font-bold text-3xl sm:text-5xl md:text-6xl leading-[1.18] tracking-tight text-bone">
+        Great software should never feel generic. Whether it is a rural clinic running offline triage or a browser canvas reacting at sixty frames per second, every pixel and every byte is an opportunity to build something people remember.
       </p>
     </div>
-
-    <!-- Dual-Row Opposite-Direction Scroll-Linked Marquee (3D Jack Reference) -->
-    <div class="space-y-5 select-none">
-      <!-- Row 1: Moves Left on Scroll -->
-      <div id="marqueeRow1" class="flex gap-5 whitespace-nowrap will-change-transform px-4">
-        <div class="w-[340px] sm:w-[400px] shrink-0 rounded-2xl p-6 bg-[#15151e] border border-white/10">
-          <div class="font-mono text-[11px] text-mint mb-2">MILESTONE // 01</div>
-          <div class="font-display font-bold text-xl text-white">VIT Pune IT Entry</div>
-          <div class="text-xs text-slate-400 mt-1 whitespace-normal">Joined Division FY-IT-E, Batch B2 — diving deep into C++, Python & systems.</div>
-        </div>
-        <div class="w-[340px] sm:w-[400px] shrink-0 rounded-2xl p-6 bg-[#15151e] border border-white/10">
-          <div class="font-mono text-[11px] text-copper mb-2">HACKATHON // 02</div>
-          <div class="font-display font-bold text-xl text-white">Team ByteForge Lead</div>
-          <div class="text-xs text-slate-400 mt-1 whitespace-normal">Captained sprint architecture & jury demo at VIT Code APEX 3.0.</div>
-        </div>
-        <div class="w-[340px] sm:w-[400px] shrink-0 rounded-2xl p-6 bg-[#15151e] border border-white/10">
-          <div class="font-mono text-[11px] text-violet mb-2">HEALTHCARE // 03</div>
-          <div class="font-display font-bold text-xl text-white">MediMate AI Engine</div>
-          <div class="text-xs text-slate-400 mt-1 whitespace-normal">Zero-connectivity medical triage powered by local IndexedDB.</div>
-        </div>
-        <div class="w-[340px] sm:w-[400px] shrink-0 rounded-2xl p-6 bg-[#15151e] border border-white/10">
-          <div class="font-mono text-[11px] text-cobalt mb-2">INNOVATION // 04</div>
-          <div class="font-display font-bold text-xl text-white">EDI1 (ES26102) Lead</div>
-          <div class="text-xs text-slate-400 mt-1 whitespace-normal">Human-centered engineering design & prototype leadership.</div>
-        </div>
-      </div>
-
-      <!-- Row 2: Moves Right on Scroll -->
-      <div id="marqueeRow2" class="flex gap-5 whitespace-nowrap will-change-transform px-4 -ml-40">
-        <div class="w-[340px] sm:w-[400px] shrink-0 rounded-2xl p-6 bg-[#15151e] border border-white/10">
-          <div class="font-mono text-[11px] text-emerald-400 mb-2">FINTECH // 05</div>
-          <div class="font-display font-bold text-xl text-white">UTSAVFUND Ledger</div>
-          <div class="text-xs text-slate-400 mt-1 whitespace-normal">Transparent community festival crowdfunding with public audit trails.</div>
-        </div>
-        <div class="w-[340px] sm:w-[400px] shrink-0 rounded-2xl p-6 bg-[#15151e] border border-white/10">
-          <div class="font-mono text-[11px] text-amber-400 mb-2">RESEARCH // 06</div>
-          <div class="font-display font-bold text-xl text-white">Rajasthan in Focus</div>
-          <div class="text-xs text-slate-400 mt-1 whitespace-normal">Lead presenter analyzing regional water systems, heritage & economy.</div>
-        </div>
-        <div class="w-[340px] sm:w-[400px] shrink-0 rounded-2xl p-6 bg-[#15151e] border border-white/10">
-          <div class="font-mono text-[11px] text-mint mb-2">SUSTAINABILITY // 07</div>
-          <div class="font-display font-bold text-xl text-white">RepairConnect P2P</div>
-          <div class="text-xs text-slate-400 mt-1 whitespace-normal">Hyperlocal technician matching fighting e-waste & planned obsolescence.</div>
-        </div>
-        <div class="w-[340px] sm:w-[400px] shrink-0 rounded-2xl p-6 bg-[#15151e] border border-white/10">
-          <div class="font-mono text-[11px] text-pink-400 mb-2">ALGORITHMS // 08</div>
-          <div class="font-display font-bold text-xl text-white">PyLogic Suite</div>
-          <div class="text-xs text-slate-400 mt-1 whitespace-normal">Interactive DSA visualizer & C++ memory cache profiler.</div>
-        </div>
-      </div>
-    </div>
-
   </section>
 
   <!-- ========================================================================= -->
-  <!-- ACT III: THE SEMESTER & MILESTONE ARCHIVE (VHS Archive / Shelf Hero)      -->
+  <!-- ACT IV: EDITORIAL WORKS LIST WITH FLOATING MOUSE-TRACKING PREVIEW         -->
   <!-- ========================================================================= -->
-  <section id="archive" class="relative py-28 bg-paper text-ink overflow-hidden">
-    <div class="max-w-7xl mx-auto px-5 sm:px-10">
-      
-      <!-- Archive Header -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
-        <div>
-          <div class="font-mono text-xs uppercase tracking-[0.2em] text-cobalt font-bold mb-2">
-            02 // Chronological Artifact Shelf
-          </div>
-          <h2 class="font-serif italic text-4xl sm:text-6xl text-ink tracking-tight">
-            Chapters of the Journey
-          </h2>
-        </div>
-        <p class="font-mono text-xs text-slate-600 max-w-sm">
-          Click any chapter spine on the shelf below to pull it forward and inspect the milestone.
-        </p>
-      </div>
-
-      <!-- Interactive Horizontal Spine Shelf (VHS Archive Reference) -->
-      <div id="shelfContainer" class="flex flex-col md:flex-row gap-3 min-h-[380px] items-stretch mb-10">
-        <!-- Populated dynamically via JS -->
-      </div>
-
-      <!-- Timeline Ruler (2024 -> 2030) with Gliding Cobalt Indicator -->
-      <div class="relative pt-6 border-t border-ink/15">
-        <div class="flex justify-between font-mono text-xs text-slate-500 uppercase tracking-widest">
-          <button onclick="selectChapter(0)" class="hover:text-cobalt transition-colors">01. Spark</button>
-          <button onclick="selectChapter(1)" class="hover:text-cobalt transition-colors">02. VIT Pune</button>
-          <button onclick="selectChapter(2)" class="hover:text-cobalt transition-colors">03. ByteForge</button>
-          <button onclick="selectChapter(3)" class="hover:text-cobalt transition-colors">04. EDI1 & Study</button>
-          <button onclick="selectChapter(4)" class="hover:text-cobalt transition-colors">05. 2030 Horizon</button>
-        </div>
-        <!-- Gliding Dot -->
-        <div id="timelineDot" class="absolute -top-[5px] w-2.5 h-2.5 rounded-full bg-cobalt shadow-md shadow-cobalt/50 transition-all duration-500" style="left: 0%;"></div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ========================================================================= -->
-  <!-- ACT IV: HIGH-CONTRAST TOOLKIT CHAPTER (3D Jack White Rounded-Top Break)   -->
-  <!-- ========================================================================= -->
-  <section id="toolkit" class="relative bg-white text-ink rounded-t-[40px] sm:rounded-t-[60px] -mt-6 pt-24 pb-32 px-5 sm:px-10 z-20 shadow-2xl">
+  <section id="works" class="relative z-10 py-28 bg-obsidian px-5 sm:px-12 border-t border-white/10">
     <div class="max-w-6xl mx-auto">
       
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14">
+        <div>
+          <div class="font-mono text-xs text-mint uppercase tracking-[0.25em] mb-2">03 // Selected Works</div>
+          <h2 class="font-syne font-extrabold text-4xl sm:text-6xl text-bone tracking-tight">Shipped Systems</h2>
+        </div>
+        <div class="font-mono text-xs text-slate-400">Hover to preview • Click to inspect architecture</div>
+      </div>
+
+      <!-- Floating Preview Card (Desktop) -->
+      <div id="work-preview-float" class="hidden lg:block rounded-2xl p-5 bg-surface/95 border border-mint/40 backdrop-blur-2xl shadow-2xl">
+        <div id="preview-tag" class="font-mono text-[10px] text-mint uppercase tracking-widest mb-1"></div>
+        <div id="preview-title" class="font-syne font-bold text-xl text-white mb-2"></div>
+        <div id="preview-metric" class="font-mono text-xs text-slate-300 bg-white/5 p-2.5 rounded-lg border border-white/10"></div>
+      </div>
+
+      <!-- Editorial Rows -->
+      <div class="divide-y divide-white/10 border-y border-white/10">
+        
+        <div class="work-row py-8 sm:py-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer"
+             data-cursor="OPEN" data-id="medimate"
+             data-tag="HEALTHCARE AI • OFFLINE-FIRST" data-title="MediMate AI" data-metric="// < 50ms local triage • Encrypted IndexedDB">
+          <div class="flex items-baseline gap-6">
+            <span class="font-mono text-xs text-slate-500">01</span>
+            <h3 class="font-syne font-bold text-3xl sm:text-5xl text-white">MediMate AI</h3>
+          </div>
+          <div class="flex items-center gap-6 font-mono text-xs text-slate-400">
+            <span>React • TypeScript • IndexedDB</span>
+            <span class="text-mint">→</span>
+          </div>
+        </div>
+
+        <div class="work-row py-8 sm:py-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer"
+             data-cursor="OPEN" data-id="utsavfund"
+             data-tag="CIVIC FINTECH • AUDIT LEDGER" data-title="UTSAVFUND" data-metric="// Real-time public ledger • PDF receipts">
+          <div class="flex items-baseline gap-6">
+            <span class="font-mono text-xs text-slate-500">02</span>
+            <h3 class="font-syne font-bold text-3xl sm:text-5xl text-white">UTSAVFUND</h3>
+          </div>
+          <div class="flex items-center gap-6 font-mono text-xs text-slate-400">
+            <span>TypeScript • Public Ledger • Charts</span>
+            <span class="text-mint">→</span>
+          </div>
+        </div>
+
+        <div class="work-row py-8 sm:py-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer"
+             data-cursor="OPEN" data-id="repairconnect"
+             data-tag="CIRCULAR ECONOMY • P2P" data-title="RepairConnect" data-metric="// Hyperlocal radius matching • E-waste reduction">
+          <div class="flex items-baseline gap-6">
+            <span class="font-mono text-xs text-slate-500">03</span>
+            <h3 class="font-syne font-bold text-3xl sm:text-5xl text-white">RepairConnect</h3>
+          </div>
+          <div class="flex items-center gap-6 font-mono text-xs text-slate-400">
+            <span>JavaScript • Geolocation • REST</span>
+            <span class="text-mint">→</span>
+          </div>
+        </div>
+
+        <div class="work-row py-8 sm:py-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer"
+             data-cursor="OPEN" data-id="pylogic"
+             data-tag="SYSTEMS & ALGORITHMS" data-title="PyLogic Suite" data-metric="// O(V+E) graph visuals • Call-stack profiler">
+          <div class="flex items-baseline gap-6">
+            <span class="font-mono text-xs text-slate-500">04</span>
+            <h3 class="font-syne font-bold text-3xl sm:text-5xl text-white">PyLogic Suite</h3>
+          </div>
+          <div class="flex items-center gap-6 font-mono text-xs text-slate-400">
+            <span>Python 3 • C++ STL • DSA</span>
+            <span class="text-mint">→</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- ACT V: HIGH-CONTRAST WARM BONE TOOLKIT (3D Jack Editorial Break)          -->
+  <!-- ========================================================================= -->
+  <section id="toolkit" class="relative z-20 bg-bone text-obsidian rounded-t-[40px] sm:rounded-t-[60px] py-28 px-5 sm:px-12">
+    <div class="max-w-6xl mx-auto">
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-12 border-b border-black/10">
         <div>
-          <span class="font-mono text-xs uppercase tracking-[0.2em] text-slate-500">03 // Engineering Arsenal</span>
-          <h2 class="font-display font-extrabold text-4xl sm:text-6xl tracking-tight text-ink mt-2">
-            What I Build With.
-          </h2>
+          <div class="font-mono text-xs uppercase tracking-[0.25em] text-slate-500 mb-2">04 // Technical Toolkit</div>
+          <h2 class="font-syne font-extrabold text-4xl sm:text-6xl tracking-tight">Core Capabilities.</h2>
         </div>
-        <div class="font-hand text-2xl text-cobalt -rotate-2">
-          5 core pillars of my stack
-        </div>
+        <div class="font-hand text-2xl text-indigoGlow -rotate-2">built for speed & scale</div>
       </div>
 
-      <!-- Numbered 01-05 Huge Numeral List -->
       <div class="divide-y divide-black/10">
-        
-        <div class="py-8 sm:py-10 grid grid-cols-1 md:grid-cols-12 gap-4 items-center group">
-          <div class="md:col-span-3 font-display font-black text-slate-200 group-hover:text-cobalt transition-colors leading-none select-none" style="font-size: clamp(3rem, 7vw, 6rem);">
-            01
-          </div>
-          <div class="md:col-span-4 font-display font-bold text-2xl sm:text-3xl text-ink">
-            Systems & Algorithms
-          </div>
-          <div class="md:col-span-5 text-slate-600 text-sm sm:text-base font-sans">
-            <strong class="text-ink">Python 3, C++ STL, Data Structures & Graph Theory.</strong> Building fast, memory-aware backends and algorithmic visualizers.
-          </div>
+        <div class="py-8 grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+          <div class="md:col-span-3 font-syne font-extrabold text-5xl sm:text-6xl text-black/15">01</div>
+          <div class="md:col-span-4 font-syne font-bold text-2xl">Systems & DSA</div>
+          <div class="md:col-span-5 text-slate-700 text-sm sm:text-base">Python 3, C++ STL, Graph Algorithms, Memory & Runtime Optimization.</div>
         </div>
-
-        <div class="py-8 sm:py-10 grid grid-cols-1 md:grid-cols-12 gap-4 items-center group">
-          <div class="md:col-span-3 font-display font-black text-slate-200 group-hover:text-violet transition-colors leading-none select-none" style="font-size: clamp(3rem, 7vw, 6rem);">
-            02
-          </div>
-          <div class="md:col-span-4 font-display font-bold text-2xl sm:text-3xl text-ink">
-            Modern Reactive Web
-          </div>
-          <div class="md:col-span-5 text-slate-600 text-sm sm:text-base font-sans">
-            <strong class="text-ink">React, TypeScript, Tailwind CSS & Vanilla JS.</strong> Engineering responsive, accessible interfaces with 60 FPS motion choreography.
-          </div>
+        <div class="py-8 grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+          <div class="md:col-span-3 font-syne font-extrabold text-5xl sm:text-6xl text-black/15">02</div>
+          <div class="md:col-span-4 font-syne font-bold text-2xl">Reactive Frontend</div>
+          <div class="md:col-span-5 text-slate-700 text-sm sm:text-base">React, TypeScript, Tailwind CSS, GSAP ScrollTrigger & Lenis Motion.</div>
         </div>
-
-        <div class="py-8 sm:py-10 grid grid-cols-1 md:grid-cols-12 gap-4 items-center group">
-          <div class="md:col-span-3 font-display font-black text-slate-200 group-hover:text-mint transition-colors leading-none select-none" style="font-size: clamp(3rem, 7vw, 6rem);">
-            03
-          </div>
-          <div class="md:col-span-4 font-display font-bold text-2xl sm:text-3xl text-ink">
-            Offline-First Architecture
-          </div>
-          <div class="md:col-span-5 text-slate-600 text-sm sm:text-base font-sans">
-            <strong class="text-ink">IndexedDB, LocalStorage Caching, PWAs & Web Workers.</strong> Ensuring critical apps like MediMate AI work seamlessly with zero internet.
-          </div>
+        <div class="py-8 grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+          <div class="md:col-span-3 font-syne font-extrabold text-5xl sm:text-6xl text-black/15">03</div>
+          <div class="md:col-span-4 font-syne font-bold text-2xl">Offline-First & WebGL</div>
+          <div class="md:col-span-5 text-slate-700 text-sm sm:text-base">IndexedDB Encryption, PWAs, Three.js 3D Shaders & Web Audio API.</div>
         </div>
-
-        <div class="py-8 sm:py-10 grid grid-cols-1 md:grid-cols-12 gap-4 items-center group">
-          <div class="md:col-span-3 font-display font-black text-slate-200 group-hover:text-copper transition-colors leading-none select-none" style="font-size: clamp(3rem, 7vw, 6rem);">
-            04
-          </div>
-          <div class="md:col-span-4 font-display font-bold text-2xl sm:text-3xl text-ink">
-            Kinetic Motion & Audio
-          </div>
-          <div class="md:col-span-5 text-slate-600 text-sm sm:text-base font-sans">
-            <strong class="text-ink">HTML5 Canvas, Physics Simulations & Web Audio API.</strong> Crafting tactile micro-interactions, particle fields, and synthesized sound.
-          </div>
+        <div class="py-8 grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+          <div class="md:col-span-3 font-syne font-extrabold text-5xl sm:text-6xl text-black/15">04</div>
+          <div class="md:col-span-4 font-syne font-bold text-2xl">Leadership & Delivery</div>
+          <div class="md:col-span-5 text-slate-700 text-sm sm:text-base">Team ByteForge Captain (Code APEX 3.0), EDI1 Lead & Research Presenter.</div>
         </div>
-
-        <div class="py-8 sm:py-10 grid grid-cols-1 md:grid-cols-12 gap-4 items-center group">
-          <div class="md:col-span-3 font-display font-black text-slate-200 group-hover:text-ink transition-colors leading-none select-none" style="font-size: clamp(3rem, 7vw, 6rem);">
-            05
-          </div>
-          <div class="md:col-span-4 font-display font-bold text-2xl sm:text-3xl text-ink">
-            Team & Product Leadership
-          </div>
-          <div class="md:col-span-5 text-slate-600 text-sm sm:text-base font-sans">
-            <strong class="text-ink">Hackathon Sprints, Git Workflows & Technical Pitching.</strong> Leading Team ByteForge and EDI1 groups from blank page to shipped demo.
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
 
   <!-- ========================================================================= -->
-  <!-- ACT V: STICKY STACKING PROJECT CARDS (3D Jack + Laptop Portfolio Tickets) -->
+  <!-- ACT VI: CONTACT & DISPATCH                                                -->
   <!-- ========================================================================= -->
-  <section id="works" class="relative bg-ink text-white rounded-t-[40px] sm:rounded-t-[60px] -mt-12 pt-24 pb-32 px-5 sm:px-10 z-30 border-t border-white/10">
-    <div class="max-w-6xl mx-auto">
+  <section id="contact" class="relative z-30 bg-obsidian text-bone rounded-t-[40px] sm:rounded-t-[60px] -mt-10 pt-28 pb-16 px-5 sm:px-12 border-t border-white/10">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
       
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-16">
-        <div>
-          <span class="font-mono text-xs uppercase tracking-[0.2em] text-mint">04 // Sticky Project Deck</span>
-          <h2 class="font-display font-extrabold text-4xl sm:text-6xl tracking-tight text-white mt-2">
-            Selected Works
-          </h2>
-        </div>
-        <p class="text-slate-400 text-sm max-w-sm font-sans">
-          Scroll to stack each project card. Click any ticket to open its full architectural case study.
-        </p>
-      </div>
-
-      <!-- Sticky Stacking Cards Container -->
-      <div class="space-y-10 relative pb-10">
-        
-        <!-- Card 1: MediMate AI -->
-        <div class="stack-card rounded-3xl p-6 sm:p-10 bg-gradient-to-br from-[#141923] to-[#0d1017] border border-white/15 shadow-2xl" style="--stack-top: 84px;" data-cursor="OPEN" onclick="openProjectModal('medimate')">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div class="lg:col-span-7 space-y-4">
-              <div class="flex items-center gap-3 font-mono text-xs">
-                <span class="px-3 py-1 rounded-full bg-mint/15 text-mint border border-mint/30">01 // HEALTHCARE AI</span>
-                <span class="text-slate-400">OFFLINE-FIRST</span>
-              </div>
-              <h3 class="font-display font-bold text-3xl sm:text-5xl text-white">MediMate AI</h3>
-              <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                Intelligent offline-first personal healthcare triage assistant. Built for zero-connectivity rural environments using client-side diagnostic decision trees and encrypted IndexedDB sync queues.
-              </p>
-              <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs">
-                <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10">React</span>
-                <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10">TypeScript</span>
-                <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-mint">IndexedDB</span>
-                <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10">Decision Trees</span>
-              </div>
-            </div>
-            <!-- Punched Paper Spec Ticket (Laptop Portfolio Reference) -->
-            <div class="lg:col-span-5">
-              <div class="ticket-card rounded-2xl p-6 shadow-xl font-mono text-xs space-y-3">
-                <div class="flex justify-between items-center border-b border-black/15 pb-2">
-                  <span class="font-bold tracking-widest uppercase">SPEC TICKET #01</span>
-                  <span class="px-2 py-0.5 rounded bg-ink text-white text-[10px]">SHIPPED</span>
-                </div>
-                <div class="space-y-1.5 text-slate-700">
-                  <div><strong class="text-ink">// latency:</strong> &lt; 50ms local triage</div>
-                  <div><strong class="text-ink">// storage:</strong> Encrypted IndexedDB</div>
-                  <div><strong class="text-ink">// impact:</strong> Zero-network autonomy</div>
-                </div>
-                <div class="pt-3 border-t border-dashed border-black/25 flex items-center justify-between text-ink font-bold">
-                  <span>INSPECT ARCHITECTURE</span>
-                  <span>→</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 2: UTSAVFUND -->
-        <div class="stack-card rounded-3xl p-6 sm:p-10 bg-gradient-to-br from-[#191426] to-[#0f0c17] border border-white/15 shadow-2xl" style="--stack-top: 112px;" data-cursor="OPEN" onclick="openProjectModal('utsavfund')">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div class="lg:col-span-7 space-y-4">
-              <div class="flex items-center gap-3 font-mono text-xs">
-                <span class="px-3 py-1 rounded-full bg-violet/20 text-purple-300 border border-violet/40">02 // CIVIC FINTECH</span>
-                <span class="text-slate-400">TRANSPARENT LEDGER</span>
-              </div>
-              <h3 class="font-display font-bold text-3xl sm:text-5xl text-white">UTSAVFUND</h3>
-              <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                Community crowdfunding and cultural festival fund accounting platform. Eliminates manual receipt mismanagement with real-time public expenditure ledgers and automated digital receipts.
-              </p>
-              <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs">
-                <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10">TypeScript</span>
-                <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-purple-300">Audit Trail</span>
-                <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10">Analytics Charts</span>
-              </div>
-            </div>
-            <div class="lg:col-span-5">
-              <div class="ticket-card rounded-2xl p-6 shadow-xl font-mono text-xs space-y-3">
-                <div class="flex justify-between items-center border-b border-black/15 pb-2">
-                  <span class="font-bold tracking-widest uppercase">SPEC TICKET #02</span>
-                  <span class="px-2 py-0.5 rounded bg-violet text-white text-[10px]">VERIFIED</span>
-                </div>
-                <div class="space-y-1.5 text-slate-700">
-                  <div><strong class="text-ink">// ledger:</strong> Public real-time feed</div>
-                  <div><strong class="text-ink">// receipts:</strong> Instant PDF dispatch</div>
-                  <div><strong class="text-ink">// trust:</strong> 100% expense visibility</div>
-                </div>
-                <div class="pt-3 border-t border-dashed border-black/25 flex items-center justify-between text-ink font-bold">
-                  <span>INSPECT ARCHITECTURE</span>
-                  <span>→</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 3: RepairConnect -->
-        <div class="stack-card rounded-3xl p-6 sm:p-10 bg-gradient-to-br from-[#12201b] to-[#0a120f] border border-white/15 shadow-2xl" style="--stack-top: 140px;" data-cursor="OPEN" onclick="openProjectModal('repairconnect')">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div class="lg:col-span-7 space-y-4">
-              <div class="flex items-center gap-3 font-mono text-xs">
-                <span class="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">03 // CIRCULAR ECONOMY</span>
-                <span class="text-slate-400">HYPERLOCAL P2P</span>
-              </div>
-              <h3 class="font-display font-bold text-3xl sm:text-5xl text-white">RepairConnect</h3>
-              <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                Hyperlocal peer-to-peer electronics repair marketplace connecting broken device owners with verified neighborhood technicians to combat electronic waste and planned obsolescence.
-              </p>
-              <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs">
-                <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10">Modern JS</span>
-                <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-emerald-300">Geolocation</span>
-                <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10">Right to Repair</span>
-              </div>
-            </div>
-            <div class="lg:col-span-5">
-              <div class="ticket-card rounded-2xl p-6 shadow-xl font-mono text-xs space-y-3">
-                <div class="flex justify-between items-center border-b border-black/15 pb-2">
-                  <span class="font-bold tracking-widest uppercase">SPEC TICKET #03</span>
-                  <span class="px-2 py-0.5 rounded bg-emerald-700 text-white text-[10px]">ECO-TECH</span>
-                </div>
-                <div class="space-y-1.5 text-slate-700">
-                  <div><strong class="text-ink">// matching:</strong> Radius-based search</div>
-                  <div><strong class="text-ink">// quotes:</strong> Transparent diagnostics</div>
-                  <div><strong class="text-ink">// mission:</strong> E-waste reduction</div>
-                </div>
-                <div class="pt-3 border-t border-dashed border-black/25 flex items-center justify-between text-ink font-bold">
-                  <span>INSPECT ARCHITECTURE</span>
-                  <span>→</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 4: PyLogic Suite -->
-        <div class="stack-card rounded-3xl p-6 sm:p-10 bg-gradient-to-br from-[#211a12] to-[#120e09] border border-white/15 shadow-2xl" style="--stack-top: 168px;" data-cursor="OPEN" onclick="openProjectModal('pylogic')">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div class="lg:col-span-7 space-y-4">
-              <div class="flex items-center gap-3 font-mono text-xs">
-                <span class="px-3 py-1 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30">04 // ALGORITHMS</span>
-                <span class="text-slate-400">PYTHON & C++</span>
-              </div>
-              <h3 class="font-display font-bold text-3xl sm:text-5xl text-white">PyLogic Suite</h3>
-              <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                High-performance algorithmic toolkit and interactive data structures playground featuring visual graph traversal, recursion call-stack tracing, and memory cache profiling.
-              </p>
-              <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs">
-                <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-amber-300">Python 3</span>
-                <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10">C++ STL</span>
-                <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10">Graph Theory</span>
-              </div>
-            </div>
-            <div class="lg:col-span-5">
-              <div class="ticket-card rounded-2xl p-6 shadow-xl font-mono text-xs space-y-3">
-                <div class="flex justify-between items-center border-b border-black/15 pb-2">
-                  <span class="font-bold tracking-widest uppercase">SPEC TICKET #04</span>
-                  <span class="px-2 py-0.5 rounded bg-amber-700 text-white text-[10px]">CORE DSA</span>
-                </div>
-                <div class="space-y-1.5 text-slate-700">
-                  <div><strong class="text-ink">// engine:</strong> O(V+E) graph visuals</div>
-                  <div><strong class="text-ink">// profiler:</strong> Call-stack & memory</div>
-                  <div><strong class="text-ink">// design:</strong> Modular CLI suite</div>
-                </div>
-                <div class="pt-3 border-t border-dashed border-black/25 flex items-center justify-between text-ink font-bold">
-                  <span>INSPECT ARCHITECTURE</span>
-                  <span>→</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================================= -->
-  <!-- ACT VI: NEXT CHAPTER & DIRECT DISPATCH                                    -->
-  <!-- ========================================================================= -->
-  <section id="dispatch" class="relative py-28 bg-moss border-t border-white/10 px-5 sm:px-10">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-      
-      <!-- Left 5 Cols -->
       <div class="lg:col-span-5 space-y-6">
-        <div class="font-mono text-xs uppercase tracking-[0.2em] text-mint">05 // Write the Next Chapter</div>
+        <div class="font-mono text-xs text-mint uppercase tracking-[0.25em]">05 // Next Chapter</div>
         <h2 class="font-serif italic text-5xl sm:text-6xl text-white leading-[1.05]">
-          Let's build something <span class="text-mint">unforgettable.</span>
+          Let's build something <span class="text-mint">extraordinary.</span>
         </h2>
         <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
-          Open to software engineering internships, hackathon collaborations, AI/systems research, and ambitious web projects.
+          Available for software engineering internships, AI/systems collaborations, and ambitious web builds.
         </p>
 
         <div class="space-y-3 pt-2 font-mono text-xs">
@@ -746,15 +577,14 @@
             <span>github.com/ShreeyashSolunke08</span>
           </a>
           <a href="https://linkedin.com/in/shreeyashsolunke08" target="_blank" class="flex items-center gap-3 p-3.5 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 transition-all">
-            <i data-lucide="linkedin" class="w-4 h-4 text-cobalt"></i>
+            <i data-lucide="linkedin" class="w-4 h-4 text-indigoGlow"></i>
             <span>linkedin.com/in/shreeyashsolunke08</span>
           </a>
         </div>
       </div>
 
-      <!-- Right 7 Cols: Contact Form -->
       <div class="lg:col-span-7">
-        <div class="rounded-3xl p-8 sm:p-10 bg-ink/80 border border-white/10 backdrop-blur-xl shadow-2xl">
+        <div class="rounded-3xl p-8 sm:p-10 bg-surface border border-white/10 shadow-2xl">
           <form id="contactForm" class="space-y-5">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -771,9 +601,9 @@
               <textarea id="senderMessage" rows="4" required placeholder="Tell me about your idea, role, or collaboration..." class="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 focus:border-mint outline-none text-white text-sm transition-all resize-none"></textarea>
             </div>
             <div id="formNotice" class="hidden p-3.5 rounded-xl font-mono text-xs"></div>
-            <button type="submit" id="submitBtn" class="w-full py-4 rounded-xl font-mono text-xs font-bold uppercase tracking-widest text-ink bg-mint hover:bg-white transition-all flex items-center justify-center gap-2">
+            <button type="submit" class="w-full py-4 rounded-xl font-mono text-xs font-bold uppercase tracking-widest text-obsidian bg-mint hover:bg-bone transition-all flex items-center justify-center gap-2">
               <i data-lucide="send" class="w-4 h-4"></i>
-              <span id="submitText">Transmit Message</span>
+              <span id="submitText">Transmit Dispatch</span>
             </button>
           </form>
         </div>
@@ -783,346 +613,285 @@
 
     <footer class="max-w-6xl mx-auto mt-20 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-slate-500">
       <div>© 2026 Shreeyash Rahul Solunke • VIT Pune Class of 2030</div>
-      <div>Crafted with MotionSites Choreography & Canvas Physics</div>
+      <div>Three.js WebGL • GSAP ScrollTrigger • Lenis</div>
     </footer>
   </section>
 
-  <!-- ========================================================================= -->
-  <!-- CASE STUDY MODAL OVERLAY                                                  -->
-  <!-- ========================================================================= -->
-  <div id="projectModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-xl hidden items-center justify-center p-4">
-    <div class="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl p-7 sm:p-10 bg-[#12131a] border border-white/15 shadow-2xl">
-      <button onclick="closeProjectModal()" class="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all">
+  <!-- CASE STUDY MODAL -->
+  <div id="caseModal" class="fixed inset-0 z-[80] bg-black/85 backdrop-blur-xl hidden items-center justify-center p-4">
+    <div class="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl p-7 sm:p-10 bg-surface border border-white/15 shadow-2xl">
+      <button onclick="closeCaseModal()" class="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all">
         <i data-lucide="x" class="w-4 h-4"></i>
       </button>
-      <div id="modalBody" class="space-y-6"></div>
+      <div id="caseModalBody" class="space-y-6"></div>
     </div>
   </div>
 
-  <!-- ========================================================================= -->
-  <!-- INTERACTIVE ENGINE SCRIPT                                                 -->
-  <!-- ========================================================================= -->
   <script>
     lucide.createIcons();
 
     // -----------------------------------------------------------------------
     // 1. Web Audio Tactile Synthesizer
     // -----------------------------------------------------------------------
-    let audioCtx = null;
-    let soundOn = true;
-
+    let audioCtx = null, soundOn = true;
     function playTone(type) {
       if (!soundOn) return;
       try {
         if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         if (audioCtx.state === 'suspended') audioCtx.resume();
         const now = audioCtx.currentTime;
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        if (type === 'tick') {
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(750, now);
-          osc.frequency.exponentialRampToValueAtTime(1100, now + 0.03);
-          gain.gain.setValueAtTime(0.02, now);
-          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.035);
-          osc.connect(gain); gain.connect(audioCtx.destination);
-          osc.start(now); osc.stop(now + 0.04);
-        } else if (type === 'open') {
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(380, now);
-          osc.frequency.exponentialRampToValueAtTime(760, now + 0.12);
-          gain.gain.setValueAtTime(0.04, now);
-          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.14);
-          osc.connect(gain); gain.connect(audioCtx.destination);
-          osc.start(now); osc.stop(now + 0.15);
-        }
+        const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+        osc.type = type === 'open' ? 'triangle' : 'sine';
+        osc.frequency.setValueAtTime(type === 'open' ? 360 : 800, now);
+        osc.frequency.exponentialRampToValueAtTime(type === 'open' ? 720 : 1200, now + 0.08);
+        gain.gain.setValueAtTime(0.03, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.09);
+        osc.connect(gain); gain.connect(audioCtx.destination);
+        osc.start(now); osc.stop(now + 0.1);
       } catch (e) {}
     }
-
-    document.getElementById('soundToggle').addEventListener('click', () => {
+    document.getElementById('audioBtn').addEventListener('click', () => {
       soundOn = !soundOn;
-      document.getElementById('iconSoundOn').classList.toggle('hidden', !soundOn);
-      document.getElementById('iconSoundOff').classList.toggle('hidden', soundOn);
+      document.getElementById('sndOn').classList.toggle('hidden', !soundOn);
+      document.getElementById('sndOff').classList.toggle('hidden', soundOn);
       if (soundOn) playTone('tick');
     });
 
     // -----------------------------------------------------------------------
-    // 2. Ring Preloader (0% -> 100%)
+    // 2. Lenis Smooth Scroll + GSAP Integration
     // -----------------------------------------------------------------------
-    const loaderCircle = document.getElementById('loader-circle');
-    const loaderPct = document.getElementById('loader-pct');
-    const preloader = document.getElementById('preloader');
-    const circumference = 276.46;
-    let progress = 0;
+    gsap.registerPlugin(ScrollTrigger);
+    const lenis = new Lenis({ duration: 1.25, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
 
-    const loadTimer = setInterval(() => {
-      progress += Math.floor(Math.random() * 14) + 8;
-      if (progress >= 100) {
-        progress = 100;
-        clearInterval(loadTimer);
-        setTimeout(() => preloader.classList.add('done'), 220);
+    // -----------------------------------------------------------------------
+    // 3. Curtain Preloader Animation
+    // -----------------------------------------------------------------------
+    const counterEl = document.getElementById('preloader-counter');
+    const barEl = document.getElementById('preloader-bar');
+    const obj = { val: 0 };
+
+    gsap.to(obj, {
+      val: 100,
+      duration: 1.1,
+      ease: 'power2.inOut',
+      onUpdate: () => {
+        const v = Math.floor(obj.val);
+        counterEl.textContent = String(v).padStart(3, '0');
+        barEl.style.width = v + '%';
+      },
+      onComplete: () => {
+        gsap.to('#curtain-preloader', {
+          clipPath: 'inset(0 0 100% 0)',
+          duration: 0.85,
+          ease: 'power4.inOut',
+          onComplete: () => {
+            document.getElementById('curtain-preloader').style.display = 'none';
+            // Trigger Hero Masked Line Reveal
+            gsap.to('.reveal-line', {
+              y: '0%',
+              duration: 1.1,
+              stagger: 0.14,
+              ease: 'power4.out'
+            });
+          }
+        });
       }
-      loaderPct.textContent = progress + '%';
-      loaderCircle.style.strokeDashoffset = circumference - (progress / 100) * circumference;
-    }, 55);
+    });
 
     // -----------------------------------------------------------------------
-    // 3. Custom Morphing Cursor
+    // 4. Three.js WebGL 3D Particle & Wireframe Sculpture
     // -----------------------------------------------------------------------
-    const ring = document.getElementById('cursor-ring');
-    const dot = document.getElementById('cursor-dot');
+    try {
+      const canvas = document.getElementById('webgl-hero');
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100);
+      camera.position.z = 7.5;
+
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // TorusKnot Particle Geometry
+      const knotGeo = new THREE.TorusKnotGeometry(2.1, 0.58, 180, 28);
+      const ptsMat = new THREE.PointsMaterial({ color: 0x2dd4bf, size: 0.032, transparent: true, opacity: 0.78 });
+      const knotParticles = new THREE.Points(knotGeo, ptsMat);
+      knotParticles.position.x = 1.6;
+      scene.add(knotParticles);
+
+      // Inner Wireframe Core
+      const coreGeo = new THREE.IcosahedronGeometry(1.15, 1);
+      const coreMat = new THREE.MeshBasicMaterial({ color: 0x6366f1, wireframe: true, transparent: true, opacity: 0.28 });
+      const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+      coreMesh.position.x = 1.6;
+      scene.add(coreMesh);
+
+      // Ambient Starfield
+      const starGeo = new THREE.BufferGeometry();
+      const starCount = 700;
+      const starPos = new Float32Array(starCount * 3);
+      for (let i = 0; i < starCount * 3; i++) starPos[i] = (Math.random() - 0.5) * 26;
+      starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+      const starMat = new THREE.PointsMaterial({ color: 0xf3f0e8, size: 0.022, transparent: true, opacity: 0.35 });
+      const stars = new THREE.Points(starGeo, starMat);
+      scene.add(stars);
+
+      let mouseX = 0, mouseY = 0;
+      document.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+      });
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      function animateWebGL() {
+        requestAnimationFrame(animateWebGL);
+        knotParticles.rotation.y += 0.0025;
+        knotParticles.rotation.x += 0.0012;
+        coreMesh.rotation.y -= 0.004;
+        coreMesh.rotation.z += 0.002;
+        stars.rotation.y += 0.0004;
+
+        camera.position.x += (mouseX * 0.65 - camera.position.x) * 0.04;
+        camera.position.y += (-mouseY * 0.45 - camera.position.y) * 0.04;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+      }
+      animateWebGL();
+
+      // Scroll-linked WebGL depth zoom
+      gsap.to(camera.position, {
+        z: 3.8,
+        scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
+      });
+    } catch (e) {}
+
+    // -----------------------------------------------------------------------
+    // 5. Pinned Horizontal Journey Scroll (Desktop)
+    // -----------------------------------------------------------------------
+    ScrollTrigger.matchMedia({
+      '(min-width: 768px)': function() {
+        const track = document.getElementById('horizontal-track');
+        const panels = gsap.utils.toArray('.journey-panel');
+        const progBar = document.getElementById('journey-progress');
+        const stepLabel = document.getElementById('journey-step-label');
+
+        gsap.to(panels, {
+          xPercent: -100 * (panels.length - 1),
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#journey',
+            pin: true,
+            scrub: 1,
+            end: () => '+=' + track.offsetWidth * 0.75,
+            onUpdate: (self) => {
+              const p = self.progress;
+              const idx = Math.min(5, Math.floor(p * 5) + 1);
+              stepLabel.textContent = `CHAPTER 0${idx} / 05`;
+              progBar.style.width = `${20 + p * 80}%`;
+            }
+          }
+        });
+      }
+    });
+
+    // -----------------------------------------------------------------------
+    // 6. Scroll-Scrubbed Manifesto Word Reveal
+    // -----------------------------------------------------------------------
+    const manifestoEl = document.getElementById('manifesto-text');
+    const words = manifestoEl.innerText.trim().split(/\s+/);
+    manifestoEl.innerHTML = words.map(w => `<span class="manifesto-word">${w}</span>`).join(' ');
+
+    gsap.to('.manifesto-word', {
+      opacity: 1,
+      stagger: 0.05,
+      scrollTrigger: {
+        trigger: '#manifesto',
+        start: 'top 70%',
+        end: 'bottom 45%',
+        scrub: true
+      }
+    });
+
+    // -----------------------------------------------------------------------
+    // 7. 3D Lanyard Pass Tilt & Flip
+    // -----------------------------------------------------------------------
+    const pass = document.getElementById('lanyardPass');
+    let tX = 0, tY = 0, cX = 0, cY = 0;
+    pass.addEventListener('mousemove', (e) => {
+      const r = pass.getBoundingClientRect();
+      tX = ((e.clientY - (r.top + r.height / 2)) / (r.height / 2)) * -14;
+      tY = ((e.clientX - (r.left + r.width / 2)) / (r.width / 2)) * 14;
+    });
+    pass.addEventListener('mouseleave', () => { tX = 0; tY = 0; });
+    (function loopPass() {
+      cX += (tX - cX) * 0.12; cY += (tY - cY) * 0.12;
+      pass.style.transform = `perspective(800px) rotateX(${cX}deg) rotateY(${cY}deg)`;
+      requestAnimationFrame(loopPass);
+    })();
+    pass.addEventListener('click', () => {
+      playTone('open');
+      document.getElementById('passFront').classList.toggle('hidden');
+      document.getElementById('passBack').classList.toggle('hidden');
+    });
+
+    // -----------------------------------------------------------------------
+    // 8. Custom Morphing Cursor & Floating Work Preview
+    // -----------------------------------------------------------------------
+    const follower = document.getElementById('cursor-follower');
+    const floatCard = document.getElementById('work-preview-float');
+    let fx = 0, fy = 0, mx = 0, my = 0;
 
     document.addEventListener('mousemove', (e) => {
-      if (ring && dot) {
-        ring.style.left = e.clientX + 'px';
-        ring.style.top = e.clientY + 'px';
-        dot.style.left = e.clientX + 'px';
-        dot.style.top = e.clientY + 'px';
+      mx = e.clientX; my = e.clientY;
+      follower.style.left = mx + 'px';
+      follower.style.top = my + 'px';
+    });
+
+    (function loopFloat() {
+      fx += (mx - fx) * 0.14;
+      fy += (my - fy) * 0.14;
+      if (floatCard) {
+        floatCard.style.left = (fx + 190) + 'px';
+        floatCard.style.top = (fy - 40) + 'px';
       }
-    });
+      requestAnimationFrame(loopFloat);
+    })();
 
-    function bindCursorTargets() {
-      document.querySelectorAll('[data-cursor]').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-          ring.classList.add('cursor-active');
-          ring.textContent = el.dataset.cursor;
-          playTone('tick');
-        });
-        el.addEventListener('mouseleave', () => {
-          ring.classList.remove('cursor-active');
-          ring.textContent = '';
-        });
+    document.querySelectorAll('[data-cursor]').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        follower.classList.add('is-active');
+        follower.textContent = el.dataset.cursor;
+        playTone('tick');
       });
-    }
-
-    // -----------------------------------------------------------------------
-    // 4. Dot Portrait Inspired Particle Canvas
-    // -----------------------------------------------------------------------
-    const pCanvas = document.getElementById('particleCanvas');
-    const pCtx = pCanvas.getContext('2d');
-    let pW, pH;
-    const particles = [];
-    const mouse = { x: -999, y: -999 };
-
-    function resizeParticles() {
-      pW = pCanvas.width = window.innerWidth;
-      pH = pCanvas.height = window.innerHeight;
-    }
-    resizeParticles();
-    window.addEventListener('resize', resizeParticles);
-
-    document.addEventListener('mousemove', (e) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    });
-
-    for (let i = 0; i < 160; i++) {
-      const angle = Math.random() * Math.PI * 2;
-      const dist = Math.random() * 260 + 40;
-      particles.push({
-        x: Math.random() * pW,
-        y: Math.random() * pH,
-        baseAngle: angle,
-        dist: dist,
-        size: Math.random() * 1.8 + 0.8,
-        speed: (Math.random() * 0.003 + 0.001) * (Math.random() > 0.5 ? 1 : -1),
-        color: i % 5 === 0 ? '#7fa8a3' : (i % 3 === 0 ? '#2dd4bf' : '#c9d4b8')
+      el.addEventListener('mouseleave', () => {
+        follower.classList.remove('is-active');
+        follower.textContent = '';
       });
-    }
+    });
 
-    function animateParticles() {
-      pCtx.clearRect(0, 0, pW, pH);
-      const cx = pW * 0.65;
-      const cy = pH * 0.5;
-
-      particles.forEach(p => {
-        p.baseAngle += p.speed;
-        const targetX = cx + Math.cos(p.baseAngle) * p.dist;
-        const targetY = cy + Math.sin(p.baseAngle) * (p.dist * 0.75);
-
-        const dx = mouse.x - p.x;
-        const dy = mouse.y - p.y;
-        const d = Math.hypot(dx, dy);
-
-        if (d < 120) {
-          p.x -= (dx / d) * 4;
-          p.y -= (dy / d) * 4;
-        } else {
-          p.x += (targetX - p.x) * 0.04;
-          p.y += (targetY - p.y) * 0.04;
-        }
-
-        pCtx.beginPath();
-        pCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        pCtx.fillStyle = p.color;
-        pCtx.globalAlpha = 0.65;
-        pCtx.fill();
+    document.querySelectorAll('.work-row').forEach(row => {
+      row.addEventListener('mouseenter', () => {
+        document.getElementById('preview-tag').textContent = row.dataset.tag;
+        document.getElementById('preview-title').textContent = row.dataset.title;
+        document.getElementById('preview-metric').textContent = row.dataset.metric;
+        floatCard.classList.add('visible');
       });
-
-      requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
-
-    // -----------------------------------------------------------------------
-    // 5. 3D Lanyard Badge Tilt & Flip
-    // -----------------------------------------------------------------------
-    const lanyardCard = document.getElementById('lanyardCard');
-    let tiltX = 0, tiltY = 0, curX = 0, curY = 0;
-
-    lanyardCard.addEventListener('mousemove', (e) => {
-      const r = lanyardCard.getBoundingClientRect();
-      tiltX = ((e.clientY - (r.top + r.height / 2)) / (r.height / 2)) * -14;
-      tiltY = ((e.clientX - (r.left + r.width / 2)) / (r.width / 2)) * 14;
-    });
-    lanyardCard.addEventListener('mouseleave', () => { tiltX = 0; tiltY = 0; });
-
-    function updateLanyard() {
-      curX += (tiltX - curX) * 0.12;
-      curY += (tiltY - curY) * 0.12;
-      lanyardCard.style.transform = `perspective(800px) rotateX(${curX}deg) rotateY(${curY}deg)`;
-      requestAnimationFrame(updateLanyard);
-    }
-    updateLanyard();
-
-    lanyardCard.addEventListener('click', () => {
-      playTone('open');
-      document.getElementById('badgeFront').classList.toggle('hidden');
-      document.getElementById('badgeBack').classList.toggle('hidden');
+      row.addEventListener('mouseleave', () => floatCard.classList.remove('visible'));
+      row.addEventListener('click', () => openCaseModal(row.dataset.id));
     });
 
     // -----------------------------------------------------------------------
-    // 6. Scroll-Opacity Character Reveal + Dual Opposite Marquee
+    // 9. Case Study Modal
     // -----------------------------------------------------------------------
-    const storyEl = document.getElementById('scrollStoryText');
-    const rawText = storyEl.innerText;
-    storyEl.innerHTML = rawText.split('').map(ch => `<span class="scroll-char">${ch}</span>`).join('');
-    const charSpans = storyEl.querySelectorAll('.scroll-char');
-
-    const mRow1 = document.getElementById('marqueeRow1');
-    const mRow2 = document.getElementById('marqueeRow2');
-
-    window.addEventListener('scroll', () => {
-      const rect = storyEl.getBoundingClientRect();
-      const winH = window.innerHeight;
-      const start = winH * 0.85;
-      const end = winH * 0.2;
-      const pct = Math.min(1, Math.max(0, (start - rect.top) / (start - end + rect.height * 0.5)));
-
-      const activeCount = Math.floor(pct * charSpans.length);
-      charSpans.forEach((span, idx) => {
-        span.style.opacity = idx <= activeCount ? '1' : '0.16';
-      });
-
-      // Dual-row opposite marquee linked to scrollY
-      const scrollOffset = window.scrollY * 0.22;
-      if (mRow1 && mRow2) {
-        mRow1.style.transform = `translateX(-${scrollOffset % 450}px)`;
-        mRow2.style.transform = `translateX(${scrollOffset % 450}px)`;
-      }
-    });
-
-    // -----------------------------------------------------------------------
-    // 7. VHS Archive / Shelf Hero Interactive Chapters
-    // -----------------------------------------------------------------------
-    const chapters = [
-      {
-        num: "01",
-        year: "THE SPARK",
-        title: "First Lines & Curiosity",
-        subtitle: "Python Scripts & Logic Foundations",
-        desc: "Started by breaking down how everyday software works—writing early Python automation scripts, algorithmic puzzles, and discovering the joy of building from scratch.",
-        tag: "FOUNDATION",
-        bg: "bg-[#1a1a22] text-white"
-      },
-      {
-        num: "02",
-        year: "VIT PUNE",
-        title: "Entering Class of 2030",
-        subtitle: "B.Tech IT • Division FY-IT-E, Batch B2",
-        desc: "Joined Vishwakarma Institute of Technology, Pune. Immersed in C++, Data Structures, and collaborative engineering cohorts.",
-        tag: "ACADEMICS",
-        bg: "bg-[#122620] text-white"
-      },
-      {
-        num: "03",
-        year: "CODE APEX 3.0",
-        title: "Leading Team ByteForge",
-        subtitle: "Hackathon Captain & Systems Architect",
-        desc: "Led Team ByteForge at VIT Code APEX 3.0—coordinating sprint execution, merging full-stack architecture, and pitching live to the jury.",
-        tag: "LEADERSHIP",
-        bg: "bg-[#1d1530] text-white"
-      },
-      {
-        num: "04",
-        year: "EDI1 & STUDY",
-        title: "Design & Research Lead",
-        subtitle: "ES26102 & Rajasthan in Focus",
-        desc: "Guided the EDI1 engineering design team and served as Lead Presenter for 'Rajasthan in Focus', synthesizing heritage, water systems, and data.",
-        tag: "RESEARCH",
-        bg: "bg-[#2a1c14] text-white"
-      },
-      {
-        num: "05",
-        year: "HORIZON '30",
-        title: "Offline AI & Motion Web",
-        subtitle: "MediMate AI, UTSAVFUND & Beyond",
-        desc: "Shipping resilient offline-first healthcare tools, transparent civic ledgers, and interactive motion-engineered experiences for the real world.",
-        tag: "FUTURE",
-        bg: "bg-[#0f172a] text-white"
-      }
-    ];
-
-    const shelfContainer = document.getElementById('shelfContainer');
-    const timelineDot = document.getElementById('timelineDot');
-    let activeChapterIdx = 2; // Start focused on ByteForge
-
-    function renderShelf() {
-      shelfContainer.innerHTML = chapters.map((ch, idx) => {
-        const isActive = idx === activeChapterIdx;
-        return `
-          <div onclick="selectChapter(${idx})" data-cursor="OPEN"
-               class="shelf-spine ${isActive ? 'active' : 'flex-1 hover:flex-[1.2]'} ${ch.bg} rounded-2xl p-6 cursor-pointer flex flex-col justify-between border border-black/15 shadow-lg overflow-hidden relative">
-            <div class="flex items-center justify-between font-mono text-[11px] opacity-70">
-              <span>${ch.num}</span>
-              <span>${ch.year}</span>
-            </div>
-            ${isActive ? `
-              <div class="space-y-3 my-4">
-                <span class="inline-block px-2.5 py-0.5 rounded bg-mint text-ink font-mono text-[10px] font-bold">${ch.tag}</span>
-                <h3 class="font-display font-bold text-2xl sm:text-3xl leading-tight">${ch.title}</h3>
-                <div class="font-mono text-xs text-mint">${ch.subtitle}</div>
-                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">${ch.desc}</p>
-              </div>
-            ` : `
-              <div class="my-auto py-4 md:py-0">
-                <div class="font-display font-bold text-lg md:-rotate-90 md:whitespace-nowrap origin-left md:translate-y-12 opacity-80">
-                  ${ch.title}
-                </div>
-              </div>
-            `}
-            <div class="font-mono text-[10px] opacity-50 flex justify-between">
-              <span>CHAPTER ${ch.num}</span>
-              <span>${isActive ? 'ACTIVE' : 'SELECT →'}</span>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      timelineDot.style.left = `${(activeChapterIdx / (chapters.length - 1)) * 96}%`;
-      bindCursorTargets();
-    }
-
-    function selectChapter(idx) {
-      activeChapterIdx = idx;
-      playTone('open');
-      renderShelf();
-    }
-    renderShelf();
-
-    // -----------------------------------------------------------------------
-    // 8. Project Case Study Modal
-    // -----------------------------------------------------------------------
-    const projectsData = {
+    const caseData = {
       medimate: {
         title: "MediMate AI",
         tag: "Healthcare & Offline AI",
@@ -1157,51 +926,42 @@
       }
     };
 
-    function openProjectModal(id) {
-      const p = projectsData[id];
-      if (!p) return;
+    function openCaseModal(id) {
+      const d = caseData[id]; if (!d) return;
       playTone('open');
-      document.getElementById('modalBody').innerHTML = `
+      document.getElementById('caseModalBody').innerHTML = `
         <div>
-          <span class="font-mono text-xs text-mint uppercase tracking-widest">${p.tag}</span>
-          <h3 class="font-display font-bold text-3xl text-white mt-1">${p.title}</h3>
+          <span class="font-mono text-xs text-mint uppercase tracking-widest">${d.tag}</span>
+          <h3 class="font-syne font-bold text-3xl text-white mt-1">${d.title}</h3>
         </div>
         <div class="p-4 rounded-2xl bg-red-500/10 border border-red-500/20">
           <div class="font-mono text-xs font-bold text-red-400 uppercase mb-1">Problem</div>
-          <p class="text-slate-300 text-sm">${p.problem}</p>
+          <p class="text-slate-300 text-sm">${d.problem}</p>
         </div>
         <div class="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20">
-          <div class="font-mono text-xs font-bold text-emerald-400 uppercase mb-1">Solution</div>
-          <p class="text-slate-300 text-sm">${p.solution}</p>
+          <div class="font-mono text-xs font-bold text-emerald-400 uppercase mb-1">Engineered Solution</div>
+          <p class="text-slate-300 text-sm">${d.solution}</p>
         </div>
         <div class="flex flex-wrap gap-2 font-mono text-xs">
-          ${p.stack.map(s => `<span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-white">${s}</span>`).join('')}
+          ${d.stack.map(s => `<span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-white">${s}</span>`).join('')}
         </div>
         <div class="pt-4 border-t border-white/10 flex justify-between items-center">
-          <a href="${p.github}" target="_blank" class="px-5 py-2.5 rounded-full bg-mint text-ink font-mono text-xs font-bold hover:bg-white transition-all">
-            View on GitHub →
-          </a>
-          <button onclick="closeProjectModal()" class="font-mono text-xs text-slate-400 hover:text-white">Close</button>
+          <a href="${d.github}" target="_blank" class="px-5 py-2.5 rounded-full bg-mint text-obsidian font-mono text-xs font-bold hover:bg-bone transition-all">View on GitHub →</a>
+          <button onclick="closeCaseModal()" class="font-mono text-xs text-slate-400 hover:text-white">Close</button>
         </div>
       `;
-      const m = document.getElementById('projectModal');
-      m.classList.remove('hidden');
-      m.classList.add('flex');
+      const m = document.getElementById('caseModal');
+      m.classList.remove('hidden'); m.classList.add('flex');
     }
-
-    function closeProjectModal() {
+    function closeCaseModal() {
       playTone('tick');
-      const m = document.getElementById('projectModal');
-      m.classList.add('hidden');
-      m.classList.remove('flex');
+      const m = document.getElementById('caseModal');
+      m.classList.add('hidden'); m.classList.remove('flex');
     }
-
-    document.getElementById('projectModal').addEventListener('click', (e) => {
-      if (e.target.id === 'projectModal') closeProjectModal();
-    });
+    document.getElementById('caseModal').addEventListener('click', (e) => { if (e.target.id === 'caseModal') closeCaseModal(); });
 
     // -----------------------------------------------------------------------
-    // 9. Contact Dispatch Form
+    // 10. Contact Dispatch
     // -----------------------------------------------------------------------
     document.getElementById('contactForm').addEventListener('submit', (e) => {
       e.preventDefault();
@@ -1219,10 +979,7 @@
       fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          access_key: 'c7c8c871-3316-419b-bfa0-14e21ce2c70d',
-          name, email, message: msg, recipient: 'shreeyashsolunke@gmail.com'
-        })
+        body: JSON.stringify({ access_key: 'c7c8c871-3316-419b-bfa0-14e21ce2c70d', name, email, message: msg, recipient: 'shreeyashsolunke@gmail.com' })
       })
       .then(() => {
         notice.className = 'p-3.5 rounded-xl font-mono text-xs bg-emerald-500/15 text-emerald-300 border border-emerald-500/30';
@@ -1234,11 +991,9 @@
         notice.className = 'p-3.5 rounded-xl font-mono text-xs bg-mint/15 text-mint border border-mint/30';
         notice.textContent = '✓ Copied to clipboard! Opening your email client...';
         window.location.href = `mailto:shreeyashsolunke@gmail.com?subject=Portfolio%20Inquiry&body=${encodeURIComponent(formatted)}`;
-        btnText.textContent = 'Transmit Message';
+        btnText.textContent = 'Transmit Dispatch';
       });
     });
-
-    bindCursorTargets();
   </script>
 </body>
 </html>

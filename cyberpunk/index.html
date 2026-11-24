@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeonTerminal — Shreeyash Solunke | Cyberpunk & Interactive CLI Portfolio</title>
+  <meta name="description" content="Cyberpunk Glassmorphic & CLI Terminal Portfolio of Shreeyash Rahul Solunke - IT Engineering Student at VIT Pune, Team Leader of ByteForge (Code APEX 3.0), and builder of MediMate, UTSAVFUND & RepairConnect.">
+  <meta name="keywords" content="Shreeyash Solunke, VIT Pune, ByteForge, Code APEX, MediMate, Portfolio, Python Developer, Flutter">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338bdf8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polygon points='12 2 2 7 12 12 22 7 12 2'/><polyline points='2 17 12 22 22 17'/><polyline points='2 12 12 17 22 12'/></svg>">
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              cyan: '#06b6d4',
+              sky: '#38bdf8',
+              blue: '#3b82f6',
+              indigo: '#6366f1',
+              violet: '#8b5cf6',
+              purple: '#a855f7',
+              emerald: '#10b981',
+              dark: '#050814'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="bg-[#050814] text-slate-100 antialiased selection:bg-indigo-500/30 selection:text-white">
+
+  <!-- Top Real-time Scroll Progress Bar -->
+  <div id="scroll-progress-bar"></div>
+
+  <!-- Custom Interactive Cursor Follower -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <!-- Animated Interactive Particle Background Canvas -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- Glowing Ambient Radial Light Blobs -->
+  <div class="ambient-glow-1"></div>
+  <div class="ambient-glow-2"></div>
+  <div class="ambient-glow-3"></div>
+
+  <!-- ========================================================================
+       TOP NAVIGATION BAR
+       ======================================================================== -->
+  <header class="fixed top-0 left-0 right-0 z-40 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logo & Academic Status -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-500 via-indigo-600 to-purple-600 p-[1.5px] shadow-lg shadow-indigo-500/20 group-hover:shadow-cyan-500/30 transition-all duration-300">
+          <div class="w-full h-full bg-[#080d21] rounded-[10px] flex items-center justify-center">
+            <span class="font-mono font-bold text-lg bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">SS</span>
+          </div>
+        </div>
+        <div>
+          <span class="text-sm font-bold tracking-tight text-white group-hover:text-cyan-300 transition-colors">
+            Shreeyash Solunke
+          </span>
+          <div class="flex items-center gap-1.5 text-[11px] text-slate-400 font-mono">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>VIT Pune IT '30</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
+        <a href="#leadership" class="hover:text-cyan-400 transition-colors flex items-center gap-1.5">
+          <span>Leadership</span>
+          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/30">ByteForge</span>
+        </a>
+        <a href="#skills" class="hover:text-cyan-400 transition-colors">Skills</a>
+        <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
+        <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
+      </nav>
+
+      <!-- Right Utility Bar: Audio Toggle, Live IST Clock & CTA -->
+      <div class="hidden sm:flex items-center gap-4">
+        
+        <!-- Live Clock Pill -->
+        <div class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-800 text-xs font-mono text-slate-400">
+          <i data-lucide="clock" class="w-3.5 h-3.5 text-cyan-400"></i>
+          <span id="live-time">--:--:-- IST</span>
+        </div>
+
+        <!-- Print / PDF Resume Preview Button -->
+        <button onclick="window.print()" class="hidden xl:flex p-2 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-indigo-500/50 text-slate-400 hover:text-indigo-400 transition-all text-xs font-mono items-center gap-1.5" title="Print or Save Resume Summary">
+          <i data-lucide="printer" class="w-4 h-4"></i>
+          <span class="text-[11px]">Print Resume</span>
+        </button>
+
+        <!-- Futuristic Sound FX Toggle Button with Equalizer Waveform -->
+        <button id="sound-toggle" class="p-2 px-3 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/50 text-slate-400 hover:text-cyan-400 transition-all text-xs font-mono flex items-center gap-2" title="Toggle Futuristic UI Audio FX">
+          <i id="sound-icon" data-lucide="volume-x" class="w-4 h-4"></i>
+          <div id="sound-eq-container" class="eq-bar-container">
+            <span class="eq-bar h-1"></span>
+            <span class="eq-bar h-2"></span>
+            <span class="eq-bar h-1"></span>
+          </div>
+          <span id="sound-label" class="hidden xl:inline text-[11px]">Audio OFF</span>
+        </button>
+
+        <!-- Multi-Portfolio Switcher -->
+        <div class="hidden sm:flex items-center gap-1 bg-slate-900/80 p-1 rounded-full border border-slate-800 text-xs font-mono">
+          <a href="../" class="px-2.5 py-0.5 rounded-full text-slate-400 hover:text-white transition-all" title="Master Portfolio Gateway">Hub</a>
+          <a href="../kinetic/" class="px-2.5 py-0.5 rounded-full text-slate-400 hover:text-white transition-all flex items-center gap-1" title="MotionSites Kinetic Edition">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>/kinetic
+          </a>
+          <a href="../bento/" class="px-2.5 py-0.5 rounded-full text-slate-400 hover:text-white transition-all" title="Apple-Inspired Minimal Bento Edition">/bento</a>
+          <span class="px-2.5 py-0.5 rounded-full bg-indigo-600 text-white font-medium">/cyberpunk</span>
+        </div>
+
+        <!-- Connect Action Button -->
+        <a href="#contact" id="nav-connect-btn" class="glow-btn px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 via-indigo-600 to-purple-600 text-white text-xs font-semibold tracking-wide shadow-md shadow-indigo-600/30 hover:shadow-cyan-500/40 transition-all flex items-center gap-2">
+          <span>Let's Connect</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Hamburger Button -->
+      <button id="mobile-menu-btn" class="md:hidden p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-300 hover:text-white">
+        <i data-lucide="menu" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Slide-out Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden bg-[#080d21]/95 border-b border-slate-800 px-6 py-6 space-y-4">
+      <a href="#about" class="mobile-nav-link block text-sm font-medium text-slate-300 hover:text-cyan-400">About Shreeyash</a>
+      <a href="#leadership" class="mobile-nav-link block text-sm font-medium text-slate-300 hover:text-cyan-400">Team ByteForge & Leadership</a>
+      <a href="#skills" class="mobile-nav-link block text-sm font-medium text-slate-300 hover:text-cyan-400">Skills & Tech Stack</a>
+      <a href="#projects" class="mobile-nav-link block text-sm font-medium text-slate-300 hover:text-cyan-400">Featured Projects</a>
+      <a href="#contact" class="mobile-nav-link block text-sm font-medium text-slate-300 hover:text-cyan-400">Contact & Socials</a>
+      <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+        <span class="text-xs font-mono text-slate-400">VIT Pune | FY-IT-E</span>
+        <a href="https://github.com/ShreeyashSolunke08" target="_blank" class="text-slate-400 hover:text-white">
+          <i data-lucide="github" class="w-5 h-5"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       HERO SECTION
+       ======================================================================== -->
+  <section class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <!-- Left Hero Column: Personal Branding & Introduction -->
+        <div class="lg:col-span-7 space-y-6">
+          
+          <!-- Status Pill -->
+          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-slate-800 shimmer-badge text-xs font-mono text-cyan-300">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-badge"></span>
+            <span>VIT Pune IT '30 • Team Leader @ ByteForge (Code APEX 3.0)</span>
+          </div>
+
+          <!-- Main Hero Headline -->
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
+            Hi, I'm <br class="hidden sm:inline" />
+            <span class="gradient-text-cyan-indigo">Shreeyash Solunke</span>
+          </h1>
+
+          <!-- Dynamic Typing Text Banner -->
+          <div class="flex items-center gap-2 text-lg sm:text-xl md:text-2xl font-mono text-slate-300 min-h-[36px]">
+            <span class="text-cyan-400 font-bold">&gt;</span>
+            <span id="typing-text" class="text-sky-300 font-semibold"></span>
+            <span class="terminal-cursor"></span>
+          </div>
+
+          <!-- Bio Description -->
+          <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl font-light">
+            First-year Information Technology engineering student at <strong class="font-semibold text-white">VIT Pune</strong> (FY-IT-E, B2). Passionate about turning complex real-world challenges into clean, accessible digital products — from elder-friendly healthcare solutions with <strong class="text-cyan-300">MediMate</strong> to cultural festival platforms like <strong class="text-indigo-300">UTSAVFUND</strong>.
+          </p>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <a href="#projects" class="glow-btn px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 via-indigo-600 to-purple-600 text-white font-semibold text-sm shadow-lg shadow-indigo-600/30 flex items-center gap-2">
+              <i data-lucide="layers" class="w-4 h-4"></i>
+              <span>Explore Projects</span>
+            </a>
+            <a href="#leadership" class="px-6 py-3 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-700/80 text-slate-200 font-semibold text-sm transition-all flex items-center gap-2">
+              <i data-lucide="shield-check" class="w-4 h-4 text-amber-400"></i>
+              <span>Team ByteForge</span>
+            </a>
+            <a href="#contact" id="hero-connect-btn" class="px-5 py-3 rounded-xl bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800 text-slate-300 font-semibold text-sm transition-all flex items-center gap-2">
+              <i data-lucide="send" class="w-4 h-4 text-cyan-400"></i>
+              <span>Get in Touch</span>
+            </a>
+          </div>
+
+          <!-- Verified Social Channels Ribbon -->
+          <div class="pt-4 flex flex-wrap items-center gap-3 text-xs font-mono text-slate-400">
+            <span class="text-slate-500">Connect:</span>
+            
+            <a href="https://www.linkedin.com/in/shreeyash-solunke-a9a4a9437?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-slate-900/80 hover:bg-blue-950/60 border border-slate-800 hover:border-blue-500/50 text-slate-300 hover:text-blue-400 transition-all flex items-center gap-1.5">
+              <i data-lucide="linkedin" class="w-3.5 h-3.5"></i>
+              <span>LinkedIn</span>
+            </a>
+
+            <a href="https://github.com/ShreeyashSolunke08" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-slate-600 text-slate-300 hover:text-white transition-all flex items-center gap-1.5">
+              <i data-lucide="github" class="w-3.5 h-3.5"></i>
+              <span>GitHub</span>
+            </a>
+
+            <a href="https://instagram.com/shreeyash_solunke23?dlrf=dDl1dHR1MHdyM29p" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-slate-900/80 hover:bg-pink-950/60 border border-slate-800 hover:border-pink-500/50 text-slate-300 hover:text-pink-400 transition-all flex items-center gap-1.5">
+              <i data-lucide="instagram" class="w-3.5 h-3.5"></i>
+              <span>Instagram</span>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Right Hero Column: Interactive Terminal Simulator -->
+        <div class="lg:col-span-5">
+          <div class="tilt-card terminal-window rounded-2xl overflow-hidden">
+            
+            <!-- Terminal Titlebar -->
+            <div class="terminal-header px-4 py-3 flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 rounded-full bg-rose-500/80"></div>
+                <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
+                <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+              </div>
+              <div class="text-[11px] font-mono text-slate-400 flex items-center gap-1.5">
+                <i data-lucide="terminal" class="w-3.5 h-3.5 text-cyan-400"></i>
+                <span>shreeyash@vit-pune-terminal</span>
+              </div>
+              <div class="w-8"></div>
+            </div>
+
+            <!-- Terminal Output Body -->
+            <div id="terminal-body" class="p-4 h-64 overflow-y-auto space-y-2 text-xs font-mono leading-relaxed text-slate-300">
+              <div class="text-cyan-400">
+                ⚡ Initializing Shreeyash's Interactive Terminal v2.4...
+              </div>
+              <div class="text-slate-400 text-xs">
+                Welcome! Type <span class="text-amber-300 font-semibold cursor-pointer" onclick="runFromText('help')">help</span> or click the quick command chips below.
+              </div>
+              <div class="p-2 rounded bg-slate-900/60 border border-slate-800 text-[11px] text-slate-400">
+                <span class="text-emerald-400 font-bold">STATUS:</span> Leading Team ByteForge (VIT Code APEX 3.0) & Building MediMate.
+              </div>
+            </div>
+
+            <!-- Quick Action Chips -->
+            <div class="px-3 py-2 bg-slate-900/90 border-t border-slate-800/80 flex flex-wrap gap-1.5">
+              <button class="quick-term-btn px-2 py-0.5 rounded bg-slate-800 hover:bg-indigo-900/60 text-[10px] font-mono text-cyan-300 border border-slate-700/60" data-cmd="about">about</button>
+              <button class="quick-term-btn px-2 py-0.5 rounded bg-slate-800 hover:bg-indigo-900/60 text-[10px] font-mono text-cyan-300 border border-slate-700/60" data-cmd="projects">projects</button>
+              <button class="quick-term-btn px-2 py-0.5 rounded bg-slate-800 hover:bg-indigo-900/60 text-[10px] font-mono text-cyan-300 border border-slate-700/60" data-cmd="skills">skills</button>
+              <button class="quick-term-btn px-2 py-0.5 rounded bg-slate-800 hover:bg-indigo-900/60 text-[10px] font-mono text-amber-300 border border-slate-700/60" data-cmd="leader">leader</button>
+              <button class="quick-term-btn px-2 py-0.5 rounded bg-slate-800 hover:bg-indigo-900/60 text-[10px] font-mono text-pink-300 border border-slate-700/60" data-cmd="contact">contact</button>
+              <button class="quick-term-btn px-2 py-0.5 rounded bg-slate-800 hover:bg-indigo-900/60 text-[10px] font-mono text-slate-400 border border-slate-700/60" data-cmd="clear">clear</button>
+            </div>
+
+            <!-- Terminal Input Prompt -->
+            <div class="p-3 bg-slate-950 flex items-center gap-2 border-t border-slate-800">
+              <span class="text-emerald-400 font-mono text-xs font-semibold">shreeyash:~$</span>
+              <input type="text" id="terminal-input" class="w-full bg-transparent text-xs font-mono text-cyan-300 focus:outline-none placeholder-slate-600" placeholder="Type a command (e.g. 'help', 'about')..." autocomplete="off" spellcheck="false">
+              <button onclick="document.getElementById('terminal-input').dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}))" class="text-slate-400 hover:text-cyan-400 p-1">
+                <i data-lucide="corner-down-left" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       KEY METRICS & HIGHLIGHTS BANNER
+       ======================================================================== -->
+  <section class="relative z-10 py-10 border-y border-slate-800/80 bg-slate-950/60 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        
+        <div class="p-4 rounded-xl glass-panel">
+          <div class="text-2xl md:text-3xl font-extrabold text-cyan-400 font-mono">Team Leader</div>
+          <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider font-medium">ByteForge • Code APEX 3.0</div>
+        </div>
+
+        <div class="p-4 rounded-xl glass-panel">
+          <div class="text-2xl md:text-3xl font-extrabold text-indigo-400 font-mono">VIT Pune</div>
+          <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider font-medium">Information Technology (FY-IT-E)</div>
+        </div>
+
+        <div class="p-4 rounded-xl glass-panel">
+          <div class="text-2xl md:text-3xl font-extrabold text-emerald-400 font-mono">4+ Core</div>
+          <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider font-medium">Real-World Projects & Prototypes</div>
+        </div>
+
+        <div class="p-4 rounded-xl glass-panel">
+          <div class="text-2xl md:text-3xl font-extrabold text-purple-400 font-mono">NLEM 2022</div>
+          <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider font-medium">Govt. Medicine DB Integration</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       ABOUT ME & PHILOSOPHY
+       ======================================================================== -->
+  <section id="about" class="relative py-24 z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-mono font-semibold px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+          // 01. PROFILE & MINDSET
+        </span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-white mt-4 tracking-tight">
+          Engineering Purposeful Solutions with Grit & Vision
+        </h2>
+        <p class="text-slate-400 text-sm md:text-base mt-3 leading-relaxed">
+          Embarking on my journey at Vishwakarma Institute of Technology (VIT Pune) with a deep drive to build practical, accessible technology that touches real lives.
+        </p>
+      </div>
+
+      <!-- Main About Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Card 1: The Builder Philosophy -->
+        <div class="tilt-card glow-border-box p-8 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-6">
+              <i data-lucide="cpu" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">Hands-on Engineering</h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Started exploring Python through core logic building (Smart Calculator, Branching Treasure Hunt RPG, Restaurant Bill & Tax Splitter). Now scaling up with Git/GitHub workflows, SQL database design, and mobile app architecture.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-800 text-xs font-mono text-cyan-400 flex items-center gap-1.5">
+            <i data-lucide="check" class="w-4 h-4"></i>
+            <span>Learning by Building</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Leadership & Collaboration -->
+        <div class="tilt-card glow-border-box p-8 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 mb-6">
+              <i data-lucide="users-2" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">Team Leadership</h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Proud Team Leader of <strong class="text-white">ByteForge</strong> in the VIT Code APEX 3.0 Hackathon. Also leading my <strong class="text-white">EDI1 (ES26102)</strong> engineering group, focusing strictly on innovative, non-trivial, daily-life practical projects over generic academic tropes.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-800 text-xs font-mono text-indigo-400 flex items-center gap-1.5">
+            <i data-lucide="award" class="w-4 h-4"></i>
+            <span>ByteForge & EDI1 Group Lead</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Modern AI Workflows & Presentation -->
+        <div class="tilt-card glow-border-box p-8 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-6">
+              <i data-lucide="sparkles" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">AI-Augmented Velocity</h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Believer in smart engineering workflows: leveraging specification-driven development with Antigravity AI agents, and crafting presentation decks using next-gen visual tools like Gamma, SlideGo, Genspark, and Figma.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-800 text-xs font-mono text-purple-400 flex items-center gap-1.5">
+            <i data-lucide="zap" class="w-4 h-4"></i>
+            <span>Next-Gen Development Workflow</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       LEADERSHIP SPOTLIGHT: TEAM BYTEFORGE & CODE APEX 3.0
+       ======================================================================== -->
+  <section id="leadership" class="relative py-20 z-10 bg-gradient-to-b from-transparent via-[#090e24]/70 to-transparent">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="glow-border-box p-8 md:p-12 relative overflow-hidden">
+        
+        <!-- Background Accent Graphic -->
+        <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <div class="lg:col-span-8 space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-mono">
+              <i data-lucide="shield" class="w-3.5 h-3.5"></i>
+              <span>VIT Code APEX 3.0 Hackathon Spotlight</span>
+            </div>
+
+            <h3 class="text-2xl md:text-4xl font-extrabold text-white">
+              Leading <span class="gradient-text-gold">Team ByteForge</span>
+            </h3>
+
+            <p class="text-slate-300 text-sm md:text-base leading-relaxed">
+              As Team Leader of ByteForge at VIT Pune, I orchestrate our hackathon strategy, architecture roadmaps, and feature prioritization. Our flagship hackathon build is <strong class="text-white">MediMate</strong> — an elder-centric medicine adherence application engineered with Flutter, Firebase, and the official Government of India NLEM 2022 database.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3">
+              <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-900/80 border border-slate-800">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+                <div class="text-xs">
+                  <div class="font-bold text-white">Spec-Driven Architecture</div>
+                  <div class="text-slate-400">Collaborating via structured markdown specs and Antigravity AI orchestration.</div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-900/80 border border-slate-800">
+                <i data-lucide="heart-pulse" class="w-5 h-5 text-rose-400 shrink-0 mt-0.5"></i>
+                <div class="text-xs">
+                  <div class="font-bold text-white">Accessibility for 60+ Seniors</div>
+                  <div class="text-slate-400">Removing friction, background alarms, and multi-tier guardian alerts.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4 flex flex-wrap items-center gap-4">
+              <button onclick="openProjectModal('medimate')" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 text-white font-semibold text-xs shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 transition-all flex items-center gap-2">
+                <i data-lucide="eye" class="w-4 h-4"></i>
+                <span>View MediMate Case Study</span>
+              </button>
+
+              <button class="copy-action-btn px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-mono text-xs transition-all flex items-center gap-2" data-copy="ByteForge - VIT Code APEX 3.0 (Leader: Shreeyash Solunke)">
+                <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                <span>Copy Team Bio</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Spotlight Graphic / Metric Card -->
+          <div class="lg:col-span-4 bg-slate-950/80 border border-slate-800/80 rounded-2xl p-6 text-center space-y-5">
+            <div class="w-16 h-16 mx-auto rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
+              <i data-lucide="trophy" class="w-8 h-8"></i>
+            </div>
+            <div>
+              <div class="text-xl font-bold text-white">ByteForge</div>
+              <div class="text-xs text-amber-400 font-mono">Code APEX 3.0 Contender</div>
+            </div>
+            <div class="text-xs text-slate-400 leading-relaxed font-mono">
+              "Building robust, accessible software that solves real pain points from day zero."
+            </div>
+            <div class="pt-2 border-t border-slate-800 flex justify-around text-xs font-mono">
+              <div>
+                <div class="text-slate-500">BRANCH</div>
+                <div class="font-bold text-white">IT Engineering</div>
+              </div>
+              <div class="w-px bg-slate-800"></div>
+              <div>
+                <div class="text-slate-500">DIVISION</div>
+                <div class="font-bold text-white">FY-IT-E (B2)</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Academic Leadership Dual Spotlight (EDI1 & Rajasthan in Focus) -->
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Academic Lead 1: EDI1 (ES26102) -->
+        <div class="tilt-card glow-border-box p-8 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-mono px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/40 font-semibold">
+                VIT Pune • ES26102
+              </span>
+              <span class="text-xs text-amber-400 font-mono flex items-center gap-1 font-bold">
+                <i data-lucide="crown" class="w-3.5 h-3.5"></i>
+                Team Leader
+              </span>
+            </div>
+
+            <h3 class="text-xl font-bold text-white mb-2">
+              EDI1: Engineering Design & Exploration
+            </h3>
+            <p class="text-xs text-indigo-300 font-mono mb-4">
+              Group Leader • Real-World Daily Utility & Innovation Synopsis
+            </p>
+
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Handpicked as Group Leader by our faculty guide to direct the semester engineering exploration project. Steered ideation away from generic, repeated templates (e.g. Modi script archives, generic haptic belts) to architect an out-of-the-box engineering solution with genuine daily-life utility.
+            </p>
+
+            <div class="space-y-2 mb-6 text-xs text-slate-400">
+              <div class="flex items-center gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
+                <span>Directing team ideation, component selection & synopsis formulation</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
+                <span>Focus: High-impact daily-life problem decomposition</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+            <button onclick="openProjectModal('academic-edi')" class="text-xs font-semibold text-purple-400 hover:text-purple-300 flex items-center gap-1.5 transition-colors">
+              <span>View EDI1 Synopsis Details</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+            <span class="text-[11px] font-mono text-slate-500">FY-IT-E (Batch B2)</span>
+          </div>
+        </div>
+
+        <!-- Academic Lead 2: Rajasthan in Focus -->
+        <div class="tilt-card glow-border-box p-8 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-mono px-3 py-1 rounded-full bg-pink-500/20 text-pink-300 border border-pink-500/40 font-semibold">
+                Student Activity • State Research
+              </span>
+              <span class="text-xs text-pink-400 font-mono flex items-center gap-1 font-bold">
+                <i data-lucide="users" class="w-3.5 h-3.5"></i>
+                Led Team of 4
+              </span>
+            </div>
+
+            <h3 class="text-xl font-bold text-white mb-2">
+              Rajasthan in Focus: Governance & Schemes
+            </h3>
+            <p class="text-xs text-pink-300 font-mono mb-4">
+              Team Leader & Key Speaker • 7-Slide Strategic Presentation
+            </p>
+
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Led and orchestrated a 4-member research team to analyze flagship public policies: Rajeevika, Mukhyamantri Jal Swavlamban Abhiyan (MJSA 2.0), Hariyalo Rajasthan, and Circular Economy initiatives.
+            </p>
+
+            <!-- Modern AI Toolchain Highlight -->
+            <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 mb-6">
+              <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider mb-2 font-bold flex items-center gap-1.5">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-pink-400"></i>
+                AI-Augmented Presentation Toolchain:
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-pink-950/60 border border-pink-700/50 text-pink-300 font-semibold">Gamma AI</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-pink-950/60 border border-pink-700/50 text-pink-300 font-semibold">SlideGo</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-pink-950/60 border border-pink-700/50 text-pink-300 font-semibold">Genspark</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-pink-950/60 border border-pink-700/50 text-pink-300 font-semibold">Figma</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+            <button onclick="openProjectModal('rajasthan-case-study')" class="text-xs font-semibold text-pink-400 hover:text-pink-300 flex items-center gap-1.5 transition-colors">
+              <span>View Presentation Case Study</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+            <span class="text-[11px] font-mono text-slate-500">VIT Pune Lead</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Engineering Roadmap: 2026 - 2030 (Class of 2030 Vision) -->
+      <div class="mt-16 pt-10 border-t border-slate-800/80">
+        <div class="text-center mb-10">
+          <span class="text-xs font-mono font-semibold px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+            // HORIZON 2026 - 2030
+          </span>
+          <h3 class="text-2xl md:text-3xl font-extrabold text-white mt-3">
+            The 4-Year Engineering Trajectory (Class of 2030)
+          </h3>
+          <p class="text-xs md:text-sm text-slate-400 mt-2 font-mono">
+            Structured roadmap from foundational algorithms to high-scale production systems.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          <div class="p-5 rounded-2xl bg-slate-900/60 border border-cyan-500/30 relative">
+            <div class="text-xs font-mono text-cyan-400 font-bold mb-1">YEAR 1 (2026 - 2027)</div>
+            <div class="text-sm font-bold text-white mb-2">Core Foundations & Hackathons</div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Python algorithms suite, Git/GitHub mastery, SQL schema design, leading ByteForge in Code APEX 3.0 & EDI1 project stewardship.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800 relative">
+            <div class="text-xs font-mono text-indigo-400 font-bold mb-1">YEAR 2 (2027 - 2028)</div>
+            <div class="text-sm font-bold text-white mb-2">Full-Stack & Civic Platforms</div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Scaling UTSAVFUND across Maharashtra festival mandals, launching RepairConnect circular economy prototypes, API architecture.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800 relative">
+            <div class="text-xs font-mono text-purple-400 font-bold mb-1">YEAR 3 (2028 - 2029)</div>
+            <div class="text-sm font-bold text-white mb-2">Distributed Systems & Cloud</div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Cloud orchestration (Docker, Kubernetes), microservices, high-concurrency backend services, engineering internships.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-900/60 border border-emerald-500/30 relative">
+            <div class="text-xs font-mono text-emerald-400 font-bold mb-1">YEAR 4 (2029 - 2030)</div>
+            <div class="text-sm font-bold text-white mb-2">Capstone & Industry Launch</div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Production capstone deployment, open-source maintainership, graduating with distinction from VIT Pune Department of IT.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       TECHNICAL ARSENAL & SKILLS
+       ======================================================================== -->
+  <section id="skills" class="relative py-24 z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-mono font-semibold px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/30">
+          // 02. TECHNICAL SKILLS & TOOLS
+        </span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-white mt-4 tracking-tight">
+          Tools, Frameworks & Core Capabilities
+        </h2>
+        <p class="text-slate-400 text-sm md:text-base mt-3 leading-relaxed">
+          Continuously expanding my skill set with practical implementation, clean version control, and modern toolchains.
+        </p>
+      </div>
+
+      <!-- Skills Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Group 1: Languages & Backend -->
+        <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                <i data-lucide="code-2" class="w-5 h-5"></i>
+              </div>
+              <h3 class="font-bold text-white text-base">Languages & Core</h3>
+            </div>
+            <p class="text-xs text-slate-400 mb-4">Logic, algorithm design, and data structures.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="tech-tag text-xs font-mono px-2.5 py-1 rounded-md text-cyan-300">Python 3</span>
+              <span class="tech-tag text-xs font-mono px-2.5 py-1 rounded-md text-cyan-300">SQL / MySQL</span>
+              <span class="tech-tag text-xs font-mono px-2.5 py-1 rounded-md text-cyan-300">Dart</span>
+              <span class="tech-tag text-xs font-mono px-2.5 py-1 rounded-md text-cyan-300">C / C++ Basics</span>
+            </div>
+          </div>
+          <div class="mt-6 pt-3 border-t border-slate-800 text-[11px] font-mono text-slate-500">
+            OOP, Scripts, Relational Schema
+          </div>
+        </div>
+
+        <!-- Group 2: Mobile & Frameworks -->
+        <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="p-2.5 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                <i data-lucide="smartphone" class="w-5 h-5"></i>
+              </div>
+              <h3 class="font-bold text-white text-base">Mobile & Cloud</h3>
+            </div>
+            <p class="text-xs text-slate-400 mb-4">Cross-platform UI and cloud backend integration.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="tech-tag text-xs font-mono px-2.5 py-1 rounded-md text-indigo-300">Flutter</span>
+              <span class="tech-tag text-xs font-mono px-2.5 py-1 rounded-md text-indigo-300">Firebase</span>
+              <span class="tech-tag text-xs font-mono px-2.5 py-1 rounded-md text-indigo-300">REST APIs</span>
+              <span class="tech-tag text-xs font-mono px-2.5 py-1 rounded-md text-indigo-300">Local Alarms</span>
+            </div>
+          </div>
+          <div class="mt-6 pt-3 border-t border-slate-800 text-[11px] font-mono text-slate-500">
+            Android SDK, Cloud Firestore, Auth
+          </div>
+        </div>
+
+        <!-- Group 3: Developer Tooling -->
+        <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <i data-lucide="git-branch" class="w-5 h-5"></i>
+              </div>
+              <h3 class="font-bold text-white text-base">DevOps & Tooling</h3>
+            </div>
+            <p class="text-xs text-slate-400 mb-4">Version control, environments and agentic IDEs.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="tech-tag text-xs font-mono px-2.5 py-1 rounded-md text-emerald-300">Git</span>
+              <span class="tech-tag text-xs font-mono px-2.5 py-1 rounded-md text-emerald-300">GitHub</span>
+              <span class="tech-tag text-xs font-mono px-2.5 py-1 rounded-md text-emerald-300">VS Code</span>
+              <span class="tech-tag text-xs font-mono px-2.5 py-1 rounded-md text-emerald-300">Android Studio</span>
+              <span class="tech-tag text-xs font-mono px-2.5 py-1 rounded-md text-emerald-300">Antigravity AI</span>
+            </div>
+          </div>
+          <div class="mt-6 pt-3 border-t border-slate-800 text-[11px] font-mono text-slate-500">
+            Branching, PRs, CLI, Spec Workflow
+          </div>
+        </div>
+
+        <!-- Group 4: Presentation & AI Tools -->
+        <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="p-2.5 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                <i data-lucide="palette" class="w-5 h-5"></i>
+              </div>
+              <h3 class="font-bold text-white text-base">Design & Presentation</h3>
+            </div>
+            <p class="text-xs text-slate-400 mb-4">High-impact visual communication and research.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="tech-tag text-xs font-mono px-2.5 py-1 rounded-md text-purple-300">Gamma</span>
+              <span class="tech-tag text-xs font-mono px-2.5 py-1 rounded-md text-purple-300">SlideGo</span>
+              <span class="tech-tag text-xs font-mono px-2.5 py-1 rounded-md text-purple-300">Genspark</span>
+              <span class="tech-tag text-xs font-mono px-2.5 py-1 rounded-md text-purple-300">Figma</span>
+            </div>
+          </div>
+          <div class="mt-6 pt-3 border-t border-slate-800 text-[11px] font-mono text-slate-500">
+            UI Prototyping, Pitch Decks, Research
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       FEATURED PROJECTS SHOWCASE
+       ======================================================================== -->
+  <section id="projects" class="relative py-24 z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+        <div>
+          <span class="text-xs font-mono font-semibold px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+            // 03. FEATURED WORK & CASE STUDIES
+          </span>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-white mt-4 tracking-tight">
+            Impact-Driven Engineering Projects
+          </h2>
+          <p class="text-slate-400 text-sm md:text-base mt-2">
+            Click on any card to dive deep into architecture, key metrics, and problem statements.
+          </p>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="mt-6 md:mt-0 flex flex-wrap gap-2">
+          <button class="filter-btn active px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-900 border border-slate-800 text-slate-300 hover:text-white" data-filter="all">
+            All Projects
+          </button>
+          <button class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-900 border border-slate-800 text-slate-300 hover:text-white" data-filter="hackathon">
+            Hackathons
+          </button>
+          <button class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-900 border border-slate-800 text-slate-300 hover:text-white" data-filter="social">
+            Social & Civic Tech
+          </button>
+          <button class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-900 border border-slate-800 text-slate-300 hover:text-white" data-filter="python">
+            Python Core
+          </button>
+          <button class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-900 border border-slate-800 text-slate-300 hover:text-white" data-filter="academic">
+            Academic & Lead
+          </button>
+        </div>
+      </div>
+
+      <!-- Dynamic Projects Grid (rendered by main.js) -->
+      <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Rendered dynamically -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       PROJECT CASE STUDY MODAL
+       ======================================================================== -->
+  <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 hidden">
+    <!-- Backdrop -->
+    <div id="modal-backdrop" class="modal-overlay absolute inset-0 cursor-pointer"></div>
+
+    <!-- Modal Card Wrapper -->
+    <div class="modal-content-wrapper relative bg-[#090f24] border border-cyan-500/40 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-10 z-10 shadow-2xl shadow-cyan-500/10">
+      
+      <!-- Close Button -->
+      <button id="modal-close" class="absolute top-6 right-6 p-2 rounded-xl bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 border border-slate-800 transition-all">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <!-- Badge & Category -->
+      <div class="flex items-center gap-3 mb-3">
+        <span id="modal-badge" class="text-xs font-mono px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-semibold">
+          --
+        </span>
+        <span class="text-xs text-slate-400 font-mono flex items-center gap-1.5">
+          <i data-lucide="shield" class="w-3.5 h-3.5 text-indigo-400"></i>
+          <span id="modal-role">--</span>
+        </span>
+      </div>
+
+      <!-- Title & Subtitle -->
+      <h2 id="modal-title" class="text-2xl md:text-4xl font-extrabold text-white">--</h2>
+      <p id="modal-subtitle" class="text-sm md:text-base text-indigo-300 font-medium mt-1 mb-6">--</p>
+
+      <!-- Metrics Grid -->
+      <div id="modal-metrics" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+        <!-- Injected via JS -->
+      </div>
+
+      <!-- Full Story / Background -->
+      <div class="mb-8">
+        <h4 class="text-xs uppercase font-mono tracking-wider text-slate-400 mb-2 font-bold">The Problem & Solution:</h4>
+        <p id="modal-story" class="text-sm text-slate-300 leading-relaxed bg-slate-900/60 p-5 rounded-2xl border border-slate-800/80">
+          --
+        </p>
+      </div>
+
+      <!-- Key Highlights -->
+      <div class="mb-8">
+        <h4 class="text-xs uppercase font-mono tracking-wider text-slate-400 mb-3 font-bold">Key Architectural Highlights:</h4>
+        <ul id="modal-highlights" class="space-y-2.5">
+          <!-- Injected via JS -->
+        </ul>
+      </div>
+
+      <!-- Tech Stack Badges -->
+      <div class="mb-8">
+        <h4 class="text-xs uppercase font-mono tracking-wider text-slate-400 mb-3 font-bold">Technologies Employed:</h4>
+        <div id="modal-tech" class="flex flex-wrap gap-2">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- Footer Actions -->
+      <div class="pt-6 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4">
+        <a id="modal-github" href="#" target="_blank" class="glow-btn px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 via-indigo-600 to-purple-600 text-white text-xs font-semibold flex items-center gap-2">
+          <i data-lucide="github" class="w-4 h-4"></i>
+          <span>View on GitHub</span>
+        </a>
+        <button onclick="document.getElementById('modal-close').click()" class="px-5 py-2.5 rounded-xl bg-slate-900 text-slate-300 text-xs font-semibold hover:bg-slate-800 border border-slate-800">
+          Close Preview
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       CONNECT & CONTACT SECTION
+       ======================================================================== -->
+  <section id="contact" class="relative py-24 z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-mono font-semibold px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+          // 04. GET IN TOUCH & NETWORKING
+        </span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-white mt-4 tracking-tight">
+          Let's Build Something Exceptional Together
+        </h2>
+        <p class="text-slate-400 text-sm md:text-base mt-3 leading-relaxed">
+          Open to hackathon invitations, tech discussions, open-source collaborations, and engineering internships.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        
+        <!-- Left Column: Direct Channels & Social Cards -->
+        <div class="lg:col-span-5 space-y-4">
+          
+          <!-- LinkedIn Card -->
+          <a href="https://www.linkedin.com/in/shreeyash-solunke-a9a4a9437?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" class="glow-border-box group p-5 flex items-center justify-between block hover:-translate-y-1 transition-all">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
+                <i data-lucide="linkedin" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">LinkedIn Profile</div>
+                <div class="text-xs text-slate-400 font-mono">@shreeyash-solunke</div>
+              </div>
+            </div>
+            <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover:text-blue-400"></i>
+          </a>
+
+          <!-- GitHub Card -->
+          <a href="https://github.com/ShreeyashSolunke08" target="_blank" rel="noopener noreferrer" class="glow-border-box group p-5 flex items-center justify-between block hover:-translate-y-1 transition-all">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                <i data-lucide="github" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">GitHub Repository</div>
+                <div class="text-xs text-slate-400 font-mono">@ShreeyashSolunke08</div>
+              </div>
+            </div>
+            <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover:text-cyan-400"></i>
+          </a>
+
+          <!-- Instagram Card -->
+          <a href="https://instagram.com/shreeyash_solunke23?dlrf=dDl1dHR1MHdyM29p" target="_blank" rel="noopener noreferrer" class="glow-border-box group p-5 flex items-center justify-between block hover:-translate-y-1 transition-all">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400 group-hover:scale-110 transition-transform">
+                <i data-lucide="instagram" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="text-sm font-bold text-white group-hover:text-pink-400 transition-colors">Instagram</div>
+                <div class="text-xs text-slate-400 font-mono">@shreeyash_solunke23</div>
+              </div>
+            </div>
+            <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover:text-pink-400"></i>
+          </a>
+
+          <!-- Academic Location Card -->
+          <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800 text-xs text-slate-400 flex items-start gap-3">
+            <i data-lucide="map-pin" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+            <div>
+              <span class="font-bold text-white block">Campus & Base Location:</span>
+              Vishwakarma Institute of Technology (VIT Pune), Upper Indira Nagar, Bibwewadi, Pune, Maharashtra 411037.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Interactive Fast Message Form -->
+        <div class="lg:col-span-7">
+          <div id="contact-card-box" class="glow-border-box p-8 transition-all duration-300">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xl font-bold text-white">Send a Direct Dispatch</h3>
+              <span class="text-[11px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-1 rounded-full flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                Active Inbox
+              </span>
+            </div>
+            <p class="text-xs text-slate-400 mb-6 font-mono">
+              Draft your message below or reach Shreeyash directly at <strong class="text-cyan-300">shreeyashsolunke@gmail.com</strong>.
+            </p>
+
+            <!-- Status Alert Banner -->
+            <div id="form-status-box" class="hidden mb-5 p-4 rounded-xl text-xs font-mono border transition-all duration-300">
+              <div id="form-status-content" class="flex items-start gap-2.5">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <form id="quick-contact-form" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="contact-name" class="block text-xs font-mono text-slate-300 mb-1.5">Your Name *</label>
+                  <input type="text" id="contact-name" name="name" required class="w-full bg-slate-900/90 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-500 transition-colors" placeholder="e.g. Alex Sharma">
+                </div>
+                <div>
+                  <label for="contact-email" class="block text-xs font-mono text-slate-300 mb-1.5">Your Email *</label>
+                  <input type="email" id="contact-email" name="email" required class="w-full bg-slate-900/90 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-500 transition-colors" placeholder="e.g. alex@company.com">
+                </div>
+              </div>
+
+              <div>
+                <label for="contact-msg" class="block text-xs font-mono text-slate-300 mb-1.5">Message / Hackathon Proposal *</label>
+                <textarea id="contact-msg" name="message" rows="4" required class="w-full bg-slate-900/90 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-500 transition-colors" placeholder="Tell me about your project, hackathon collaboration, or idea..."></textarea>
+              </div>
+
+              <div class="pt-2 flex flex-wrap items-center justify-between gap-4">
+                <button type="submit" id="contact-submit-btn" class="glow-btn px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 via-indigo-600 to-purple-600 text-white font-semibold text-xs flex items-center gap-2 shadow-lg shadow-indigo-600/30">
+                  <i id="submit-btn-icon" data-lucide="send" class="w-4 h-4"></i>
+                  <span id="submit-btn-text">Transmit Message</span>
+                </button>
+
+                <button type="button" class="copy-action-btn text-xs font-mono text-slate-400 hover:text-cyan-300 flex items-center gap-1.5 p-2 rounded-lg hover:bg-slate-800/60 transition-colors" data-copy="shreeyashsolunke@gmail.com">
+                  <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                  <span>Copy: shreeyashsolunke@gmail.com</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
+  <footer class="relative z-10 border-t border-slate-800/80 bg-[#030611] py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      
+      <!-- Brand & Academic -->
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center font-mono font-bold text-sm text-white">
+          SS
+        </div>
+        <div class="text-xs text-slate-400">
+          <strong class="text-white">Shreeyash Rahul Solunke</strong> • VIT Pune IT (FY-IT-E, B2)
+        </div>
+      </div>
+
+      <!-- Center Tech Spec -->
+      <div class="text-xs font-mono text-slate-500 text-center">
+        Designed & Engineered with Canvas, Tailwind, Lucide & Vanilla JS
+      </div>
+
+      <!-- Back to top & social -->
+      <div class="flex items-center gap-4 text-xs font-mono">
+        <a href="#about" class="text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1">
+          <span>Back to Top</span>
+          <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/projects-data.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

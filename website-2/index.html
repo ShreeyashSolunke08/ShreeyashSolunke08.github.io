@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shreeyash Solunke — Engineer, Builder, Leader</title>
+  <meta name="description" content="Portfolio of Shreeyash Rahul Solunke — IT Engineer at VIT Pune, Team Leader of ByteForge, builder of MediMate, UTSAVFUND & more.">
+
+  <!-- Fonts: Inter + Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'], heading: ['"Space Grotesk"', 'sans-serif'] },
+          colors: {
+            bg: '#0a0a0a', surface: '#141414', surfaceLight: '#1e1e1e',
+            accent: { blue: '#2563eb', violet: '#7c3aed', orange: '#f97316', emerald: '#10b981' }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* ── BASE ──────────────────────────────────────────── */
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body { background: #0a0a0a; color: #fafafa; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+    ::selection { background: rgba(37, 99, 235, .35); color: #fff; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0a0a0a; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #2563eb, #7c3aed); border-radius: 99px; }
+
+    /* ── GRADIENT MESH BG ─────────────────────────────── */
+    .gradient-mesh {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 600px 500px at 15% 20%, rgba(37,99,235,.12), transparent),
+        radial-gradient(ellipse 500px 600px at 80% 70%, rgba(124,58,237,.10), transparent),
+        radial-gradient(ellipse 400px 400px at 50% 50%, rgba(249,115,22,.06), transparent);
+    }
+    .gradient-mesh-parallax { transition: transform .3s ease-out; }
+
+    /* ── SCROLL ANIMATIONS ────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+    .reveal-delay-5 { transition-delay: .5s; }
+    .reveal-delay-6 { transition-delay: .6s; }
+
+    /* ── HERO TEXT REVEAL ─────────────────────────────── */
+    .hero-word { display: inline-block; opacity: 0; transform: translateY(30px) rotateX(-15deg); transition: opacity .5s ease, transform .5s ease; }
+    .hero-word.show { opacity: 1; transform: translateY(0) rotateX(0); }
+
+    /* ── BENTO CARD ───────────────────────────────────── */
+    .bento-card {
+      background: #141414; border: 1px solid rgba(255,255,255,.06); border-radius: 1.25rem;
+      transition: all .35s cubic-bezier(.16,1,.3,1); position: relative; overflow: hidden;
+    }
+    .bento-card::before {
+      content: ''; position: absolute; inset: 0; border-radius: inherit; opacity: 0;
+      background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(37,99,235,.12), transparent 60%);
+      transition: opacity .4s;
+    }
+    .bento-card:hover { border-color: rgba(37,99,235,.35); transform: translateY(-4px); box-shadow: 0 20px 40px -12px rgba(0,0,0,.5); }
+    .bento-card:hover::before { opacity: 1; }
+
+    /* ── PROJECT CARD ─────────────────────────────────── */
+    .project-card {
+      background: #141414; border: 1px solid rgba(255,255,255,.06); border-radius: 1.25rem;
+      padding: 1.75rem; transition: all .4s cubic-bezier(.16,1,.3,1); position: relative; overflow: hidden;
+    }
+    .project-card::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 1.25rem 1.25rem 0 0;
+      background: linear-gradient(90deg, var(--accent-from, #2563eb), var(--accent-to, #7c3aed));
+      opacity: 0; transition: opacity .3s;
+    }
+    .project-card:hover { border-color: rgba(255,255,255,.12); transform: translateY(-6px); box-shadow: 0 24px 48px -12px rgba(0,0,0,.6); }
+    .project-card:hover::after { opacity: 1; }
+
+    /* ── MAGNETIC BUTTON ──────────────────────────────── */
+    .magnetic-btn {
+      position: relative; display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px; border-radius: 9999px; font-weight: 600; font-size: 14px;
+      transition: all .2s ease; overflow: hidden;
+    }
+    .magnetic-btn-inner { position: relative; z-index: 1; display: flex; align-items: center; gap: 8px; }
+    .magnetic-btn::before {
+      content: ''; position: absolute; inset: 0; border-radius: inherit;
+      background: linear-gradient(135deg, #2563eb, #7c3aed); opacity: 0; transition: opacity .3s;
+    }
+    .magnetic-btn:hover::before { opacity: 1; }
+
+    /* ── SKILL PILL ───────────────────────────────────── */
+    .skill-pill {
+      padding: 8px 18px; border-radius: 9999px; border: 1px solid rgba(255,255,255,.1);
+      background: #141414; font-size: 13px; font-weight: 500; white-space: nowrap;
+      transition: all .25s ease; cursor: default;
+    }
+    .skill-pill:hover { border-color: rgba(37,99,235,.5); background: rgba(37,99,235,.1); color: #60a5fa; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,.15); }
+
+    /* ── TIMELINE ─────────────────────────────────────── */
+    .timeline-line { position: absolute; left: 19px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, #2563eb, #7c3aed, #f97316); border-radius: 2px; }
+    .timeline-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid; background: #0a0a0a; flex-shrink: 0; z-index: 2; transition: all .3s; }
+    .timeline-item:hover .timeline-dot { transform: scale(1.4); box-shadow: 0 0 12px currentColor; }
+
+    /* ── NAV ──────────────────────────────────────────── */
+    .nav-glass { background: rgba(10,10,10,.8); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,.06); }
+
+    /* ── BACK TO TOP ──────────────────────────────────── */
+    #back-to-top {
+      position: fixed; bottom: 28px; right: 28px; z-index: 50;
+      background: #141414; border: 1px solid rgba(255,255,255,.1); border-radius: 9999px;
+      padding: 10px 18px; display: flex; align-items: center; gap: 6px;
+      font-size: 12px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; color: #94a3b8;
+      opacity: 0; transform: translateY(20px); pointer-events: none;
+      transition: all .3s cubic-bezier(.16,1,.3,1);
+    }
+    #back-to-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    #back-to-top:hover { border-color: rgba(37,99,235,.5); color: #60a5fa; }
+
+    /* ── GEOMETRIC SHAPES ─────────────────────────────── */
+    .geo-ring {
+      position: absolute; border: 1px solid rgba(255,255,255,.04); border-radius: 50%;
+      animation: geoSpin 25s linear infinite; pointer-events: none;
+    }
+    @keyframes geoSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .geo-cross {
+      position: absolute; width: 20px; height: 20px; opacity: .06;
+      background: linear-gradient(#fff 0 0) center/2px 100% no-repeat, linear-gradient(#fff 0 0) center/100% 2px no-repeat;
+      animation: geoPulse 4s ease-in-out infinite alternate; pointer-events: none;
+    }
+    @keyframes geoPulse { 0% { opacity: .04; transform: scale(.8); } 100% { opacity: .08; transform: scale(1.2); } }
+  </style>
+</head>
+<body>
+
+  <!-- Gradient Mesh Background -->
+  <div class="gradient-mesh gradient-mesh-parallax" id="gradient-mesh"></div>
+
+  <!-- Geometric Decorations -->
+  <div class="geo-ring" style="width:400px;height:400px;top:10%;right:-100px;"></div>
+  <div class="geo-ring" style="width:250px;height:250px;bottom:20%;left:-80px;animation-direction:reverse;"></div>
+  <div class="geo-cross" style="top:25%;left:8%;"></div>
+  <div class="geo-cross" style="top:60%;right:12%;animation-delay:2s;"></div>
+  <div class="geo-cross" style="bottom:15%;left:20%;animation-delay:1s;"></div>
+
+  <!-- ═══════════════════════════════════════════════════
+       NAVIGATION
+       ═══════════════════════════════════════════════════ -->
+  <header class="fixed top-0 left-0 right-0 z-50 nav-glass">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#" class="font-heading font-bold text-lg tracking-tight">SS<span class="text-accent-blue">.</span></a>
+      <nav class="hidden md:flex items-center gap-8 text-sm text-zinc-400 font-medium">
+        <a href="#about" class="hover:text-white transition-colors">About</a>
+        <a href="#projects" class="hover:text-white transition-colors">Projects</a>
+        <a href="#skills" class="hover:text-white transition-colors">Skills</a>
+        <a href="#leadership" class="hover:text-white transition-colors">Leadership</a>
+        <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+      </nav>
+      <a href="#contact" class="magnetic-btn bg-white/5 border border-white/10 text-white text-xs">
+        <span class="magnetic-btn-inner"><span>Let's Talk</span><i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i></span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════
+       HERO — BENTO GRID
+       ═══════════════════════════════════════════════════ -->
+  <section class="relative pt-32 pb-20 md:pt-44 md:pb-28 z-10">
+    <div class="max-w-6xl mx-auto px-6">
+
+      <!-- Hero Headline -->
+      <div class="mb-6">
+        <p class="text-sm font-medium text-accent-blue font-heading tracking-widest uppercase mb-4 reveal">Hello, I'm</p>
+        <h1 id="hero-headline" class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading font-bold tracking-tight leading-[1.05]">
+          <!-- Words injected by JS -->
+        </h1>
+      </div>
+
+      <!-- Animated Subtitle -->
+      <p class="text-lg md:text-xl text-zinc-400 max-w-2xl leading-relaxed mb-10 reveal reveal-delay-2">
+        First-year <strong class="text-white font-semibold">IT Engineering</strong> student at VIT Pune (Class of 2030).
+        Leading <strong class="text-accent-blue font-semibold">Team ByteForge</strong> at Code APEX 3.0.
+        Building accessible healthcare, civic-tech, and circular economy platforms.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-wrap gap-4 mb-16 reveal reveal-delay-3">
+        <a href="#projects" class="magnetic-btn bg-accent-blue text-white shadow-lg shadow-accent-blue/25">
+          <span class="magnetic-btn-inner"><span>View Projects</span><i data-lucide="layers" class="w-4 h-4"></i></span>
+        </a>
+        <a href="https://github.com/ShreeyashSolunke08" target="_blank" class="magnetic-btn bg-white/5 border border-white/10 text-white">
+          <span class="magnetic-btn-inner"><i data-lucide="github" class="w-4 h-4"></i><span>GitHub</span></span>
+        </a>
+        <a href="https://www.linkedin.com/in/shreeyash-solunke-a9a4a9437" target="_blank" class="magnetic-btn bg-white/5 border border-white/10 text-white">
+          <span class="magnetic-btn-inner"><i data-lucide="linkedin" class="w-4 h-4"></i><span>LinkedIn</span></span>
+        </a>
+      </div>
+
+      <!-- Bento Stats Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bento-card p-6 reveal reveal-delay-1">
+          <div class="text-3xl font-heading font-bold text-accent-blue">Leader</div>
+          <div class="text-xs text-zinc-500 mt-1 font-medium uppercase tracking-wider">Team ByteForge</div>
+          <div class="text-[11px] text-zinc-600 mt-2">VIT Code APEX 3.0</div>
+        </div>
+        <div class="bento-card p-6 reveal reveal-delay-2">
+          <div class="text-3xl font-heading font-bold text-accent-violet">2030</div>
+          <div class="text-xs text-zinc-500 mt-1 font-medium uppercase tracking-wider">Class of</div>
+          <div class="text-[11px] text-zinc-600 mt-2">VIT Pune, FY-IT-E, B2</div>
+        </div>
+        <div class="bento-card p-6 reveal reveal-delay-3">
+          <div class="text-3xl font-heading font-bold text-accent-orange">7+</div>
+          <div class="text-xs text-zinc-500 mt-1 font-medium uppercase tracking-wider">Projects Built</div>
+          <div class="text-[11px] text-zinc-600 mt-2">From Healthcare to Civic-Tech</div>
+        </div>
+        <div class="bento-card p-6 reveal reveal-delay-4">
+          <div class="text-3xl font-heading font-bold text-accent-emerald">3×</div>
+          <div class="text-xs text-zinc-500 mt-1 font-medium uppercase tracking-wider">Team Lead Roles</div>
+          <div class="text-[11px] text-zinc-600 mt-2">ByteForge · EDI1 · Rajasthan</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       ABOUT — BENTO PHILOSOPHY
+       ═══════════════════════════════════════════════════ -->
+  <section id="about" class="relative py-24 z-10">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-12 reveal">
+        <p class="text-xs font-heading font-semibold text-accent-blue uppercase tracking-[.2em] mb-3">About</p>
+        <h2 class="text-3xl md:text-4xl font-heading font-bold tracking-tight">The Builder's Mindset</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Card 1: Hands-On Engineering -->
+        <div class="bento-card p-8 md:col-span-2 reveal reveal-delay-1">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-accent-blue/10 flex items-center justify-center text-accent-blue"><i data-lucide="cpu" class="w-5 h-5"></i></div>
+            <h3 class="font-heading font-bold text-lg">Hands-On Engineering</h3>
+          </div>
+          <p class="text-sm text-zinc-400 leading-relaxed">
+            I learn by building. Started with Python fundamentals — a smart calculator, a branching treasure hunt RPG, a restaurant GST billing engine — and quickly moved to mobile apps with Flutter + Firebase, SQL database design, and Git-driven workflows. Every project is an experiment in clean architecture and real-world problem decomposition.
+          </p>
+        </div>
+
+        <!-- Card 2: Team Leadership -->
+        <div class="bento-card p-8 reveal reveal-delay-2">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-accent-violet/10 flex items-center justify-center text-accent-violet"><i data-lucide="users" class="w-5 h-5"></i></div>
+            <h3 class="font-heading font-bold text-lg">Leadership</h3>
+          </div>
+          <p class="text-sm text-zinc-400 leading-relaxed">
+            Three team lead roles in my first year alone — ByteForge (Code APEX 3.0), EDI1 engineering project, and the Rajasthan governance research presentation. I push teams to reject mediocrity and build things that matter.
+          </p>
+        </div>
+
+        <!-- Card 3: AI-Augmented Workflow -->
+        <div class="bento-card p-8 reveal reveal-delay-3">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-accent-orange/10 flex items-center justify-center text-accent-orange"><i data-lucide="zap" class="w-5 h-5"></i></div>
+            <h3 class="font-heading font-bold text-lg">AI-First Velocity</h3>
+          </div>
+          <p class="text-sm text-zinc-400 leading-relaxed">
+            Using Antigravity AI agents for spec-driven development, Gamma and SlideGo for presentations, Genspark for deep research, and Figma for prototyping. Modern tools, modern speed.
+          </p>
+        </div>
+
+        <!-- Card 4: Vision -->
+        <div class="bento-card p-8 md:col-span-2 reveal reveal-delay-4">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-accent-emerald/10 flex items-center justify-center text-accent-emerald"><i data-lucide="target" class="w-5 h-5"></i></div>
+            <h3 class="font-heading font-bold text-lg">The 2026–2030 Trajectory</h3>
+          </div>
+          <p class="text-sm text-zinc-400 leading-relaxed">
+            Year 1: Core algorithms, hackathons, and team leadership. Year 2: Full-stack civic platforms. Year 3: Distributed systems, cloud, and internships. Year 4: Capstone deployment and industry launch. Every semester is a stepping stone toward building technology that reaches millions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       PROJECTS — MASONRY BENTO
+       ═══════════════════════════════════════════════════ -->
+  <section id="projects" class="relative py-24 z-10">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-12 reveal">
+        <p class="text-xs font-heading font-semibold text-accent-blue uppercase tracking-[.2em] mb-3">Work</p>
+        <h2 class="text-3xl md:text-4xl font-heading font-bold tracking-tight">Featured Projects</h2>
+        <p class="text-sm text-zinc-500 mt-2">Each project solves a real problem for real people.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <!-- MediMate -->
+        <div class="project-card lg:col-span-2 reveal reveal-delay-1" style="--accent-from:#2563eb;--accent-to:#06b6d4;">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-[11px] font-heading font-semibold px-3 py-1 rounded-full bg-accent-blue/10 text-accent-blue border border-accent-blue/20">Code APEX 3.0 Flagship</span>
+            <span class="text-[11px] text-zinc-500 font-mono flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Active</span>
+          </div>
+          <h3 class="text-xl font-heading font-bold mb-2">MediMate</h3>
+          <p class="text-xs text-zinc-500 font-medium mb-3">Elder-Friendly Medicine Adherence & Health Guardian</p>
+          <p class="text-sm text-zinc-400 leading-relaxed mb-5">Multi-role healthcare app (Patient, Guardian, Doctor/Pharmacist) with background alarms, tablet tracking, expiry alerts, and a medicine database built from the Govt. of India NLEM 2022 list. Designed specifically for senior citizens (60+) with large-text accessibility.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">Flutter</span>
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">Firebase</span>
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">NLEM 2022</span>
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">Antigravity</span>
+          </div>
+        </div>
+
+        <!-- UTSAVFUND -->
+        <div class="project-card reveal reveal-delay-2" style="--accent-from:#f97316;--accent-to:#fbbf24;">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-[11px] font-heading font-semibold px-3 py-1 rounded-full bg-accent-orange/10 text-accent-orange border border-accent-orange/20">Sponsorship Platform</span>
+          </div>
+          <h3 class="text-xl font-heading font-bold mb-2">UTSAVFUND</h3>
+          <p class="text-xs text-zinc-500 font-medium mb-3">Festival Pandal × Brand Marketplace</p>
+          <p class="text-sm text-zinc-400 leading-relaxed mb-5">Bridging cultural festival pandals with corporate sponsors. Commission-based model with transparent metrics. Expanding from Pune Ganpati to pan-India festivals and temples.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">Python</span>
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">MySQL</span>
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">Geo-Location</span>
+          </div>
+        </div>
+
+        <!-- RepairConnect -->
+        <div class="project-card reveal reveal-delay-3" style="--accent-from:#10b981;--accent-to:#34d399;">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-[11px] font-heading font-semibold px-3 py-1 rounded-full bg-accent-emerald/10 text-accent-emerald border border-accent-emerald/20">Sustainability Tech</span>
+          </div>
+          <h3 class="text-xl font-heading font-bold mb-2">RepairConnect</h3>
+          <p class="text-xs text-zinc-500 font-medium mb-3">Circular Economy Repair Network</p>
+          <p class="text-sm text-zinc-400 leading-relaxed mb-5">Repair over replace. Live milestone timeline: Received → Diagnostic → Repairing → Testing → Delivered. Upfront transparent quotes and verified technician directory.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">Python</span>
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">REST APIs</span>
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">SQL</span>
+          </div>
+        </div>
+
+        <!-- SchemeMatch + DocBuddy -->
+        <div class="project-card reveal reveal-delay-4" style="--accent-from:#2563eb;--accent-to:#7c3aed;">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-[11px] font-heading font-semibold px-3 py-1 rounded-full bg-accent-violet/10 text-accent-violet border border-accent-violet/20">Civic Tech</span>
+          </div>
+          <h3 class="text-xl font-heading font-bold mb-2">SchemeMatch + DocBuddy</h3>
+          <p class="text-xs text-zinc-500 font-medium mb-3">Welfare Eligibility & Document Guide</p>
+          <p class="text-sm text-zinc-400 leading-relaxed mb-5">Rule-based eligibility engine for government welfare schemes. DocBuddy wizard generates document checklists so applicants never face rejection for missing paperwork.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">Python</span>
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">MySQL</span>
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">Java</span>
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">Git</span>
+          </div>
+        </div>
+
+        <!-- Python Suite -->
+        <div class="project-card reveal reveal-delay-5" style="--accent-from:#06b6d4;--accent-to:#2563eb;">
+          <h3 class="text-xl font-heading font-bold mb-2">Python Practical Suite</h3>
+          <p class="text-xs text-zinc-500 font-medium mb-3">Algorithms, Games & Automation</p>
+          <p class="text-sm text-zinc-400 leading-relaxed mb-5">Smart Calculator with memory functions, an interactive branching Treasure Hunt RPG, and a Restaurant Bill Calculator with GST/tip splitting. Clean OOP, input sanitization, full Git history.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">Python 3</span>
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">OOP</span>
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">Git</span>
+          </div>
+        </div>
+
+        <!-- EDI1 -->
+        <div class="project-card reveal reveal-delay-5" style="--accent-from:#7c3aed;--accent-to:#a855f7;">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-[11px] font-heading font-semibold px-3 py-1 rounded-full bg-accent-violet/10 text-accent-violet border border-accent-violet/20">Team Leader</span>
+          </div>
+          <h3 class="text-xl font-heading font-bold mb-2">EDI1: Engineering Design</h3>
+          <p class="text-xs text-zinc-500 font-medium mb-3">ES26102 · Innovation Synopsis</p>
+          <p class="text-sm text-zinc-400 leading-relaxed mb-5">Group Leader appointed by faculty guide. Rejected generic ideas (Modi script, haptic belt, dialect archives) to architect an out-of-the-box engineering solution with real daily-life utility.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">Systems Eng.</span>
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">Synopsis</span>
+          </div>
+        </div>
+
+        <!-- Rajasthan -->
+        <div class="project-card reveal reveal-delay-6" style="--accent-from:#f97316;--accent-to:#ec4899;">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-[11px] font-heading font-semibold px-3 py-1 rounded-full bg-pink-500/10 text-pink-400 border border-pink-500/20">Led Team of 4</span>
+          </div>
+          <h3 class="text-xl font-heading font-bold mb-2">Rajasthan in Focus</h3>
+          <p class="text-xs text-zinc-500 font-medium mb-3">AI-Augmented Strategic Presentation</p>
+          <p class="text-sm text-zinc-400 leading-relaxed mb-5">7-slide analysis of Rajeevika, MJSA 2.0, Hariyalo Rajasthan & Circular Economy. Built with Gamma, SlideGo, Genspark, and Figma — pioneering a modern AI presentation workflow.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">Gamma</span>
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">SlideGo</span>
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">Figma</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       SKILLS — SCROLLABLE PILL CLOUD
+       ═══════════════════════════════════════════════════ -->
+  <section id="skills" class="relative py-24 z-10">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-10 reveal">
+        <p class="text-xs font-heading font-semibold text-accent-blue uppercase tracking-[.2em] mb-3">Stack</p>
+        <h2 class="text-3xl md:text-4xl font-heading font-bold tracking-tight">Skills & Tools</h2>
+      </div>
+
+      <div class="space-y-6">
+        <!-- Row 1: Languages -->
+        <div class="reveal reveal-delay-1">
+          <p class="text-xs text-zinc-500 font-heading font-semibold uppercase tracking-wider mb-3">Languages & Core</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-pill">Python 3</span>
+            <span class="skill-pill">SQL / MySQL</span>
+            <span class="skill-pill">Dart</span>
+            <span class="skill-pill">C / C++ Basics</span>
+            <span class="skill-pill">OOP</span>
+            <span class="skill-pill">Data Structures</span>
+          </div>
+        </div>
+
+        <!-- Row 2: Frameworks -->
+        <div class="reveal reveal-delay-2">
+          <p class="text-xs text-zinc-500 font-heading font-semibold uppercase tracking-wider mb-3">Mobile & Cloud</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-pill">Flutter</span>
+            <span class="skill-pill">Firebase</span>
+            <span class="skill-pill">REST APIs</span>
+            <span class="skill-pill">Cloud Firestore</span>
+            <span class="skill-pill">Android SDK</span>
+          </div>
+        </div>
+
+        <!-- Row 3: Tools -->
+        <div class="reveal reveal-delay-3">
+          <p class="text-xs text-zinc-500 font-heading font-semibold uppercase tracking-wider mb-3">DevOps & Tooling</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-pill">Git</span>
+            <span class="skill-pill">GitHub</span>
+            <span class="skill-pill">VS Code</span>
+            <span class="skill-pill">Android Studio</span>
+            <span class="skill-pill">Antigravity AI</span>
+          </div>
+        </div>
+
+        <!-- Row 4: Design -->
+        <div class="reveal reveal-delay-4">
+          <p class="text-xs text-zinc-500 font-heading font-semibold uppercase tracking-wider mb-3">Design & Presentation</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-pill">Gamma AI</span>
+            <span class="skill-pill">SlideGo</span>
+            <span class="skill-pill">Genspark</span>
+            <span class="skill-pill">Figma</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       LEADERSHIP TIMELINE
+       ═══════════════════════════════════════════════════ -->
+  <section id="leadership" class="relative py-24 z-10">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-12 reveal">
+        <p class="text-xs font-heading font-semibold text-accent-blue uppercase tracking-[.2em] mb-3">Journey</p>
+        <h2 class="text-3xl md:text-4xl font-heading font-bold tracking-tight">Leadership Timeline</h2>
+      </div>
+
+      <div class="relative max-w-2xl">
+        <div class="timeline-line"></div>
+
+        <!-- Item 1: ByteForge -->
+        <div class="timeline-item relative flex gap-5 pb-12 reveal reveal-delay-1">
+          <div class="timeline-dot border-accent-blue text-accent-blue mt-1.5"></div>
+          <div class="flex-1 ml-2">
+            <p class="text-[11px] font-mono text-accent-blue font-semibold mb-1">2026 — PRESENT</p>
+            <h3 class="font-heading font-bold text-lg mb-1">Team Leader — ByteForge</h3>
+            <p class="text-xs text-zinc-500 mb-2">VIT Code APEX 3.0 Hackathon</p>
+            <p class="text-sm text-zinc-400 leading-relaxed">Leading the flagship hackathon team to build MediMate — an elder-friendly medicine adherence system with Flutter, Firebase, and the NLEM 2022 database. Directing architecture, feature prioritization, and agile sprints using Antigravity AI agents.</p>
+          </div>
+        </div>
+
+        <!-- Item 2: EDI1 -->
+        <div class="timeline-item relative flex gap-5 pb-12 reveal reveal-delay-2">
+          <div class="timeline-dot border-accent-violet text-accent-violet mt-1.5"></div>
+          <div class="flex-1 ml-2">
+            <p class="text-[11px] font-mono text-accent-violet font-semibold mb-1">2026 — PRESENT</p>
+            <h3 class="font-heading font-bold text-lg mb-1">Group Leader — EDI1 Project</h3>
+            <p class="text-xs text-zinc-500 mb-2">ES26102 · VIT Pune Engineering Exploration</p>
+            <p class="text-sm text-zinc-400 leading-relaxed">Appointed by the project guide to direct the semester engineering synopsis. Filtering out generic, repetitive ideas in pursuit of a unique, out-of-the-box solution with genuine daily-life utility and measurable impact.</p>
+          </div>
+        </div>
+
+        <!-- Item 3: Rajasthan -->
+        <div class="timeline-item relative flex gap-5 pb-4 reveal reveal-delay-3">
+          <div class="timeline-dot border-accent-orange text-accent-orange mt-1.5"></div>
+          <div class="flex-1 ml-2">
+            <p class="text-[11px] font-mono text-accent-orange font-semibold mb-1">2026 — COMPLETED</p>
+            <h3 class="font-heading font-bold text-lg mb-1">Team Leader — Rajasthan in Focus</h3>
+            <p class="text-xs text-zinc-500 mb-2">Student Activity · Led Team of 4</p>
+            <p class="text-sm text-zinc-400 leading-relaxed">Directed a 4-member research team to analyze Rajasthan's flagship state initiatives (Rajeevika, MJSA 2.0, Hariyalo Rajasthan, Circular Economy). Delivered a polished 7-slide strategic presentation using an AI-augmented toolchain — Gamma, SlideGo, Genspark, and Figma.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       CONTACT
+       ═══════════════════════════════════════════════════ -->
+  <section id="contact" class="relative py-24 z-10">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+        <!-- Left: Info -->
+        <div class="lg:col-span-5 reveal">
+          <p class="text-xs font-heading font-semibold text-accent-blue uppercase tracking-[.2em] mb-3">Connect</p>
+          <h2 class="text-3xl md:text-4xl font-heading font-bold tracking-tight mb-4">Let's Build Something</h2>
+          <p class="text-sm text-zinc-400 leading-relaxed mb-8">Open to hackathon teams, open-source collaborations, internships, and engineering conversations.</p>
+
+          <div class="space-y-3">
+            <a href="https://www.linkedin.com/in/shreeyash-solunke-a9a4a9437" target="_blank" class="bento-card p-4 flex items-center gap-4 group block">
+              <div class="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform"><i data-lucide="linkedin" class="w-5 h-5"></i></div>
+              <div><div class="text-sm font-semibold group-hover:text-blue-400 transition-colors">LinkedIn</div><div class="text-xs text-zinc-500 font-mono">@shreeyash-solunke</div></div>
+            </a>
+            <a href="https://github.com/ShreeyashSolunke08" target="_blank" class="bento-card p-4 flex items-center gap-4 group block">
+              <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-white group-hover:scale-110 transition-transform"><i data-lucide="github" class="w-5 h-5"></i></div>
+              <div><div class="text-sm font-semibold group-hover:text-zinc-300 transition-colors">GitHub</div><div class="text-xs text-zinc-500 font-mono">@ShreeyashSolunke08</div></div>
+            </a>
+            <a href="https://instagram.com/shreeyash_solunke23" target="_blank" class="bento-card p-4 flex items-center gap-4 group block">
+              <div class="w-10 h-10 rounded-xl bg-pink-500/10 flex items-center justify-center text-pink-400 group-hover:scale-110 transition-transform"><i data-lucide="instagram" class="w-5 h-5"></i></div>
+              <div><div class="text-sm font-semibold group-hover:text-pink-400 transition-colors">Instagram</div><div class="text-xs text-zinc-500 font-mono">@shreeyash_solunke23</div></div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="lg:col-span-7 reveal reveal-delay-2">
+          <div class="bento-card p-8">
+            <h3 class="font-heading font-bold text-lg mb-1">Send a Message</h3>
+            <p class="text-xs text-zinc-500 font-mono mb-6">Reach Shreeyash directly at <strong class="text-zinc-300">shreeyashsolunke@gmail.com</strong></p>
+            <form id="contact-form" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs text-zinc-400 mb-1.5 font-medium">Name *</label>
+                  <input type="text" id="c-name" required class="w-full bg-white/5 border border-white/8 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accent-blue/50 transition-colors placeholder-zinc-600" placeholder="Your name">
+                </div>
+                <div>
+                  <label class="block text-xs text-zinc-400 mb-1.5 font-medium">Email *</label>
+                  <input type="email" id="c-email" required class="w-full bg-white/5 border border-white/8 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accent-blue/50 transition-colors placeholder-zinc-600" placeholder="you@example.com">
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs text-zinc-400 mb-1.5 font-medium">Message *</label>
+                <textarea id="c-msg" rows="4" required class="w-full bg-white/5 border border-white/8 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accent-blue/50 transition-colors placeholder-zinc-600 resize-none" placeholder="Your message or project idea..."></textarea>
+              </div>
+              <div id="form-feedback" class="hidden p-3 rounded-xl text-xs font-mono"></div>
+              <button type="submit" class="magnetic-btn bg-accent-blue text-white w-full justify-center">
+                <span class="magnetic-btn-inner"><i data-lucide="send" class="w-4 h-4"></i><span>Send Message</span></span>
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════ -->
+  <footer class="relative z-10 border-t border-white/5 py-10">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="text-xs text-zinc-500"><strong class="text-zinc-300">Shreeyash Rahul Solunke</strong> · VIT Pune IT (FY-IT-E, B2) · Class of 2030</div>
+      <div class="text-xs text-zinc-600 font-mono">Website No. 2 — Bento Grid Edition</div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i><span>Top</span>
+  </button>
+
+  <!-- ═══════════════════════════════════════════════════
+       JAVASCRIPT
+       ═══════════════════════════════════════════════════ -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.lucide) lucide.createIcons();
+      initHeroTextReveal();
+      initScrollReveal();
+      initBackToTop();
+      initParallaxMesh();
+      initSpotlightHover();
+      initMagneticButtons();
+      initContactForm();
+    });
+
+    /* ── HERO TEXT REVEAL ──────────────────────────────── */
+    function initHeroTextReveal() {
+      const headline = document.getElementById("hero-headline");
+      if (!headline) return;
+      const words = ["Shreeyash", "Solunke."];
+      headline.innerHTML = words.map((w, i) =>
+        `<span class="hero-word" style="transition-delay:${.3 + i * .15}s">${w}&nbsp;</span>`
+      ).join("");
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          headline.querySelectorAll(".hero-word").forEach(w => w.classList.add("show"));
+        }, 200);
+      });
+    }
+
+    /* ── SCROLL REVEAL (Intersection Observer) ────────── */
+    function initScrollReveal() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+      document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+    }
+
+    /* ── BACK TO TOP ──────────────────────────────────── */
+    function initBackToTop() {
+      const btn = document.getElementById("back-to-top");
+      if (!btn) return;
+      window.addEventListener("scroll", () => {
+        btn.classList.toggle("show", window.scrollY > 600);
+      }, { passive: true });
+    }
+
+    /* ── PARALLAX GRADIENT MESH ───────────────────────── */
+    function initParallaxMesh() {
+      const mesh = document.getElementById("gradient-mesh");
+      if (!mesh) return;
+      window.addEventListener("scroll", () => {
+        const y = window.scrollY * 0.08;
+        mesh.style.transform = `translateY(${y}px)`;
+      }, { passive: true });
+    }
+
+    /* ── SPOTLIGHT HOVER ON CARDS ─────────────────────── */
+    function initSpotlightHover() {
+      document.querySelectorAll(".bento-card, .project-card").forEach(card => {
+        card.addEventListener("mousemove", e => {
+          const r = card.getBoundingClientRect();
+          card.style.setProperty("--mx", ((e.clientX - r.left) / r.width * 100) + "%");
+          card.style.setProperty("--my", ((e.clientY - r.top) / r.height * 100) + "%");
+        });
+      });
+    }
+
+    /* ── MAGNETIC BUTTONS ─────────────────────────────── */
+    function initMagneticButtons() {
+      document.querySelectorAll(".magnetic-btn").forEach(btn => {
+        btn.addEventListener("mousemove", e => {
+          const r = btn.getBoundingClientRect();
+          const x = (e.clientX - r.left - r.width / 2) * 0.15;
+          const y = (e.clientY - r.top - r.height / 2) * 0.15;
+          btn.style.transform = `translate(${x}px, ${y}px)`;
+        });
+        btn.addEventListener("mouseleave", () => {
+          btn.style.transform = "translate(0,0)";
+        });
+      });
+    }
+
+    /* ── CONTACT FORM ─────────────────────────────────── */
+    function initContactForm() {
+      const form = document.getElementById("contact-form");
+      const feedback = document.getElementById("form-feedback");
+      if (!form) return;
+
+      form.addEventListener("submit", async e => {
+        e.preventDefault();
+        const name = document.getElementById("c-name").value.trim();
+        const email = document.getElementById("c-email").value.trim();
+        const msg = document.getElementById("c-msg").value.trim();
+        if (!name || !email || !msg) return;
+
+        // Mailto fallback
+        const mailto = `mailto:shreeyashsolunke@gmail.com?subject=${encodeURIComponent("Portfolio Message from " + name)}&body=${encodeURIComponent(msg + "\n\nFrom: " + name + " (" + email + ")")}`;
+        window.open(mailto, "_blank");
+
+        if (feedback) {
+          feedback.className = "p-3 rounded-xl text-xs font-mono bg-accent-emerald/10 border border-accent-emerald/30 text-emerald-300 block";
+          feedback.innerHTML = `<strong>Message ready!</strong> Your email client was opened with the message pre-filled for Shreeyash.`;
+        }
+        form.reset();
+      });
+    }
+  </script>
+
+</body>
+</html>

@@ -3,24 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shreeyash Solunke — Engineer, Builder & Student Journey | VIT Pune '30</title>
-  <meta name="description" content="Interactive WebGL & GSAP storytelling portfolio of Shreeyash Rahul Solunke — B.Tech IT at VIT Pune (Class of 2030), Team Leader of ByteForge at Code APEX 3.0.">
+  <title>Shreeyash Solunke — Notebook of an Engineer | VIT Pune '30</title>
+  <meta name="description" content="Interactive GLSL WebGL & GSAP storytelling portfolio of Shreeyash Rahul Solunke — B.Tech IT at VIT Pune (Class of 2030), Team Leader of ByteForge at Code APEX 3.0.">
 
-  <!-- Fonts: Syne (Avant-garde Display), Instrument Serif, Space Grotesk, JetBrains Mono -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CSS -->
+  <!-- Libraries -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- Three.js WebGL -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <!-- GSAP & ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <!-- Lenis Smooth Scroll -->
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 
   <script>
@@ -35,12 +31,12 @@
             hand: ['"Caveat Brush"', 'cursive'],
           },
           colors: {
-            obsidian: '#060608',
-            surface: '#0e0e13',
-            bone: '#f3f0e8',
+            obsidian: '#070709',
+            surface: '#101015',
+            bone: '#f3efe6',
             mint: '#2dd4bf',
             indigoGlow: '#6366f1',
-            amberGlow: '#f59e0b',
+            copper: '#d97746',
           }
         }
       }
@@ -49,126 +45,87 @@
 
   <style>
     html, body {
-      background-color: #060608;
-      color: #f3f0e8;
+      background-color: #070709;
+      color: #f3efe6;
       overflow-x: hidden;
     }
 
-    /* Subtle Analog Film Grain */
+    /* Film Grain */
     .noise-overlay {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 90;
-      opacity: 0.035;
+      position: fixed; inset: 0; pointer-events: none; z-index: 90; opacity: 0.035;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    /* Custom Scrollbar */
     ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: #060608; }
-    ::-webkit-scrollbar-thumb { background: #272732; border-radius: 99px; }
+    ::-webkit-scrollbar-track { background: #070709; }
+    ::-webkit-scrollbar-thumb { background: #262632; border-radius: 99px; }
     ::-webkit-scrollbar-thumb:hover { background: #2dd4bf; }
 
     /* Morphing Cursor */
     #cursor-follower {
-      position: fixed;
-      top: 0; left: 0;
-      width: 28px; height: 28px;
-      border: 1px solid rgba(243, 240, 232, 0.45);
-      border-radius: 9999px;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                  height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                  background-color 0.25s ease,
-                  border-color 0.25s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 9px;
-      font-weight: 700;
-      color: #060608;
-      letter-spacing: 0.08em;
+      position: fixed; top: 0; left: 0; width: 26px; height: 26px;
+      border: 1px solid rgba(243, 239, 230, 0.45); border-radius: 9999px;
+      pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
+      transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, border-color 0.25s ease;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; color: #070709; letter-spacing: 0.08em;
     }
     #cursor-follower.is-active {
-      width: 68px;
-      height: 68px;
-      background-color: #2dd4bf;
-      border-color: #2dd4bf;
+      width: 68px; height: 68px; background-color: #2dd4bf; border-color: #2dd4bf;
     }
 
-    /* Masked Text Line Reveal */
-    .reveal-mask {
-      overflow: hidden;
-      display: block;
-    }
-    .reveal-line {
-      display: block;
-      transform: translateY(110%);
-    }
+    /* Masked Reveal */
+    .reveal-mask { overflow: hidden; display: block; }
+    .reveal-line { display: block; transform: translateY(115%); }
 
-    /* 3D Lanyard Card */
+    /* 3D Lanyard Pass */
     .lanyard-pass {
       transform-style: preserve-3d;
-      box-shadow: 0 35px 70px -15px rgba(0,0,0,0.85), 0 0 40px rgba(45, 212, 191, 0.12);
+      box-shadow: 0 35px 70px -15px rgba(0,0,0,0.85), 0 0 40px rgba(45, 212, 191, 0.14);
     }
 
-    /* Floating Hover Preview Card for Works List */
-    #work-preview-float {
-      position: fixed;
-      pointer-events: none;
-      z-index: 60;
-      width: 320px;
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0.85);
-      transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    #work-preview-float.visible {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-
-    /* Editorial Work Row Hover */
-    .work-row {
-      transition: padding-left 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
-    }
-    .work-row:hover {
-      padding-left: 1.25rem;
-      border-color: rgba(45, 212, 191, 0.5);
+    /* Punched Paper Ticket */
+    .ticket-card {
+      background: #f3efe6; color: #0e0e12; position: relative;
+      mask-image: radial-gradient(circle at 0 50%, transparent 9px, black 10px), radial-gradient(circle at 100% 50%, transparent 9px, black 10px);
+      mask-composite: intersect; -webkit-mask-composite: source-in;
     }
 
     /* Manifesto Word Highlight */
-    .manifesto-word {
-      opacity: 0.15;
-      display: inline-block;
-      margin-right: 0.28em;
+    .manifesto-word { opacity: 0.15; display: inline-block; margin-right: 0.28em; }
+
+    /* Spotlight Card Glow */
+    .glow-card {
+      position: relative;
+      background: rgba(16, 16, 21, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      backdrop-filter: blur(18px);
     }
+    .glow-card::before {
+      content: ''; position: absolute; inset: -1px; border-radius: inherit; padding: 1.5px;
+      background: radial-gradient(380px circle at var(--mx, -500px) var(--my, -500px), rgba(45, 212, 191, 0.55), rgba(99, 102, 241, 0.2), transparent 70%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; opacity: 0; transition: opacity 0.3s ease;
+    }
+    .glow-card:hover::before { opacity: 1; }
   </style>
 </head>
 <body class="antialiased selection:bg-mint selection:text-obsidian">
 
-  <!-- Film Grain Overlay -->
   <div class="noise-overlay"></div>
-
-  <!-- Custom Morphing Cursor -->
   <div id="cursor-follower" class="hidden md:flex"></div>
 
   <!-- ========================================================================= -->
-  <!-- CURTAIN PRELOADER (000 -> 100 Clip-Path Wipe)                             -->
+  <!-- CURTAIN PRELOADER                                                         -->
   <!-- ========================================================================= -->
   <div id="curtain-preloader" class="fixed inset-0 z-[100] bg-obsidian flex flex-col justify-between p-6 sm:p-12">
     <div class="flex justify-between items-center font-mono text-xs text-slate-500 uppercase tracking-widest">
       <span>Shreeyash Solunke</span>
       <span>VIT Pune // Class of 2030</span>
     </div>
-    <div class="my-auto flex flex-col items-start">
-      <div class="font-mono text-xs text-mint uppercase tracking-[0.25em] mb-2">Initializing Experience</div>
-      <div id="preloader-counter" class="font-syne font-extrabold text-7xl sm:text-9xl text-bone tabular-nums leading-none">
-        000
-      </div>
+    <div class="my-auto">
+      <div class="font-mono text-xs text-mint uppercase tracking-[0.25em] mb-2">Loading Interactive Notebook</div>
+      <div id="preloader-counter" class="font-syne font-extrabold text-7xl sm:text-9xl text-bone tabular-nums leading-none">000</div>
     </div>
     <div class="w-full h-[1px] bg-white/10 relative overflow-hidden">
       <div id="preloader-bar" class="absolute inset-y-0 left-0 bg-mint w-0"></div>
@@ -176,7 +133,7 @@
   </div>
 
   <!-- ========================================================================= -->
-  <!-- MINIMALIST EDITORIAL HEADER                                               -->
+  <!-- EDITORIAL HEADER                                                          -->
   <!-- ========================================================================= -->
   <header class="fixed top-0 left-0 right-0 z-50 px-5 sm:px-10 py-5 flex items-center justify-between mix-blend-difference text-white pointer-events-none">
     <a href="#hero" class="pointer-events-auto font-serif italic text-2xl sm:text-3xl tracking-tight hover:text-mint transition-colors" data-cursor="HOME">
@@ -185,8 +142,8 @@
 
     <nav class="pointer-events-auto hidden md:flex items-center gap-9 font-mono text-[11px] uppercase tracking-[0.2em]">
       <a href="#journey" class="hover:text-mint transition-colors">01. Journey</a>
-      <a href="#manifesto" class="hover:text-mint transition-colors">02. Ethos</a>
-      <a href="#works" class="hover:text-mint transition-colors">03. Works</a>
+      <a href="#works" class="hover:text-mint transition-colors">02. Live Works</a>
+      <a href="#manifesto" class="hover:text-mint transition-colors">03. Ethos</a>
       <a href="#toolkit" class="hover:text-mint transition-colors">04. Stack</a>
       <a href="#contact" class="hover:text-mint transition-colors">05. Contact</a>
     </nav>
@@ -203,55 +160,57 @@
   </header>
 
   <!-- ========================================================================= -->
-  <!-- ACT I: 3D WEBGL HERO STAGE + INTERACTIVE LANYARD PASS                     -->
+  <!-- ACT I: CUSTOM GLSL WEBGL SHADER HERO + 3D LANYARD PASS                    -->
   <!-- ========================================================================= -->
   <section id="hero" class="relative min-h-screen w-full flex flex-col justify-between pt-28 pb-10 px-5 sm:px-12 overflow-hidden">
     
-    <!-- Three.js WebGL 3D Canvas -->
-    <canvas id="webgl-hero" class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-85"></canvas>
+    <!-- Custom GLSL Fragment Shader Background -->
+    <canvas id="shader-bg" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
 
-    <!-- Top Metadata Row -->
+    <!-- Top Metadata -->
     <div class="relative z-10 flex items-center justify-between font-mono text-[11px] text-slate-400 uppercase tracking-widest">
       <div class="flex items-center gap-2.5">
         <span class="w-2 h-2 rounded-full bg-mint animate-ping"></span>
-        <span>Open for Software & AI Engineering</span>
+        <span id="live-ist-clock">PUNE, IN • --:--:-- IST</span>
       </div>
       <div class="hidden sm:block font-hand text-2xl text-mint/90 normal-case tracking-normal -rotate-2">
-        "code is my canvas"
+        "from blank terminal to shipped systems"
       </div>
     </div>
 
     <!-- Main Hero Grid -->
     <div class="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 items-center my-auto py-8">
       
-      <!-- Left 8 Cols: Giant Masked Typography -->
+      <!-- Left 8 Cols -->
       <div class="lg:col-span-8 space-y-6">
-        <div class="font-mono text-xs text-mint uppercase tracking-[0.25em]">
-          VIT Pune • B.Tech IT '30 • ByteForge Lead
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 font-mono text-[11px] text-mint">
+          <span>ACTIVE ROLE:</span>
+          <span id="decryptRole" class="font-bold text-bone">TEAM BYTEFORGE LEAD</span>
         </div>
 
-        <h1 class="font-syne font-extrabold tracking-tighter leading-[0.88] text-5xl sm:text-7xl md:text-8xl xl:text-[7.25rem] text-bone uppercase">
-          <span class="reveal-mask"><span class="reveal-line">SHREEYASH</span></span>
-          <span class="reveal-mask"><span class="reveal-line font-serif italic font-normal lowercase text-mint tracking-normal">Solunke.</span></span>
+        <h1 class="font-syne font-extrabold tracking-tighter leading-[0.9] text-5xl sm:text-7xl md:text-8xl xl:text-[6.8rem] text-bone">
+          <span class="reveal-mask"><span class="reveal-line">BUILDING</span></span>
+          <span class="reveal-mask"><span class="reveal-line font-serif italic font-normal text-mint tracking-normal">systems that</span></span>
+          <span class="reveal-mask"><span class="reveal-line">MATTER.</span></span>
         </h1>
 
-        <p class="text-slate-300/90 text-base sm:text-lg max-w-xl leading-relaxed font-sans pt-2">
-          First-year Information Technology student at <strong class="text-white">VIT Pune</strong>, leading <strong class="text-mint">Team ByteForge</strong> at Code APEX 3.0. I engineer offline-first AI triage tools, transparent civic ledgers, and kinetic web experiences.
+        <p class="text-slate-300/90 text-base sm:text-lg max-w-xl leading-relaxed font-sans pt-1">
+          I'm <strong class="text-white">Shreeyash Rahul Solunke</strong> — an IT Engineering undergraduate at <strong class="text-mint">VIT Pune (Class of 2030)</strong>, Captain of <strong class="text-white">Team ByteForge</strong> at Code APEX 3.0, and builder of offline-first AI & civic-tech software.
         </p>
 
         <div class="flex flex-wrap items-center gap-4 pt-2">
-          <a href="#journey" class="px-7 py-3.5 rounded-full bg-bone text-obsidian hover:bg-mint font-mono text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-2 shadow-xl shadow-black/50" data-cursor="SCROLL">
-            <span>Explore the Journey</span>
+          <a href="#journey" class="px-7 py-3.5 rounded-full bg-bone text-obsidian hover:bg-mint font-mono text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-2 shadow-xl shadow-black/50" data-cursor="START">
+            <span>Read My Journey</span>
             <i data-lucide="arrow-down" class="w-4 h-4"></i>
           </a>
-          <a href="https://github.com/ShreeyashSolunke08" target="_blank" class="px-6 py-3.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 font-mono text-xs text-bone flex items-center gap-2 transition-all">
-            <i data-lucide="github" class="w-4 h-4"></i>
-            <span>@ShreeyashSolunke08</span>
+          <a href="#works" class="px-6 py-3.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 font-mono text-xs text-bone flex items-center gap-2 transition-all" data-cursor="PLAY">
+            <i data-lucide="play" class="w-3.5 h-3.5 text-mint"></i>
+            <span>Interactive Demos</span>
           </a>
         </div>
       </div>
 
-      <!-- Right 4 Cols: Interactive 3D Physics Lanyard Pass -->
+      <!-- Right 4 Cols: 3D Lanyard Pass -->
       <div class="lg:col-span-4 flex flex-col items-center justify-center">
         <div class="w-5 h-10 bg-gradient-to-b from-indigoGlow to-obsidian rounded-t-sm border-x border-white/20"></div>
         <div class="w-9 h-2.5 bg-zinc-700 rounded-full border border-zinc-500 -mt-0.5 mb-1.5"></div>
@@ -259,11 +218,10 @@
         <div id="lanyardPass" data-cursor="FLIP" class="lanyard-pass w-full max-w-[320px] rounded-2xl p-6 bg-surface/90 border border-white/15 backdrop-blur-2xl cursor-pointer relative overflow-hidden">
           <div class="absolute -top-14 -right-14 w-32 h-32 bg-mint/15 blur-2xl rounded-full pointer-events-none"></div>
 
-          <!-- Front -->
           <div id="passFront" class="space-y-4">
             <div class="flex items-center justify-between border-b border-white/10 pb-3 font-mono text-[10px]">
-              <span class="text-mint tracking-[0.2em] font-bold">VIT PUNE • STUDENT</span>
-              <span class="px-2 py-0.5 rounded bg-white/10 text-bone">2026–2030</span>
+              <span class="text-mint tracking-[0.2em] font-bold">VIT PUNE • PASS</span>
+              <span class="px-2 py-0.5 rounded bg-white/10 text-bone">CLASS '30</span>
             </div>
             <div class="flex items-center gap-3.5">
               <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-mint to-indigoGlow p-[1.5px] shrink-0">
@@ -277,36 +235,35 @@
             <div class="p-3 rounded-xl bg-white/[0.03] border border-white/5 font-mono text-[11px] space-y-1.5">
               <div class="flex justify-between"><span class="text-slate-500">Hackathon</span><span class="text-white font-semibold">ByteForge Lead</span></div>
               <div class="flex justify-between"><span class="text-slate-500">Innovation</span><span class="text-mint">EDI1 (ES26102)</span></div>
-              <div class="flex justify-between"><span class="text-slate-500">Focus</span><span class="text-slate-200">AI & Systems</span></div>
+              <div class="flex justify-between"><span class="text-slate-500">Research</span><span class="text-slate-200">Rajasthan Study</span></div>
             </div>
             <div class="pt-2 border-t border-white/10 flex justify-between items-center font-mono text-[10px] text-slate-500">
               <span>VIT#2030-IT-08</span>
-              <span class="text-mint flex items-center gap-1"><i data-lucide="rotate-cw" class="w-3 h-3"></i> Flip</span>
+              <span class="text-mint flex items-center gap-1"><i data-lucide="rotate-cw" class="w-3 h-3"></i> Click to flip</span>
             </div>
           </div>
 
-          <!-- Back -->
           <div id="passBack" class="hidden space-y-4">
             <div class="flex items-center justify-between border-b border-white/10 pb-3 font-mono text-[10px]">
-              <span class="text-amberGlow tracking-[0.2em] font-bold">CREDENTIALS</span>
-              <span class="text-slate-400">VERIFIED</span>
+              <span class="text-copper tracking-[0.2em] font-bold">VERIFIED STACK</span>
+              <span class="text-slate-400">2026–2030</span>
             </div>
             <div class="space-y-2 font-mono text-xs">
               <div class="p-2.5 rounded-lg bg-white/5">
-                <div class="text-[10px] text-slate-400">STACK</div>
-                <div class="text-white font-semibold">Python • C++ • React • TS</div>
+                <div class="text-[10px] text-slate-400">LANGUAGES</div>
+                <div class="text-white font-semibold">Python • C++ • TypeScript • JS</div>
               </div>
               <div class="p-2.5 rounded-lg bg-white/5">
-                <div class="text-[10px] text-slate-400">SPECIALTY</div>
-                <div class="text-white font-semibold">Offline IndexedDB • WebGL</div>
+                <div class="text-[10px] text-slate-400">ARCHITECTURE</div>
+                <div class="text-white font-semibold">React • IndexedDB • WebGL • DSA</div>
               </div>
               <div class="p-2.5 rounded-lg bg-white/5">
-                <div class="text-[10px] text-slate-400">EMAIL</div>
+                <div class="text-[10px] text-slate-400">CONTACT</div>
                 <div class="text-mint text-[11px]">shreeyashsolunke@gmail.com</div>
               </div>
             </div>
             <div class="pt-2 border-t border-white/10 flex justify-between items-center font-mono text-[10px] text-slate-500">
-              <span>PUNE, IN</span>
+              <span>PUNE, INDIA</span>
               <span class="text-mint flex items-center gap-1"><i data-lucide="rotate-ccw" class="w-3 h-3"></i> Front</span>
             </div>
           </div>
@@ -315,23 +272,22 @@
 
     </div>
 
-    <!-- Bottom Coordinates Bar -->
+    <!-- Bottom Scroll Cue -->
     <div class="relative z-10 flex justify-between items-center border-t border-white/10 pt-5 font-mono text-[11px] text-slate-500">
-      <span>18.5204° N, 73.8567° E — PUNE</span>
-      <span class="text-mint animate-pulse">SCROLL ↓</span>
+      <span>GITHUB.COM/SHREEYASHSOLUNKE08</span>
+      <span class="text-mint animate-pulse">SCROLL TO EXPLORE ↓</span>
     </div>
   </section>
 
   <!-- ========================================================================= -->
-  <!-- ACT II: PINNED HORIZONTAL STUDENT JOURNEY (GSAP ScrollTrigger Pin)        -->
+  <!-- ACT II: PINNED HORIZONTAL STUDENT JOURNEY WITH LIVE ARTIFACTS             -->
   <!-- ========================================================================= -->
-  <section id="journey" class="relative z-10 bg-surface border-t border-white/10 overflow-hidden">
+  <section id="journey" class="relative z-10 bg-surface/95 border-t border-white/10 overflow-hidden backdrop-blur-md">
     
-    <!-- Pinned Header HUD -->
-    <div class="max-w-7xl mx-auto px-5 sm:px-12 pt-16 pb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+    <div class="max-w-7xl mx-auto px-5 sm:px-12 pt-14 pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
       <div>
-        <div class="font-mono text-xs text-mint uppercase tracking-[0.25em] mb-2">01 // The Student Journey</div>
-        <h2 class="font-syne font-bold text-3xl sm:text-5xl text-bone tracking-tight">Five Chapters in Motion</h2>
+        <div class="font-mono text-xs text-mint uppercase tracking-[0.25em] mb-1">01 // The Student Journey</div>
+        <h2 class="font-syne font-bold text-3xl sm:text-5xl text-bone tracking-tight">Interactive Chapters</h2>
       </div>
       <div class="flex items-center gap-4 font-mono text-xs text-slate-400">
         <span id="journey-step-label">CHAPTER 01 / 05</span>
@@ -341,80 +297,169 @@
       </div>
     </div>
 
-    <!-- Horizontal Track (Pinned on Desktop via GSAP, Clean Grid/Scroll on Mobile) -->
     <div id="horizontal-track" class="flex flex-col md:flex-row md:w-[500vw] will-change-transform">
       
-      <!-- Chapter 01 -->
-      <div class="journey-panel w-full md:w-screen min-h-[65vh] md:min-h-[72vh] flex items-center px-5 sm:px-12 py-10">
-        <div class="max-w-4xl mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center p-8 sm:p-12 rounded-3xl bg-obsidian/80 border border-white/10 backdrop-blur-xl">
-          <div class="md:col-span-4 font-syne font-extrabold text-7xl sm:text-8xl text-white/10 select-none">01</div>
-          <div class="md:col-span-8 space-y-4">
-            <span class="px-3 py-1 rounded-full bg-mint/10 border border-mint/30 text-mint font-mono text-[11px] uppercase">The First Spark</span>
-            <h3 class="font-serif italic text-4xl sm:text-5xl text-white">Breaking Things to Learn</h3>
-            <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
-              Long before formal lectures, curiosity drove my first lines of Python. I started by automating small problems, exploring logic puzzles, and realizing that software is the closest thing we have to leverage from thin air.
+      <!-- CHAPTER 01: Interactive Python REPL -->
+      <div class="journey-panel w-full md:w-screen min-h-[70vh] flex items-center px-5 sm:px-12 py-8">
+        <div class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center glow-card rounded-3xl p-7 sm:p-12">
+          <div class="lg:col-span-6 space-y-4">
+            <span class="px-3 py-1 rounded-full bg-mint/10 border border-mint/30 text-mint font-mono text-[11px]">CHAPTER 01 // THE SPARK</span>
+            <h3 class="font-serif italic text-4xl sm:text-5xl text-white">First Lines of Code</h3>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              Before university, I fell in love with automation and logic—writing Python scripts to solve everyday bottlenecks and realizing code could turn any idea into reality.
             </p>
-            <div class="font-mono text-xs text-slate-500 pt-2">KEYSTACK: PYTHON • LOGIC • CURIOSITY</div>
+            <div class="font-hand text-2xl text-copper">try clicking "Run Script" →</div>
+          </div>
+          <!-- Live Interactive Python REPL Artifact -->
+          <div class="lg:col-span-6 rounded-2xl bg-[#09090d] border border-white/15 overflow-hidden font-mono text-xs shadow-2xl">
+            <div class="px-4 py-2.5 bg-white/5 border-b border-white/10 flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                <span class="ml-2 text-slate-400">spark.py</span>
+              </div>
+              <button onclick="runChapterRepl()" class="px-3 py-1 rounded bg-mint text-obsidian font-bold hover:bg-white transition-all flex items-center gap-1" data-cursor="RUN">
+                ▶ Run Script
+              </button>
+            </div>
+            <div class="p-5 space-y-2 text-slate-300">
+              <div><span class="text-purple-400">def</span> <span class="text-mint">start_journey</span>(student):</div>
+              <div class="pl-4">goals = [<span class="text-amber-300">"Build"</span>, <span class="text-amber-300">"Lead"</span>, <span class="text-amber-300">"Ship"</span>]</div>
+              <div class="pl-4"><span class="text-purple-400">return</span> <span class="text-amber-300">f"{student} -&gt; {' -> '.join(goals)}"</span></div>
+              <div class="pt-2"><span class="text-slate-500"># Output:</span></div>
+              <div id="replOutput" class="p-3 rounded-lg bg-white/[0.03] border border-white/10 text-mint min-h-[44px]">
+                Click "Run Script" to execute...
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Chapter 02 -->
-      <div class="journey-panel w-full md:w-screen min-h-[65vh] md:min-h-[72vh] flex items-center px-5 sm:px-12 py-10">
-        <div class="max-w-4xl mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center p-8 sm:p-12 rounded-3xl bg-obsidian/80 border border-white/10 backdrop-blur-xl">
-          <div class="md:col-span-4 font-syne font-extrabold text-7xl sm:text-8xl text-white/10 select-none">02</div>
-          <div class="md:col-span-8 space-y-4">
-            <span class="px-3 py-1 rounded-full bg-indigoGlow/15 border border-indigoGlow/30 text-indigo-300 font-mono text-[11px] uppercase">VIT Pune Entry</span>
-            <h3 class="font-serif italic text-4xl sm:text-5xl text-white">B.Tech IT — Class of 2030</h3>
-            <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
-              Entered Vishwakarma Institute of Technology, Pune (Division FY-IT-E, Batch B2). Immersed myself in C++, Data Structures, and collaborative peer engineering—turning theory into shipped prototypes.
+      <!-- CHAPTER 02: VIT Pune Telemetry Card -->
+      <div class="journey-panel w-full md:w-screen min-h-[70vh] flex items-center px-5 sm:px-12 py-8">
+        <div class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center glow-card rounded-3xl p-7 sm:p-12">
+          <div class="lg:col-span-6 space-y-4">
+            <span class="px-3 py-1 rounded-full bg-indigoGlow/15 border border-indigoGlow/30 text-indigo-300 font-mono text-[11px]">CHAPTER 02 // VIT PUNE '30</span>
+            <h3 class="font-serif italic text-4xl sm:text-5xl text-white">Engineering Foundations</h3>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              Joined Vishwakarma Institute of Technology (VIT Pune) in Information Technology (Division FY-IT-E, Batch B2), diving deep into C++, Data Structures, and collaborative software engineering.
             </p>
-            <div class="font-mono text-xs text-slate-500 pt-2">COHORT: FY-IT-E • BATCH B2 • VIT PUNE</div>
+          </div>
+          <!-- Academic Telemetry Card -->
+          <div class="lg:col-span-6 rounded-2xl bg-[#09090d] border border-white/15 p-6 font-mono text-xs space-y-4">
+            <div class="flex justify-between items-center border-b border-white/10 pb-3">
+              <span class="text-indigo-400 font-bold">ACADEMIC TELEMETRY // VIT PUNE</span>
+              <span class="text-emerald-400">● ACTIVE</span>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div class="p-3 rounded-xl bg-white/[0.03] border border-white/5">
+                <div class="text-[10px] text-slate-500">DEGREE</div>
+                <div class="text-white font-bold mt-0.5">B.Tech IT</div>
+              </div>
+              <div class="p-3 rounded-xl bg-white/[0.03] border border-white/5">
+                <div class="text-[10px] text-slate-500">COHORT</div>
+                <div class="text-mint font-bold mt-0.5">FY-IT-E • B2</div>
+              </div>
+            </div>
+            <div class="space-y-2.5">
+              <div>
+                <div class="flex justify-between text-[11px] mb-1"><span>C++ & Data Structures</span><span class="text-mint">92%</span></div>
+                <div class="h-1.5 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-mint w-[92%]"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-[11px] mb-1"><span>Python & Problem Solving</span><span class="text-indigo-400">95%</span></div>
+                <div class="h-1.5 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-indigoGlow w-[95%]"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-[11px] mb-1"><span>Full-Stack Web & Motion UI</span><span class="text-copper">90%</span></div>
+                <div class="h-1.5 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-copper w-[90%]"></div></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Chapter 03 -->
-      <div class="journey-panel w-full md:w-screen min-h-[65vh] md:min-h-[72vh] flex items-center px-5 sm:px-12 py-10">
-        <div class="max-w-4xl mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center p-8 sm:p-12 rounded-3xl bg-obsidian/80 border border-mint/30 backdrop-blur-xl shadow-2xl shadow-mint/5">
-          <div class="md:col-span-4 font-syne font-extrabold text-7xl sm:text-8xl text-mint/20 select-none">03</div>
-          <div class="md:col-span-8 space-y-4">
-            <span class="px-3 py-1 rounded-full bg-amberGlow/15 border border-amberGlow/30 text-amber-300 font-mono text-[11px] uppercase">VIT Code APEX 3.0</span>
+      <!-- CHAPTER 03: ByteForge @ Code APEX 3.0 Sprint Timeline -->
+      <div class="journey-panel w-full md:w-screen min-h-[70vh] flex items-center px-5 sm:px-12 py-8">
+        <div class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center glow-card rounded-3xl p-7 sm:p-12 border-mint/30">
+          <div class="lg:col-span-6 space-y-4">
+            <span class="px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 font-mono text-[11px]">CHAPTER 03 // CODE APEX 3.0</span>
             <h3 class="font-serif italic text-4xl sm:text-5xl text-white">Leading Team ByteForge</h3>
-            <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
-              Stepped up as Team Leader of ByteForge at VIT Code APEX 3.0. Coordinated rapid sprint cycles, resolved git merge conflicts under the clock, aligned system architecture, and delivered the live jury pitch.
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              Captained Team ByteForge at VIT Code APEX 3.0. Orchestrated sprint architecture, resolved live git merges under pressure, and pitched our working product to the hackathon jury.
             </p>
-            <div class="font-mono text-xs text-mint pt-2">ROLE: TEAM CAPTAIN • ARCHITECTURE • PITCH</div>
+          </div>
+          <!-- Interactive Hackathon War-Room Log -->
+          <div class="lg:col-span-6 rounded-2xl bg-[#09090d] border border-mint/25 p-6 font-mono text-xs space-y-3">
+            <div class="flex justify-between items-center border-b border-white/10 pb-3">
+              <span class="text-amber-300 font-bold">BYTEFORGE WAR-ROOM LOG</span>
+              <span class="px-2 py-0.5 rounded bg-mint/20 text-mint text-[10px]">CAPTAIN</span>
+            </div>
+            <div class="space-y-2.5">
+              <div class="flex items-start gap-3 p-2.5 rounded-lg bg-white/[0.03]">
+                <span class="text-mint font-bold">HR 02</span>
+                <span class="text-slate-300">Locked problem statement & system schema</span>
+              </div>
+              <div class="flex items-start gap-3 p-2.5 rounded-lg bg-white/[0.03]">
+                <span class="text-indigo-400 font-bold">HR 14</span>
+                <span class="text-slate-300">Merged core backend + offline IndexedDB engine</span>
+              </div>
+              <div class="flex items-start gap-3 p-2.5 rounded-lg bg-white/[0.03]">
+                <span class="text-amber-300 font-bold">HR 28</span>
+                <span class="text-slate-300">Polished responsive UI & edge-case resilience</span>
+              </div>
+              <div class="flex items-start gap-3 p-2.5 rounded-lg bg-mint/10 border border-mint/30">
+                <span class="text-mint font-bold">HR 36</span>
+                <span class="text-white font-semibold">Live Jury Pitch & Product Demo ✓</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Chapter 04 -->
-      <div class="journey-panel w-full md:w-screen min-h-[65vh] md:min-h-[72vh] flex items-center px-5 sm:px-12 py-10">
-        <div class="max-w-4xl mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center p-8 sm:p-12 rounded-3xl bg-obsidian/80 border border-white/10 backdrop-blur-xl">
-          <div class="md:col-span-4 font-syne font-extrabold text-7xl sm:text-8xl text-white/10 select-none">04</div>
-          <div class="md:col-span-8 space-y-4">
-            <span class="px-3 py-1 rounded-full bg-purple-500/15 border border-purple-500/30 text-purple-300 font-mono text-[11px] uppercase">EDI1 & Research</span>
-            <h3 class="font-serif italic text-4xl sm:text-5xl text-white">Design & Story Leadership</h3>
-            <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
-              Served as Group Lead for Engineering Design & Innovation (ES26102) and Lead Presenter for "Rajasthan in Focus"—translating complex geospatial, cultural, and water-system research into clear stage narratives.
+      <!-- CHAPTER 04: EDI1 & Rajasthan in Focus -->
+      <div class="journey-panel w-full md:w-screen min-h-[70vh] flex items-center px-5 sm:px-12 py-8">
+        <div class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center glow-card rounded-3xl p-7 sm:p-12">
+          <div class="lg:col-span-6 space-y-4">
+            <span class="px-3 py-1 rounded-full bg-purple-500/15 border border-purple-500/30 text-purple-300 font-mono text-[11px]">CHAPTER 04 // DESIGN & RESEARCH</span>
+            <h3 class="font-serif italic text-4xl sm:text-5xl text-white">EDI1 & "Rajasthan in Focus"</h3>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              Served as Group Lead for Engineering Design & Innovation (ES26102) and Lead Presenter for "Rajasthan in Focus"—turning complex field research on water conservation and heritage into compelling stage stories.
             </p>
-            <div class="font-mono text-xs text-slate-500 pt-2">PROJECTS: EDI1 (ES26102) • RAJASTHAN STUDY</div>
+          </div>
+          <!-- Interactive Field Notes Deck -->
+          <div class="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-5 rounded-2xl bg-[#09090d] border border-white/15 space-y-2 hover:-translate-y-1 transition-transform">
+              <div class="font-mono text-[10px] text-purple-400">COURSE // ES26102</div>
+              <div class="font-syne font-bold text-lg text-white">EDI1 Group Lead</div>
+              <p class="text-xs text-slate-400 leading-relaxed">Human-centric prototyping, stakeholder interviews & design reviews.</p>
+            </div>
+            <div class="p-5 rounded-2xl bg-[#09090d] border border-white/15 space-y-2 hover:-translate-y-1 transition-transform">
+              <div class="font-mono text-[10px] text-amber-400">RESEARCH // STAGE</div>
+              <div class="font-syne font-bold text-lg text-white">Rajasthan in Focus</div>
+              <p class="text-xs text-slate-400 leading-relaxed">Lead presenter on regional architecture, stepwells & socio-economics.</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Chapter 05 -->
-      <div class="journey-panel w-full md:w-screen min-h-[65vh] md:min-h-[72vh] flex items-center px-5 sm:px-12 py-10">
-        <div class="max-w-4xl mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center p-8 sm:p-12 rounded-3xl bg-obsidian/80 border border-white/10 backdrop-blur-xl">
-          <div class="md:col-span-4 font-syne font-extrabold text-7xl sm:text-8xl text-white/10 select-none">05</div>
-          <div class="md:col-span-8 space-y-4">
-            <span class="px-3 py-1 rounded-full bg-mint/15 border border-mint/30 text-mint font-mono text-[11px] uppercase">Horizon 2030</span>
-            <h3 class="font-serif italic text-4xl sm:text-5xl text-white">Offline AI & Motion Systems</h3>
-            <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
-              Today I focus on resilient software that works where people actually need it—from zero-connectivity medical triage (MediMate AI) to transparent community ledgers (UTSAVFUND) and interactive WebGL UIs.
+      <!-- CHAPTER 05: Interactive Mini Ballpit Sandbox -->
+      <div class="journey-panel w-full md:w-screen min-h-[70vh] flex items-center px-5 sm:px-12 py-8">
+        <div class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center glow-card rounded-3xl p-7 sm:p-12">
+          <div class="lg:col-span-5 space-y-4">
+            <span class="px-3 py-1 rounded-full bg-mint/15 border border-mint/30 text-mint font-mono text-[11px]">CHAPTER 05 // HORIZON '30</span>
+            <h3 class="font-serif italic text-4xl sm:text-5xl text-white">Play With the Stack</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Click or blast the physics orbs in the sandbox to see the technologies powering my upcoming builds.
             </p>
-            <div class="font-mono text-xs text-mint pt-2">NEXT: INTERNSHIPS • OPEN SOURCE • DEEP TECH</div>
+            <button onclick="blastOrbs()" class="px-4 py-2 rounded-full bg-mint text-obsidian font-mono text-xs font-bold hover:bg-white transition-all" data-cursor="BLAST">
+              ⚡ Radial Blast Orbs
+            </button>
+          </div>
+          <div class="lg:col-span-7 h-64 rounded-2xl bg-[#09090d] border border-white/15 relative overflow-hidden">
+            <canvas id="miniBallpit" class="w-full h-full cursor-pointer"></canvas>
+            <div class="absolute bottom-2 right-3 font-mono text-[10px] text-slate-500 pointer-events-none">Click canvas to bounce</div>
           </div>
         </div>
       </div>
@@ -423,99 +468,170 @@
   </section>
 
   <!-- ========================================================================= -->
-  <!-- ACT III: SCROLL-SCRUBBED MANIFESTO (Word-by-Word GSAP Scrub)              -->
+  <!-- ACT III: LIVE INTERACTIVE PROJECT SHOWCASE (4 Working Mini-Simulators!)   -->
   <!-- ========================================================================= -->
-  <section id="manifesto" class="relative z-10 py-32 sm:py-44 bg-obsidian px-5 sm:px-12 border-t border-white/5">
+  <section id="works" class="relative z-10 py-28 bg-obsidian px-5 sm:px-12 border-t border-white/10">
+    <div class="max-w-7xl mx-auto">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-16">
+        <div>
+          <div class="font-mono text-xs text-mint uppercase tracking-[0.25em] mb-2">02 // Interactive Works</div>
+          <h2 class="font-syne font-extrabold text-4xl sm:text-6xl text-bone tracking-tight">Don't Just Read—Test Them.</h2>
+        </div>
+        <div class="font-hand text-2xl text-mint -rotate-2">live mini-simulators inside every card</div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <!-- PROJECT 1: MediMate AI (Interactive Triage Clicker) -->
+        <div class="glow-card rounded-3xl p-7 sm:p-8 flex flex-col justify-between space-y-6">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between font-mono text-xs">
+              <span class="px-3 py-1 rounded-full bg-mint/15 text-mint border border-mint/30">01 // HEALTHCARE AI</span>
+              <span class="text-slate-500">OFFLINE-FIRST PWA</span>
+            </div>
+            <h3 class="font-syne font-bold text-3xl text-white">MediMate AI</h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Offline-first personal medical triage assistant using client-side decision trees and encrypted IndexedDB storage for zero-connectivity clinics.
+            </p>
+          </div>
+
+          <!-- Live Mini Triage Simulator -->
+          <div class="p-4 rounded-2xl bg-[#09090d] border border-white/10 space-y-3 font-mono text-xs">
+            <div class="text-[10px] text-slate-500 uppercase">Live Offline Triage Demo (Select Symptom):</div>
+            <div class="flex flex-wrap gap-2">
+              <button onclick="simTriage('Fever + Chills', 'MODERATE — Hydrate & monitor temp; sync to clinic queue.', 'text-amber-300')" class="px-2.5 py-1 rounded bg-white/5 hover:bg-mint/20 border border-white/10 text-slate-200 transition-all">Fever + Chills</button>
+              <button onclick="simTriage('Chest Tightness', 'URGENT — Immediate local first-aid protocol + SOS flag.', 'text-red-400')" class="px-2.5 py-1 rounded bg-white/5 hover:bg-red-500/20 border border-white/10 text-slate-200 transition-all">Chest Tightness</button>
+              <button onclick="simTriage('Mild Headache', 'LOW — Rest & hydration; cached in IndexedDB.', 'text-mint')" class="px-2.5 py-1 rounded bg-white/5 hover:bg-mint/20 border border-white/10 text-slate-200 transition-all">Mild Headache</button>
+            </div>
+            <div id="triageOut" class="p-2.5 rounded-lg bg-white/[0.03] border border-white/5 text-mint">
+              Select a symptom above to test local triage...
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-white/10 font-mono text-xs">
+            <button onclick="openCaseModal('medimate')" class="text-white hover:text-mint flex items-center gap-1.5 font-bold" data-cursor="OPEN">
+              Inspect Full Case Study →
+            </button>
+            <a href="https://github.com/ShreeyashSolunke08" target="_blank" class="text-slate-400 hover:text-white"><i data-lucide="github" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+
+        <!-- PROJECT 2: UTSAVFUND (Interactive Live Ledger) -->
+        <div class="glow-card rounded-3xl p-7 sm:p-8 flex flex-col justify-between space-y-6">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between font-mono text-xs">
+              <span class="px-3 py-1 rounded-full bg-indigoGlow/15 text-indigo-300 border border-indigoGlow/30">02 // CIVIC FINTECH</span>
+              <span class="text-slate-500">PUBLIC AUDIT TRAIL</span>
+            </div>
+            <h3 class="font-syne font-bold text-3xl text-white">UTSAVFUND</h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Transparent community crowdfunding and festival accounting ledger eliminating lost paper receipts with real-time public expenditure logs.
+            </p>
+          </div>
+
+          <!-- Live Ledger Mini Widget -->
+          <div class="p-4 rounded-2xl bg-[#09090d] border border-white/10 space-y-3 font-mono text-xs">
+            <div class="flex justify-between items-center">
+              <span class="text-[10px] text-slate-500 uppercase">Live Audit Ledger Simulation:</span>
+              <button onclick="addLedgerEntry()" class="px-2.5 py-1 rounded bg-indigoGlow text-white text-[10px] font-bold hover:bg-indigo-500 transition-all">+ Log ₹500</button>
+            </div>
+            <div class="flex justify-between items-baseline">
+              <span class="text-slate-400">Verified Pool:</span>
+              <span id="ledgerTotal" class="text-xl font-bold text-mint">₹24,500</span>
+            </div>
+            <div id="ledgerFeed" class="text-[11px] text-slate-400 p-2 rounded bg-white/[0.03] border border-white/5 truncate">
+              #TX-904 • Stage Lighting Verified • ₹4,200 ✓
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-white/10 font-mono text-xs">
+            <button onclick="openCaseModal('utsavfund')" class="text-white hover:text-mint flex items-center gap-1.5 font-bold" data-cursor="OPEN">
+              Inspect Full Case Study →
+            </button>
+            <a href="https://github.com/ShreeyashSolunke08" target="_blank" class="text-slate-400 hover:text-white"><i data-lucide="github" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+
+        <!-- PROJECT 3: RepairConnect (Interactive Technician Radar) -->
+        <div class="glow-card rounded-3xl p-7 sm:p-8 flex flex-col justify-between space-y-6">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between font-mono text-xs">
+              <span class="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">03 // CIRCULAR ECONOMY</span>
+              <span class="text-slate-500">RIGHT TO REPAIR</span>
+            </div>
+            <h3 class="font-syne font-bold text-3xl text-white">RepairConnect</h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Hyperlocal peer-to-peer electronics repair marketplace bridging device owners with verified neighborhood technicians to cut e-waste.
+            </p>
+          </div>
+
+          <!-- Live Hyperlocal Radar -->
+          <div class="p-4 rounded-2xl bg-[#09090d] border border-white/10 flex items-center justify-between gap-4 font-mono text-xs">
+            <div class="relative w-16 h-16 rounded-full border border-emerald-500/40 flex items-center justify-center shrink-0">
+              <div class="w-10 h-10 rounded-full border border-emerald-500/30 animate-ping absolute"></div>
+              <div class="w-2.5 h-2.5 rounded-full bg-emerald-400"></div>
+            </div>
+            <div class="space-y-1 flex-1">
+              <div class="text-emerald-300 font-bold">3 Verified Techs Nearby</div>
+              <div class="text-[11px] text-slate-400">0.8km • PCB & Laptop Diagnostics</div>
+              <div class="text-[10px] text-slate-500">Avg Quote: 60% below OEM</div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-white/10 font-mono text-xs">
+            <button onclick="openCaseModal('repairconnect')" class="text-white hover:text-mint flex items-center gap-1.5 font-bold" data-cursor="OPEN">
+              Inspect Full Case Study →
+            </button>
+            <a href="https://github.com/ShreeyashSolunke08" target="_blank" class="text-slate-400 hover:text-white"><i data-lucide="github" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+
+        <!-- PROJECT 4: PyLogic Suite (Live Animated Graph Traversal Canvas) -->
+        <div class="glow-card rounded-3xl p-7 sm:p-8 flex flex-col justify-between space-y-6">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between font-mono text-xs">
+              <span class="px-3 py-1 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30">04 // ALGORITHMS</span>
+              <span class="text-slate-500">PYTHON & C++ STL</span>
+            </div>
+            <h3 class="font-syne font-bold text-3xl text-white">PyLogic Suite</h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Algorithmic toolkit and interactive data structures playground featuring visual graph traversal, recursion call-stack traces & memory profiling.
+            </p>
+          </div>
+
+          <!-- Live Animated Graph Canvas -->
+          <div class="h-28 rounded-2xl bg-[#09090d] border border-white/10 relative overflow-hidden">
+            <canvas id="graphCanvas" class="w-full h-full"></canvas>
+            <div class="absolute top-2 left-3 font-mono text-[10px] text-amber-300">LIVE BFS / GRAPH TRAVERSAL</div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-white/10 font-mono text-xs">
+            <button onclick="openCaseModal('pylogic')" class="text-white hover:text-mint flex items-center gap-1.5 font-bold" data-cursor="OPEN">
+              Inspect Full Case Study →
+            </button>
+            <a href="https://github.com/ShreeyashSolunke08" target="_blank" class="text-slate-400 hover:text-white"><i data-lucide="github" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- ACT IV: SCROLL-SCRUBBED MANIFESTO                                         -->
+  <!-- ========================================================================= -->
+  <section id="manifesto" class="relative z-10 py-32 sm:py-40 bg-obsidian px-5 sm:px-12 border-t border-white/5">
     <div class="max-w-5xl mx-auto">
-      <div class="font-mono text-xs text-mint uppercase tracking-[0.25em] mb-8">02 // Engineering Ethos</div>
+      <div class="font-mono text-xs text-mint uppercase tracking-[0.25em] mb-8">03 // Engineering Ethos</div>
       <p id="manifesto-text" class="font-syne font-bold text-3xl sm:text-5xl md:text-6xl leading-[1.18] tracking-tight text-bone">
-        Great software should never feel generic. Whether it is a rural clinic running offline triage or a browser canvas reacting at sixty frames per second, every pixel and every byte is an opportunity to build something people remember.
+        Great software should never feel generic. Whether it is a rural clinic running offline triage or a browser shader reacting at sixty frames per second, every byte is a chance to build something unforgettable.
       </p>
     </div>
   </section>
 
   <!-- ========================================================================= -->
-  <!-- ACT IV: EDITORIAL WORKS LIST WITH FLOATING MOUSE-TRACKING PREVIEW         -->
-  <!-- ========================================================================= -->
-  <section id="works" class="relative z-10 py-28 bg-obsidian px-5 sm:px-12 border-t border-white/10">
-    <div class="max-w-6xl mx-auto">
-      
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14">
-        <div>
-          <div class="font-mono text-xs text-mint uppercase tracking-[0.25em] mb-2">03 // Selected Works</div>
-          <h2 class="font-syne font-extrabold text-4xl sm:text-6xl text-bone tracking-tight">Shipped Systems</h2>
-        </div>
-        <div class="font-mono text-xs text-slate-400">Hover to preview • Click to inspect architecture</div>
-      </div>
-
-      <!-- Floating Preview Card (Desktop) -->
-      <div id="work-preview-float" class="hidden lg:block rounded-2xl p-5 bg-surface/95 border border-mint/40 backdrop-blur-2xl shadow-2xl">
-        <div id="preview-tag" class="font-mono text-[10px] text-mint uppercase tracking-widest mb-1"></div>
-        <div id="preview-title" class="font-syne font-bold text-xl text-white mb-2"></div>
-        <div id="preview-metric" class="font-mono text-xs text-slate-300 bg-white/5 p-2.5 rounded-lg border border-white/10"></div>
-      </div>
-
-      <!-- Editorial Rows -->
-      <div class="divide-y divide-white/10 border-y border-white/10">
-        
-        <div class="work-row py-8 sm:py-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer"
-             data-cursor="OPEN" data-id="medimate"
-             data-tag="HEALTHCARE AI • OFFLINE-FIRST" data-title="MediMate AI" data-metric="// < 50ms local triage • Encrypted IndexedDB">
-          <div class="flex items-baseline gap-6">
-            <span class="font-mono text-xs text-slate-500">01</span>
-            <h3 class="font-syne font-bold text-3xl sm:text-5xl text-white">MediMate AI</h3>
-          </div>
-          <div class="flex items-center gap-6 font-mono text-xs text-slate-400">
-            <span>React • TypeScript • IndexedDB</span>
-            <span class="text-mint">→</span>
-          </div>
-        </div>
-
-        <div class="work-row py-8 sm:py-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer"
-             data-cursor="OPEN" data-id="utsavfund"
-             data-tag="CIVIC FINTECH • AUDIT LEDGER" data-title="UTSAVFUND" data-metric="// Real-time public ledger • PDF receipts">
-          <div class="flex items-baseline gap-6">
-            <span class="font-mono text-xs text-slate-500">02</span>
-            <h3 class="font-syne font-bold text-3xl sm:text-5xl text-white">UTSAVFUND</h3>
-          </div>
-          <div class="flex items-center gap-6 font-mono text-xs text-slate-400">
-            <span>TypeScript • Public Ledger • Charts</span>
-            <span class="text-mint">→</span>
-          </div>
-        </div>
-
-        <div class="work-row py-8 sm:py-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer"
-             data-cursor="OPEN" data-id="repairconnect"
-             data-tag="CIRCULAR ECONOMY • P2P" data-title="RepairConnect" data-metric="// Hyperlocal radius matching • E-waste reduction">
-          <div class="flex items-baseline gap-6">
-            <span class="font-mono text-xs text-slate-500">03</span>
-            <h3 class="font-syne font-bold text-3xl sm:text-5xl text-white">RepairConnect</h3>
-          </div>
-          <div class="flex items-center gap-6 font-mono text-xs text-slate-400">
-            <span>JavaScript • Geolocation • REST</span>
-            <span class="text-mint">→</span>
-          </div>
-        </div>
-
-        <div class="work-row py-8 sm:py-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer"
-             data-cursor="OPEN" data-id="pylogic"
-             data-tag="SYSTEMS & ALGORITHMS" data-title="PyLogic Suite" data-metric="// O(V+E) graph visuals • Call-stack profiler">
-          <div class="flex items-baseline gap-6">
-            <span class="font-mono text-xs text-slate-500">04</span>
-            <h3 class="font-syne font-bold text-3xl sm:text-5xl text-white">PyLogic Suite</h3>
-          </div>
-          <div class="flex items-center gap-6 font-mono text-xs text-slate-400">
-            <span>Python 3 • C++ STL • DSA</span>
-            <span class="text-mint">→</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================================= -->
-  <!-- ACT V: HIGH-CONTRAST WARM BONE TOOLKIT (3D Jack Editorial Break)          -->
+  <!-- ACT V: HIGH-CONTRAST WARM BONE TOOLKIT                                    -->
   <!-- ========================================================================= -->
   <section id="toolkit" class="relative z-20 bg-bone text-obsidian rounded-t-[40px] sm:rounded-t-[60px] py-28 px-5 sm:px-12">
     <div class="max-w-6xl mx-auto">
@@ -524,7 +640,7 @@
           <div class="font-mono text-xs uppercase tracking-[0.25em] text-slate-500 mb-2">04 // Technical Toolkit</div>
           <h2 class="font-syne font-extrabold text-4xl sm:text-6xl tracking-tight">Core Capabilities.</h2>
         </div>
-        <div class="font-hand text-2xl text-indigoGlow -rotate-2">built for speed & scale</div>
+        <div class="font-hand text-2xl text-indigoGlow -rotate-2">engineered for impact</div>
       </div>
 
       <div class="divide-y divide-black/10">
@@ -541,7 +657,7 @@
         <div class="py-8 grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
           <div class="md:col-span-3 font-syne font-extrabold text-5xl sm:text-6xl text-black/15">03</div>
           <div class="md:col-span-4 font-syne font-bold text-2xl">Offline-First & WebGL</div>
-          <div class="md:col-span-5 text-slate-700 text-sm sm:text-base">IndexedDB Encryption, PWAs, Three.js 3D Shaders & Web Audio API.</div>
+          <div class="md:col-span-5 text-slate-700 text-sm sm:text-base">IndexedDB Encryption, PWAs, Three.js GLSL Shaders & Web Audio API.</div>
         </div>
         <div class="py-8 grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
           <div class="md:col-span-3 font-syne font-extrabold text-5xl sm:text-6xl text-black/15">04</div>
@@ -557,7 +673,6 @@
   <!-- ========================================================================= -->
   <section id="contact" class="relative z-30 bg-obsidian text-bone rounded-t-[40px] sm:rounded-t-[60px] -mt-10 pt-28 pb-16 px-5 sm:px-12 border-t border-white/10">
     <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
-      
       <div class="lg:col-span-5 space-y-6">
         <div class="font-mono text-xs text-mint uppercase tracking-[0.25em]">05 // Next Chapter</div>
         <h2 class="font-serif italic text-5xl sm:text-6xl text-white leading-[1.05]">
@@ -608,12 +723,11 @@
           </form>
         </div>
       </div>
-
     </div>
 
     <footer class="max-w-6xl mx-auto mt-20 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-slate-500">
       <div>© 2026 Shreeyash Rahul Solunke • VIT Pune Class of 2030</div>
-      <div>Three.js WebGL • GSAP ScrollTrigger • Lenis</div>
+      <div>GLSL Shaders • GSAP ScrollTrigger • Lenis</div>
     </footer>
   </section>
 
@@ -631,7 +745,32 @@
     lucide.createIcons();
 
     // -----------------------------------------------------------------------
-    // 1. Web Audio Tactile Synthesizer
+    // 1. Live IST Clock & Decrypted Role Cycle
+    // -----------------------------------------------------------------------
+    function updateClock() {
+      const now = new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour12: false });
+      document.getElementById('live-ist-clock').textContent = `PUNE, IN • ${now} IST`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    const roles = ['TEAM BYTEFORGE LEAD', 'VIT PUNE IT \'30', 'OFFLINE AI ARCHITECT', 'SYSTEMS & MOTION DEV'];
+    let rIdx = 0;
+    const roleEl = document.getElementById('decryptRole');
+    const glyphs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#&';
+    setInterval(() => {
+      rIdx = (rIdx + 1) % roles.length;
+      const target = roles[rIdx];
+      let iter = 0;
+      const t = setInterval(() => {
+        roleEl.textContent = target.split('').map((c, i) => i < iter ? target[i] : (c === ' ' ? ' ' : glyphs[Math.floor(Math.random() * glyphs.length)])).join('');
+        if (iter >= target.length) clearInterval(t);
+        iter += 0.8;
+      }, 28);
+    }, 3600);
+
+    // -----------------------------------------------------------------------
+    // 2. Web Audio Tactile Synthesizer
     // -----------------------------------------------------------------------
     let audioCtx = null, soundOn = true;
     function playTone(type) {
@@ -642,12 +781,12 @@
         const now = audioCtx.currentTime;
         const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
         osc.type = type === 'open' ? 'triangle' : 'sine';
-        osc.frequency.setValueAtTime(type === 'open' ? 360 : 800, now);
-        osc.frequency.exponentialRampToValueAtTime(type === 'open' ? 720 : 1200, now + 0.08);
-        gain.gain.setValueAtTime(0.03, now);
-        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.09);
+        osc.frequency.setValueAtTime(type === 'open' ? 360 : 850, now);
+        osc.frequency.exponentialRampToValueAtTime(type === 'open' ? 740 : 1300, now + 0.06);
+        gain.gain.setValueAtTime(0.025, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.08);
         osc.connect(gain); gain.connect(audioCtx.destination);
-        osc.start(now); osc.stop(now + 0.1);
+        osc.start(now); osc.stop(now + 0.09);
       } catch (e) {}
     }
     document.getElementById('audioBtn').addEventListener('click', () => {
@@ -658,25 +797,19 @@
     });
 
     // -----------------------------------------------------------------------
-    // 2. Lenis Smooth Scroll + GSAP Integration
+    // 3. Lenis + GSAP + Curtain Preloader
     // -----------------------------------------------------------------------
     gsap.registerPlugin(ScrollTrigger);
-    const lenis = new Lenis({ duration: 1.25, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
+    const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
 
-    // -----------------------------------------------------------------------
-    // 3. Curtain Preloader Animation
-    // -----------------------------------------------------------------------
     const counterEl = document.getElementById('preloader-counter');
     const barEl = document.getElementById('preloader-bar');
     const obj = { val: 0 };
-
     gsap.to(obj, {
-      val: 100,
-      duration: 1.1,
-      ease: 'power2.inOut',
+      val: 100, duration: 0.95, ease: 'power2.inOut',
       onUpdate: () => {
         const v = Math.floor(obj.val);
         counterEl.textContent = String(v).padStart(3, '0');
@@ -684,97 +817,89 @@
       },
       onComplete: () => {
         gsap.to('#curtain-preloader', {
-          clipPath: 'inset(0 0 100% 0)',
-          duration: 0.85,
-          ease: 'power4.inOut',
+          clipPath: 'inset(0 0 100% 0)', duration: 0.8, ease: 'power4.inOut',
           onComplete: () => {
             document.getElementById('curtain-preloader').style.display = 'none';
-            // Trigger Hero Masked Line Reveal
-            gsap.to('.reveal-line', {
-              y: '0%',
-              duration: 1.1,
-              stagger: 0.14,
-              ease: 'power4.out'
-            });
+            gsap.to('.reveal-line', { y: '0%', duration: 1.0, stagger: 0.12, ease: 'power4.out' });
           }
         });
       }
     });
 
     // -----------------------------------------------------------------------
-    // 4. Three.js WebGL 3D Particle & Wireframe Sculpture
+    // 4. Custom GLSL Fragment Shader Background (Liquid Obsidian & Mint Flow)
     // -----------------------------------------------------------------------
     try {
-      const canvas = document.getElementById('webgl-hero');
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100);
-      camera.position.z = 7.5;
-
-      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      const canvas = document.getElementById('shader-bg');
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: false, antialias: false });
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 
-      // TorusKnot Particle Geometry
-      const knotGeo = new THREE.TorusKnotGeometry(2.1, 0.58, 180, 28);
-      const ptsMat = new THREE.PointsMaterial({ color: 0x2dd4bf, size: 0.032, transparent: true, opacity: 0.78 });
-      const knotParticles = new THREE.Points(knotGeo, ptsMat);
-      knotParticles.position.x = 1.6;
-      scene.add(knotParticles);
+      const scene = new THREE.Scene();
+      const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
-      // Inner Wireframe Core
-      const coreGeo = new THREE.IcosahedronGeometry(1.15, 1);
-      const coreMat = new THREE.MeshBasicMaterial({ color: 0x6366f1, wireframe: true, transparent: true, opacity: 0.28 });
-      const coreMesh = new THREE.Mesh(coreGeo, coreMat);
-      coreMesh.position.x = 1.6;
-      scene.add(coreMesh);
+      const uniforms = {
+        u_time: { value: 0 },
+        u_res: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+        u_mouse: { value: new THREE.Vector2(0.5, 0.5) }
+      };
 
-      // Ambient Starfield
-      const starGeo = new THREE.BufferGeometry();
-      const starCount = 700;
-      const starPos = new Float32Array(starCount * 3);
-      for (let i = 0; i < starCount * 3; i++) starPos[i] = (Math.random() - 0.5) * 26;
-      starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
-      const starMat = new THREE.PointsMaterial({ color: 0xf3f0e8, size: 0.022, transparent: true, opacity: 0.35 });
-      const stars = new THREE.Points(starGeo, starMat);
-      scene.add(stars);
+      const frag = `
+        uniform float u_time;
+        uniform vec2 u_res;
+        uniform vec2 u_mouse;
 
-      let mouseX = 0, mouseY = 0;
+        float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123); }
+        float noise(vec2 p) {
+          vec2 i = floor(p); vec2 f = fract(p);
+          vec2 u = f * f * (3.0 - 2.0 * f);
+          return mix(mix(hash(i + vec2(0.0, 0.0)), hash(i + vec2(1.0, 0.0)), u.x),
+                     mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x), u.y);
+        }
+
+        void main() {
+          vec2 uv = gl_FragCoord.xy / u_res.xy;
+          vec2 p = (gl_FragCoord.xy - 0.5 * u_res.xy) / min(u_res.x, u_res.y);
+          vec2 m = (u_mouse - 0.5) * 1.4;
+
+          float t = u_time * 0.18;
+          float n1 = noise(p * 2.2 + vec2(t, -t * 0.6) + m * 0.35);
+          float n2 = noise(p * 4.0 - vec2(t * 0.8, t) + n1 * 1.5);
+          float flow = smoothstep(0.25, 0.85, n2);
+
+          vec3 colObsidian = vec3(0.027, 0.027, 0.035);
+          vec3 colIndigo = vec3(0.11, 0.12, 0.28);
+          vec3 colMint = vec3(0.08, 0.42, 0.38);
+
+          vec3 col = mix(colObsidian, colIndigo, flow * 0.55);
+          float distMouse = length(p - m * 0.5);
+          col += colMint * smoothstep(0.75, 0.0, distMouse) * 0.45 * flow;
+
+          gl_FragColor = vec4(col, 1.0);
+        }
+      `;
+
+      const mat = new THREE.ShaderMaterial({ uniforms, fragmentShader: frag, vertexShader: `void main(){gl_Position=vec4(position,1.0);}` });
+      scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), mat));
+
       document.addEventListener('mousemove', (e) => {
-        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+        uniforms.u_mouse.value.x = e.clientX / window.innerWidth;
+        uniforms.u_mouse.value.y = 1.0 - e.clientY / window.innerHeight;
       });
-
       window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
+        uniforms.u_res.value.set(window.innerWidth, window.innerHeight);
       });
 
-      function animateWebGL() {
-        requestAnimationFrame(animateWebGL);
-        knotParticles.rotation.y += 0.0025;
-        knotParticles.rotation.x += 0.0012;
-        coreMesh.rotation.y -= 0.004;
-        coreMesh.rotation.z += 0.002;
-        stars.rotation.y += 0.0004;
-
-        camera.position.x += (mouseX * 0.65 - camera.position.x) * 0.04;
-        camera.position.y += (-mouseY * 0.45 - camera.position.y) * 0.04;
-        camera.lookAt(0, 0, 0);
-
+      (function renderShader(time) {
+        uniforms.u_time.value = time * 0.001;
         renderer.render(scene, camera);
-      }
-      animateWebGL();
-
-      // Scroll-linked WebGL depth zoom
-      gsap.to(camera.position, {
-        z: 3.8,
-        scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
-      });
+        requestAnimationFrame(renderShader);
+      })(0);
     } catch (e) {}
 
     // -----------------------------------------------------------------------
-    // 5. Pinned Horizontal Journey Scroll (Desktop)
+    // 5. Pinned Horizontal Journey Scroll
     // -----------------------------------------------------------------------
     ScrollTrigger.matchMedia({
       '(min-width: 768px)': function() {
@@ -803,26 +928,130 @@
     });
 
     // -----------------------------------------------------------------------
-    // 6. Scroll-Scrubbed Manifesto Word Reveal
+    // 6. Interactive Chapter Artifacts (REPL, Mini Ballpit, Simulators)
     // -----------------------------------------------------------------------
-    const manifestoEl = document.getElementById('manifesto-text');
-    const words = manifestoEl.innerText.trim().split(/\s+/);
-    manifestoEl.innerHTML = words.map(w => `<span class="manifesto-word">${w}</span>`).join(' ');
+    function runChapterRepl() {
+      playTone('open');
+      const out = document.getElementById('replOutput');
+      out.textContent = 'Running spark.py...';
+      setTimeout(() => {
+        out.textContent = '>>> Shreeyash -> Build -> Lead -> Ship [Exit 0 in 12ms]';
+      }, 260);
+    }
 
-    gsap.to('.manifesto-word', {
-      opacity: 1,
-      stagger: 0.05,
-      scrollTrigger: {
-        trigger: '#manifesto',
-        start: 'top 70%',
-        end: 'bottom 45%',
-        scrub: true
+    // Mini Ballpit in Chapter 5
+    const bpCanvas = document.getElementById('miniBallpit');
+    const bpCtx = bpCanvas.getContext('2d');
+    const orbs = [];
+    const labels = ['Python', 'C++', 'React', 'TS', 'AI', 'WebGL', 'DSA', 'VIT'];
+    const colors = ['#2dd4bf', '#6366f1', '#d97746', '#a855f7'];
+    function resizeBP() {
+      if (bpCanvas.parentElement) {
+        bpCanvas.width = bpCanvas.parentElement.clientWidth;
+        bpCanvas.height = bpCanvas.parentElement.clientHeight;
       }
+    }
+    resizeBP();
+    window.addEventListener('resize', resizeBP);
+    for (let i = 0; i < 12; i++) {
+      orbs.push({ x: 60 + i * 30, y: 40 + (i % 3) * 30, r: 22, vx: (Math.random() - 0.5) * 4, vy: 0, label: labels[i % labels.length], color: colors[i % colors.length] });
+    }
+    function blastOrbs() {
+      playTone('open');
+      orbs.forEach(o => { o.vx = (Math.random() - 0.5) * 18; o.vy = -Math.random() * 14 - 4; });
+    }
+    bpCanvas.addEventListener('click', blastOrbs);
+    (function loopBP() {
+      const w = bpCanvas.width, h = bpCanvas.height;
+      bpCtx.clearRect(0, 0, w, h);
+      orbs.forEach(o => {
+        o.vy += 0.25; o.x += o.vx; o.y += o.vy; o.vx *= 0.99;
+        if (o.x + o.r > w) { o.x = w - o.r; o.vx *= -0.75; }
+        if (o.x - o.r < 0) { o.x = o.r; o.vx *= -0.75; }
+        if (o.y + o.r > h) { o.y = h - o.r; o.vy *= -0.7; }
+        if (o.y - o.r < 0) { o.y = o.r; o.vy *= -0.7; }
+        bpCtx.beginPath(); bpCtx.arc(o.x, o.y, o.r, 0, Math.PI * 2);
+        bpCtx.fillStyle = o.color + '25'; bpCtx.fill();
+        bpCtx.strokeStyle = o.color; bpCtx.lineWidth = 1.5; bpCtx.stroke();
+        bpCtx.font = 'bold 10px "JetBrains Mono"'; bpCtx.fillStyle = '#fff'; bpCtx.textAlign = 'center'; bpCtx.textBaseline = 'middle';
+        bpCtx.fillText(o.label, o.x, o.y);
+      });
+      requestAnimationFrame(loopBP);
+    })();
+
+    // Project 1: MediMate Triage Simulator
+    function simTriage(sym, msg, cls) {
+      playTone('tick');
+      const el = document.getElementById('triageOut');
+      el.className = `p-2.5 rounded-lg bg-white/[0.03] border border-white/5 ${cls}`;
+      el.textContent = `[${sym}] → ${msg}`;
+    }
+
+    // Project 2: UTSAVFUND Ledger Simulator
+    let pool = 24500, txNum = 904;
+    function addLedgerEntry() {
+      playTone('open');
+      pool += 500; txNum++;
+      document.getElementById('ledgerTotal').textContent = `₹${pool.toLocaleString('en-IN')}`;
+      document.getElementById('ledgerFeed').textContent = `#TX-${txNum} • Community Contribution • +₹500 ✓`;
+    }
+
+    // Project 4: PyLogic Live BFS Graph Traversal Canvas
+    const gCanvas = document.getElementById('graphCanvas');
+    const gCtx = gCanvas.getContext('2d');
+    const nodes = [
+      { x: 0.15, y: 0.5 }, { x: 0.35, y: 0.25 }, { x: 0.35, y: 0.75 },
+      { x: 0.6, y: 0.25 }, { x: 0.6, y: 0.75 }, { x: 0.85, y: 0.5 }
+    ];
+    const edges = [[0,1],[0,2],[1,3],[2,4],[1,4],[3,5],[4,5]];
+    let activeNode = 0;
+    setInterval(() => { activeNode = (activeNode + 1) % nodes.length; }, 650);
+    (function drawGraph() {
+      if (gCanvas.parentElement) {
+        gCanvas.width = gCanvas.parentElement.clientWidth;
+        gCanvas.height = gCanvas.parentElement.clientHeight;
+      }
+      const w = gCanvas.width, h = gCanvas.height;
+      gCtx.clearRect(0, 0, w, h);
+      gCtx.strokeStyle = 'rgba(255,255,255,0.15)'; gCtx.lineWidth = 1.5;
+      edges.forEach(([a, b]) => {
+        gCtx.beginPath();
+        gCtx.moveTo(nodes[a].x * w, nodes[a].y * h);
+        gCtx.lineTo(nodes[b].x * w, nodes[b].y * h);
+        gCtx.stroke();
+      });
+      nodes.forEach((n, i) => {
+        const isAct = i === activeNode;
+        gCtx.beginPath();
+        gCtx.arc(n.x * w, n.y * h, isAct ? 8 : 5, 0, Math.PI * 2);
+        gCtx.fillStyle = isAct ? '#f59e0b' : '#2dd4bf';
+        gCtx.fill();
+      });
+      requestAnimationFrame(drawGraph);
+    })();
+
+    // -----------------------------------------------------------------------
+    // 7. Spotlight Glow + Morphing Cursor + 3D Lanyard + Manifesto
+    // -----------------------------------------------------------------------
+    document.querySelectorAll('.glow-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
     });
 
-    // -----------------------------------------------------------------------
-    // 7. 3D Lanyard Pass Tilt & Flip
-    // -----------------------------------------------------------------------
+    const follower = document.getElementById('cursor-follower');
+    document.addEventListener('mousemove', (e) => {
+      follower.style.left = e.clientX + 'px';
+      follower.style.top = e.clientY + 'px';
+    });
+    document.querySelectorAll('[data-cursor]').forEach(el => {
+      el.addEventListener('mouseenter', () => { follower.classList.add('is-active'); follower.textContent = el.dataset.cursor; playTone('tick'); });
+      el.addEventListener('mouseleave', () => { follower.classList.remove('is-active'); follower.textContent = ''; });
+    });
+
+    // Lanyard
     const pass = document.getElementById('lanyardPass');
     let tX = 0, tY = 0, cX = 0, cY = 0;
     pass.addEventListener('mousemove', (e) => {
@@ -842,150 +1071,53 @@
       document.getElementById('passBack').classList.toggle('hidden');
     });
 
-    // -----------------------------------------------------------------------
-    // 8. Custom Morphing Cursor & Floating Work Preview
-    // -----------------------------------------------------------------------
-    const follower = document.getElementById('cursor-follower');
-    const floatCard = document.getElementById('work-preview-float');
-    let fx = 0, fy = 0, mx = 0, my = 0;
-
-    document.addEventListener('mousemove', (e) => {
-      mx = e.clientX; my = e.clientY;
-      follower.style.left = mx + 'px';
-      follower.style.top = my + 'px';
-    });
-
-    (function loopFloat() {
-      fx += (mx - fx) * 0.14;
-      fy += (my - fy) * 0.14;
-      if (floatCard) {
-        floatCard.style.left = (fx + 190) + 'px';
-        floatCard.style.top = (fy - 40) + 'px';
-      }
-      requestAnimationFrame(loopFloat);
-    })();
-
-    document.querySelectorAll('[data-cursor]').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        follower.classList.add('is-active');
-        follower.textContent = el.dataset.cursor;
-        playTone('tick');
-      });
-      el.addEventListener('mouseleave', () => {
-        follower.classList.remove('is-active');
-        follower.textContent = '';
-      });
-    });
-
-    document.querySelectorAll('.work-row').forEach(row => {
-      row.addEventListener('mouseenter', () => {
-        document.getElementById('preview-tag').textContent = row.dataset.tag;
-        document.getElementById('preview-title').textContent = row.dataset.title;
-        document.getElementById('preview-metric').textContent = row.dataset.metric;
-        floatCard.classList.add('visible');
-      });
-      row.addEventListener('mouseleave', () => floatCard.classList.remove('visible'));
-      row.addEventListener('click', () => openCaseModal(row.dataset.id));
+    // Manifesto
+    const manifestoEl = document.getElementById('manifesto-text');
+    manifestoEl.innerHTML = manifestoEl.innerText.trim().split(/\s+/).map(w => `<span class="manifesto-word">${w}</span>`).join(' ');
+    gsap.to('.manifesto-word', {
+      opacity: 1, stagger: 0.05,
+      scrollTrigger: { trigger: '#manifesto', start: 'top 72%', end: 'bottom 45%', scrub: true }
     });
 
     // -----------------------------------------------------------------------
-    // 9. Case Study Modal
+    // 8. Case Study Modal & Contact Dispatch
     // -----------------------------------------------------------------------
     const caseData = {
-      medimate: {
-        title: "MediMate AI",
-        tag: "Healthcare & Offline AI",
-        problem: "Rural and peri-urban clinics often lack reliable internet, rendering cloud-only telemedicine platforms unusable during urgent symptom triage.",
-        solution: "Built an offline-first PWA running client-side diagnostic decision trees with encrypted IndexedDB local storage and automatic background sync.",
-        stack: ["React", "TypeScript", "IndexedDB", "Tailwind CSS", "PWA"],
-        github: "https://github.com/ShreeyashSolunke08"
-      },
-      utsavfund: {
-        title: "UTSAVFUND",
-        tag: "Civic FinTech & Transparency",
-        problem: "Community cultural events frequently face financial opacity, lost paper receipts, and contributor skepticism.",
-        solution: "Engineered a real-time crowdfunding ledger with immutable expenditure logs, analytics visualizations, and instant digital receipts.",
-        stack: ["TypeScript", "Public Ledger", "Charts Engine", "Tailwind CSS"],
-        github: "https://github.com/ShreeyashSolunke08"
-      },
-      repairconnect: {
-        title: "RepairConnect",
-        tag: "Circular Economy & Right to Repair",
-        problem: "Functional electronics are discarded due to high OEM repair costs and difficulty finding trusted local technicians.",
-        solution: "Created a hyperlocal matching platform connecting device owners with verified neighborhood repair specialists and transparent estimates.",
-        stack: ["JavaScript", "Geolocation API", "REST API", "Tailwind CSS"],
-        github: "https://github.com/ShreeyashSolunke08"
-      },
-      pylogic: {
-        title: "PyLogic Suite",
-        tag: "Algorithms & Systems Engineering",
-        problem: "Mastering graph algorithms, recursion depth, and memory overhead is difficult without live runtime introspection.",
-        solution: "Developed an interactive Python & C++ algorithmic benchmarking and visualization toolkit for graph traversal and memory profiling.",
-        stack: ["Python 3", "C++ STL", "Graph Theory", "Memory Profiler"],
-        github: "https://github.com/ShreeyashSolunke08"
-      }
+      medimate: { title: "MediMate AI", tag: "Healthcare & Offline AI", problem: "Rural clinics often lack reliable internet, rendering cloud-only telemedicine platforms unusable during urgent triage.", solution: "Built an offline-first PWA running client-side diagnostic decision trees with encrypted IndexedDB local storage.", stack: ["React", "TypeScript", "IndexedDB", "Tailwind CSS", "PWA"], github: "https://github.com/ShreeyashSolunke08" },
+      utsavfund: { title: "UTSAVFUND", tag: "Civic FinTech & Transparency", problem: "Community cultural events frequently face financial opacity, lost paper receipts, and contributor skepticism.", solution: "Engineered a real-time crowdfunding ledger with immutable expenditure logs, analytics visualizations, and instant digital receipts.", stack: ["TypeScript", "Public Ledger", "Charts Engine", "Tailwind CSS"], github: "https://github.com/ShreeyashSolunke08" },
+      repairconnect: { title: "RepairConnect", tag: "Circular Economy & Right to Repair", problem: "Functional electronics are discarded due to high OEM repair costs and difficulty finding trusted local technicians.", solution: "Created a hyperlocal matching platform connecting device owners with verified neighborhood repair specialists.", stack: ["JavaScript", "Geolocation API", "REST API", "Tailwind CSS"], github: "https://github.com/ShreeyashSolunke08" },
+      pylogic: { title: "PyLogic Suite", tag: "Algorithms & Systems Engineering", problem: "Mastering graph algorithms, recursion depth, and memory overhead is difficult without live runtime introspection.", solution: "Developed an interactive Python & C++ algorithmic benchmarking and visualization toolkit for graph traversal.", stack: ["Python 3", "C++ STL", "Graph Theory", "Memory Profiler"], github: "https://github.com/ShreeyashSolunke08" }
     };
-
     function openCaseModal(id) {
       const d = caseData[id]; if (!d) return;
       playTone('open');
       document.getElementById('caseModalBody').innerHTML = `
-        <div>
-          <span class="font-mono text-xs text-mint uppercase tracking-widest">${d.tag}</span>
-          <h3 class="font-syne font-bold text-3xl text-white mt-1">${d.title}</h3>
-        </div>
-        <div class="p-4 rounded-2xl bg-red-500/10 border border-red-500/20">
-          <div class="font-mono text-xs font-bold text-red-400 uppercase mb-1">Problem</div>
-          <p class="text-slate-300 text-sm">${d.problem}</p>
-        </div>
-        <div class="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20">
-          <div class="font-mono text-xs font-bold text-emerald-400 uppercase mb-1">Engineered Solution</div>
-          <p class="text-slate-300 text-sm">${d.solution}</p>
-        </div>
-        <div class="flex flex-wrap gap-2 font-mono text-xs">
-          ${d.stack.map(s => `<span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-white">${s}</span>`).join('')}
-        </div>
-        <div class="pt-4 border-t border-white/10 flex justify-between items-center">
-          <a href="${d.github}" target="_blank" class="px-5 py-2.5 rounded-full bg-mint text-obsidian font-mono text-xs font-bold hover:bg-bone transition-all">View on GitHub →</a>
-          <button onclick="closeCaseModal()" class="font-mono text-xs text-slate-400 hover:text-white">Close</button>
-        </div>
+        <div><span class="font-mono text-xs text-mint uppercase tracking-widest">${d.tag}</span><h3 class="font-syne font-bold text-3xl text-white mt-1">${d.title}</h3></div>
+        <div class="p-4 rounded-2xl bg-red-500/10 border border-red-500/20"><div class="font-mono text-xs font-bold text-red-400 uppercase mb-1">Problem</div><p class="text-slate-300 text-sm">${d.problem}</p></div>
+        <div class="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20"><div class="font-mono text-xs font-bold text-emerald-400 uppercase mb-1">Engineered Solution</div><p class="text-slate-300 text-sm">${d.solution}</p></div>
+        <div class="flex flex-wrap gap-2 font-mono text-xs">${d.stack.map(s => `<span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-white">${s}</span>`).join('')}</div>
+        <div class="pt-4 border-t border-white/10 flex justify-between items-center"><a href="${d.github}" target="_blank" class="px-5 py-2.5 rounded-full bg-mint text-obsidian font-mono text-xs font-bold hover:bg-bone transition-all">View on GitHub →</a><button onclick="closeCaseModal()" class="font-mono text-xs text-slate-400 hover:text-white">Close</button></div>
       `;
-      const m = document.getElementById('caseModal');
-      m.classList.remove('hidden'); m.classList.add('flex');
+      const m = document.getElementById('caseModal'); m.classList.remove('hidden'); m.classList.add('flex');
     }
-    function closeCaseModal() {
-      playTone('tick');
-      const m = document.getElementById('caseModal');
-      m.classList.add('hidden'); m.classList.remove('flex');
-    }
+    function closeCaseModal() { playTone('tick'); const m = document.getElementById('caseModal'); m.classList.add('hidden'); m.classList.remove('flex'); }
     document.getElementById('caseModal').addEventListener('click', (e) => { if (e.target.id === 'caseModal') closeCaseModal(); });
 
-    // -----------------------------------------------------------------------
-    // 10. Contact Dispatch
-    // -----------------------------------------------------------------------
     document.getElementById('contactForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      playTone('open');
-      const name = document.getElementById('senderName').value.trim();
-      const email = document.getElementById('senderEmail').value.trim();
-      const msg = document.getElementById('senderMessage').value.trim();
-      const notice = document.getElementById('formNotice');
-      const btnText = document.getElementById('submitText');
-
+      e.preventDefault(); playTone('open');
+      const name = document.getElementById('senderName').value.trim(), email = document.getElementById('senderEmail').value.trim(), msg = document.getElementById('senderMessage').value.trim();
+      const notice = document.getElementById('formNotice'), btnText = document.getElementById('submitText');
       btnText.textContent = 'Transmitting...';
       const formatted = `From: ${name} (${email})\n\n${msg}`;
       if (navigator.clipboard) navigator.clipboard.writeText(formatted).catch(() => {});
-
       fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({ access_key: 'c7c8c871-3316-419b-bfa0-14e21ce2c70d', name, email, message: msg, recipient: 'shreeyashsolunke@gmail.com' })
       })
       .then(() => {
         notice.className = 'p-3.5 rounded-xl font-mono text-xs bg-emerald-500/15 text-emerald-300 border border-emerald-500/30';
         notice.textContent = '✓ Message transmitted to shreeyashsolunke@gmail.com!';
-        document.getElementById('contactForm').reset();
-        btnText.textContent = 'Transmitted';
+        document.getElementById('contactForm').reset(); btnText.textContent = 'Transmitted';
       })
       .catch(() => {
         notice.className = 'p-3.5 rounded-xl font-mono text-xs bg-mint/15 text-mint border border-mint/30';
